@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{1.2}
+True. Suppose that an alternate pairing existed in some matching, i.e. $(m,w')$ and $(m',w)$. Such a matching would be not be stable, since $w>_mw'$ and $m>_wm'$. 
+\subsection*{1.3}
+Consider six shows, $a_i,b_i$ for $1\leq i\leq3$. Let the $a_i$ have rating $2i$, and let the $b_i$ have rating $2i-1$. Since the parameter of stability we're concerned with, number of wins, does not depend on the ordering of timeslots, we may declare two schedule-pairs to be equivalent if they are time-permutations of each other. We may then assume that network A airs its shows in the order $a_1,a_2,a_3$, so all we really care about is how network B arranges its shows. Suppose network B wins less than $2$ timeslots for some pair of schedules. Then, this pair is not stable, as B may unilaterally change its schedule to $b_2,b_3,b_1$ in order to win the first two timeslots. Conversely, suppose that network A wins less than $3$ timeslots. It may then, up to timeslot order, change its schedule so that show $a_i$ is paired with show $b_i$, thereby winning all $3$ timeslots. Any pairing for which this is true is thus also astable. Since no pairing may have network B winning 2 or more timeslots and network A winning 3 or more, there is no stable pair of schedules in this instance.
+\subsection*{1.6}
+Algorithm: For each of the $n$ ships, construct a "preference list" of ports that is the list of ports which they visit, in order. For each of the $n$ ports, construct a "preference list" of ships that is the list of ships which visit them, in reverse order. Apply G-S to the ships and ports, with ships taking the role of men and ports that of women. Truncate each ship's schedule at the port which they were matched to by G-S.
+
+Suppose that two ships ended up at the same port on the same day using the truncations provided by the above method. Call these ships $i$ and $j$ at port $k$. Since no two ships are truncated to the same port, we may assume WLOG that ship $i$ was truncated to port $k$ at a time before $j$ visited port $k$, and that ship $j$ is truncated to some port $k'$. Thus, with the preference ordering, we have that $k'<_jk$, since ship $j$ is scheduled to visit port $k'$ after port $k$. However, we also have that $i<_kj$, since ship $j$ is scheduled to visit port $k$ after ship $i$. This contradicts the stability of the outcome of G-S, so it cannot happen. 
+\subsection*{2.4}
+Assume the base of any log is 2, assume monotonicity properties of exponentials and logs and other obvious functions. 
+
+$g_1$ is $O(g_3)$: From Solved Example 1 {in} the book, we have that $2^{\log n}$ is $O(n^{1/3})$, so it is in turn $O(n(\log n)^3)$.
+
+$g_3$ is $O(g_4)$: Pick some sufficiently small $1/9>\ep>0$. From (2.8) in the text, $\log n\leq cn^\ep$ for some $c$ and large $n$, so $n(\log n)^3\leq c^3n^{1+3\ep}\leq c^3n^{4/3}$.
+
+$g_4$ is $O(g_5)$: Take the log of both: $\log g_5=(\log n)^2$ and $\log g_4=4/3\log n$. Since $\log n>1$ for large $n$, $g_5$ is also bigger for large $n$.
+
+$g_5$ is $O(g_2)$: The log of $g_2$ is $n$, which grows faster than $(\log n)^2$ by (2.8).
+
+$g_2$ is $O(g_7)$: Taking the log of both gives $n^2>n$.
+
+$g_7$ is $O(g_6)$: Taking the log of both gives $2^n>n^2$.
+
+1,3,4,5,2,7,6
+\subsection*{3.8}
+We will show that for any $n=diam(G)$, we can make $apd(G)$ arbitrarily close to $1$. Construct $G$ by first constructing a complete graph with $m$ nodes ($m$ not yet determined), and attaching a `tail' of $n-1$ nodes such that the distance from all but $1$ of the $m$ elements to the tip of the tail is $n$. Add up the distances in this graph, perhaps at times overestimating. First, we have $\binom{m}{2}$ pairs of distance $1$ in the complete graph. Next, we have the distances from the nodes in the tail to each node in the complete graph. Each node is at most distance $n$ from any node in the complete graph, so we have a contribution of at most $n^2m$ in this segment. Finally, we have the distances between the nodes in the tail, but this is only dependent on $n$, so we ignore it for now. Add them up and divide by $\binom{m}{2}<\binom{m+n}{2}$ to obtain an upper bound for the apd, which can be expressed as $1+2n^2/(m+1)+C(n)/(m(m+1))$. Take $m\to\infty$, and we see that the apd gets arbitrarily close to $1$. This means that there is no such $c$, as we can take $n$ arbitrarily large, then increase $m$ so that the ratio approaches $n$.
+
+\subsection*{6}
+Source: Wolfram Alpha
+
+Electron diameter(classical): $2.818\times10^{-15}m$. Speed of light: $2.998\times10^8m/s$. Current age of universe: $4.3\times10^{17}s$. 
+
+It takes $c/d=9.4\times10^{-24}$ seconds for light to travel across an electron, and there are $4.6\times10^{40}$ of these time intervals in the current age of the universe. For a set of size $n$, there are $n!$ matchings, so we want the largest $n$ such that $n!<4.6\times10^{40}$. This turns out to be $35$ using numerical methods.
+
+\subsection*{EC}
+a. Drop the jar at rung $i^2$ for increasing $i$ until we reach the top of the ladder or until the jar breaks. If the jar breaks, start at the last place where we dropped the jar and move up one rung at a time until the jar breaks again. We make at most $\sqrt{n}$ drops in the first pass, and at most $n-(\sqrt{n}-1)^2=2\sqrt{n}-1$ drops in the second pass, for a total of $\Theta(\sqrt{n})$ drops. This grows strictly slower than linear.
+
+b. Drop the jar at rung $i^k$ for increasing $i$ like we did in (a), but when the jar drops, start at the last safe rung and start moving up in increments of $i^{k-1}$. To be precise,
+\begin{verbatim}
+let current_rung=1
+let last_safe_rung=1
+while k>0:
+    let base_rung=last_safe_rung
+    let i=0
+    while jar remains intact:
+        let last_safe_rung=current_rung
+        increment i
+        let current_rung be base_rung+i^k
+        drop jar from current_rung
+return last_safe_rung
+\end{verbatim}
+
+Use induction to determine the running time of this algorithm. Suppose that the running time for $k-1$ jars is $\Theta(\sqrt[k-1]{n})$. Then, for $k$ jars, we make at most $\sqrt[k]{n}$ drops until the first jar breaks. Then, we essentially follow the algorithm for $k-1$ jars but on a ladder of size $n-(\sqrt[k]{n}-1)^k=\Theta(n^{(k-1)/k})$. The inner algorithm takes $\Theta(n^{1/k})$ time to run on an input of this size, as obtained by plugging it in. Thus, the overall running time is $\Theta(\sqrt[k]{n})$.
+
+\end{document}

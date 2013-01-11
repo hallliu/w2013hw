@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{11.1}
+$$\frac{dy}{dt}=y^2\implies\frac{dy}{y^2}=dt\implies\int_{y_0}^y\frac{dy}{y^2}=\int_{t_0}^tdt\implies-\left(\frac{1}{y}-\frac{1}{y_0})\right)=t-t_0$$ so if $y_0=\eta$, we get $y=\frac{-1}{t-t_0-\frac{1}{\eta}}=\frac{\eta}{-\eta(t-t_0)+1}$.
+\subsection*{11.2}
+This function fails to be defined at $t_0+1/\eta$ due to the denominator being zero. For $\eta<0$, the biggest interval containing $t_0$ on which the soln and the original function is defined is $(t_0+1/\eta,\infty)$.
+\subsection*{12.8}
+Damn, Weare really likes these multipart problems...
+
+a. $\varphi'=-1/2(1-t^2)^{-3/2}\cdot-2t$, $t\varphi^3=(1-t^2)^{-3/2}=\varphi'$. $\varphi$ fails to be defined for $|t|\geq1$, so the interval of validity is $(-1,1)$, which contains $t_0$. 
+
+b. Same argument as in (a), but with a negative sign tacked on both sides. Interval of validity remains the same, and $t_0$ remains the same.
+
+c. $\varphi_1'=\varphi_2'=\varphi_1=\varphi_2=e^t$, so the equations are satisfied as well as the initial conditions. The solutions and the original equation are both defined everywhere, so the interval of validity is $(-\infty,\infty)$. 
+
+d. $\varphi_1'=-e^{-t}=\varphi_2$, and the same thing the other way around without the negative. Initial conditions satisfied by plug n' chug, and the functions are still all really nice.
+\subsection*{24.1}
+Existence: Let $x(t)=\int_{t_0}^tf(s)ds+z_0$. By the FTC, this is a continous function of $t$ which satisfies $x'(t)=f(t)$. Let $\varphi(t)=\int_{t_0}^tx(s)ds+y_0$. Again by the FTC, $\varphi(t)$ is cts and satisfies $\varphi'(t)=x(t)$, so $\varphi''(t)=f(t)$. By plugging in, it can be seen that it satisfies the initial conditions. Thus, $\varphi$ is a continuous solution. 
+
+Uniqueness: Suppose $\psi$ is another solution. Then, $(\varphi(t)-\psi(t))''=z''(t)=0$, so $z'(t)$ must be a constant function on $I$. We have $z'(t_0)=0$, so $z'=0$ on $I$, so $z$ is constant on $I$. We again have $z(t_0)=0$, so $z=0$ on $I$, which means that $\varphi=\psi$.
+\subsection*{32.3}
+Let $$U(t)=k_1+\ep(t-\alpha)+k_2\int_a^tf(s)ds$$ Its derivative is $U'(t)=\ep+k_2f(t)\leq\ep+k_2U(t)$. Multiply both sides by $e^{-(t-a)k_2}$ and move the $k_2U(t)$ term over to get $U'(t)e^{-(t-a)k_2}-k_2U(t)e^{-(t-a)k_2}\leq\ep e^{-(t-a)k_2}$. This is the same as $(U(t)e^{-(t-a)k_2})'\leq\ep e^{-(t-a)k_2}$. Integrate both sides from $a$ to $t$ and get $U(t)e^{-(t-a)k_2}-k_1\leq\ep(-k_2e^{-(t-a)k_2}+k_2)$, where we have $U(a)=k_2$. Rearrange to isolate $U(t)$ and get $U(t)\leq-k_2\ep+e^{(t-a)k_2}(\ep k_2+k_1)$, which is the same thing as what we were asked to prove.
+\end{document}
