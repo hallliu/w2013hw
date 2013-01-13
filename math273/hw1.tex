@@ -8,6 +8,7 @@
 \newcommand{\conj}{\overline}
 \newcommand{\dd}{\partial}
 \nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
 \nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
 \nc{\ep}{\epsilon}
 \setlength{\parindent}{0mm}
@@ -37,4 +38,17 @@ Existence: Let $x(t)=\int_{t_0}^tf(s)ds+z_0$. By the FTC, this is a continous fu
 Uniqueness: Suppose $\psi$ is another solution. Then, $(\varphi(t)-\psi(t))''=z''(t)=0$, so $z'(t)$ must be a constant function on $I$. We have $z'(t_0)=0$, so $z'=0$ on $I$, so $z$ is constant on $I$. We again have $z(t_0)=0$, so $z=0$ on $I$, which means that $\varphi=\psi$.
 \subsection*{32.3}
 Let $$U(t)=k_1+\ep(t-\alpha)+k_2\int_a^tf(s)ds$$ Its derivative is $U'(t)=\ep+k_2f(t)\leq\ep+k_2U(t)$. Multiply both sides by $e^{-(t-a)k_2}$ and move the $k_2U(t)$ term over to get $U'(t)e^{-(t-a)k_2}-k_2U(t)e^{-(t-a)k_2}\leq\ep e^{-(t-a)k_2}$. This is the same as $(U(t)e^{-(t-a)k_2})'\leq\ep e^{-(t-a)k_2}$. Integrate both sides from $a$ to $t$ and get $U(t)e^{-(t-a)k_2}-k_1\leq\ep(-k_2e^{-(t-a)k_2}+k_2)$, where we have $U(a)=k_2$. Rearrange to isolate $U(t)$ and get $U(t)\leq-k_2\ep+e^{(t-a)k_2}(\ep k_2+k_1)$, which is the same thing as what we were asked to prove.
+\subsection*{38.1}
+Integrating $\varphi'(t)=A(t)\varphi(t)+g(t)$ from $t$ to $t_0$, we get 
+$$\varphi(t_0)-\varphi(t)=\int_t^{t_0}A(s)\varphi(s)ds+\int_t^{t_0}g(s)ds\text{.}$$
+Moving $\varphi(t_0)=\eta$ over, taking the norm, and separating the sum gives 
+$$||\varphi(t)||\leq||\eta||+\int_t^{t_0}||A(s)||||\varphi(s)||ds+\int_t^{t_0}||g(s)||ds$$
+Let $K_2=\max_{[a,b]}||A(t)||$, and we get a bound on the second term above as $K_2\int_t^{t_0}||\varphi(s)||ds$. Similarly following the derivation in the text, we get a bound on the sum of the first and third terms by taking $K_1=||\eta||+\max_{[a,b]}||g(t)||(b-a)$. Putting these bounds together, we get the desired result.
+\subsection*{41.8}
+Let $a,b$ be such that $ae^{r_1t}+be^{r_2t}=0$ identically on $\rn$. It is clear that out of $a,b$, there cannot be only one nonzero, as that would imply that $e^x=0$ for some $x$. Multiply both sides by $e^{-r_1t}$ and get $a+be^{(r_2-r_1)t}=0$ identically. If $b\neq0$, this implies that $e^{(r_2-r_1)t}$ is constant on $\rn$. This is only possible if $r_1=r_2$, which is a contradiction, so $b=0$ and consequently $a=0$. 
+\subsection*{45.17}
+Let the $i$-th component of the $n$-dimensional vector $\vec{y}$ be $y^{(i)}$ (I'm indexing from 0 like real people do). Then, we have that the $i$-th component of the derivative of $\vec{y}$ is $y[i+1]$ with 
+$$y'[n-1]=\frac{1}{a_0(t)}\sum_{k=1}^{n} a_k(t)y[n-k]$$
+Theorem 2.2 implies that the solutions $\vec{y}$ to this system are closed under addition and scalar multiplication, and therefore so is the space of its first components. However, each $\vec{y}$ is uniquely determined by its $0$th component and vice versa. Since the map that takes $\vec{y}$ to its first component is a homomorphism, the space of solutions to the $n$-degree scalar equation is actually also a $n$-dimensional vector space.
+
 \end{document}
