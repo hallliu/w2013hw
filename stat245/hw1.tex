@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\setlength{\parindent}{0mm}
+\newcommand{\ep}{\epsilon}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{8.1}
+The number of intervals seems to have gone up in the data we're given in this problem. 
+
+The value given for the emission rate was $\hat{\lambda}=0.8392\text{s}^{-1}$, and we had $12169$ intervals. Using these numbers, we get these expected values:
+
+\begin{tabular}{c|c}
+n & Expected\\
+\hline
+0 & 5257\\
+1 & 4412\\
+2 & 1851\\
+3 & 518\\
+4 & 109\\
+5+ & 22\\
+\end{tabular}
+
+Looks pretty good. About $2\%$ error on most of them.
+
+\subsection*{8.2}
+Total number of intervals is $300$. Total count is found by multiplying frequency by count and summing, calculated to be $1168$. We estimate the rate parameter $\hat{\lambda}=3.893$. Expected frequencies can be found by multiplying the Poisson probability by the number of intervals. Results below.
+
+\begin{tabular}{c|c|c}
+n & Observed & Expected\\
+\hline
+0 & 14 & 6\\
+1 & 30 & 24\\
+2 & 36 & 46\\
+3 & 68 & 60\\
+4 & 43 & 59\\
+5 & 43 & 46\\
+6 & 30 & 30\\
+7 & 14 & 16\\
+8 & 10 & 8\\
+9 & 6 & 3\\
+10 & 4 & 1\\
+11 & 1 & 0\\
+12 & 1 & 0\\
+\end{tabular}
+
+The predicted frequencies seems to have a lower variance than the observed data. This is probably due to varying levels of traffic over the times that the data were taken.
+
+\subsection*{8.3}
+a. Concentration 1: 0.6825; Concentration 2: 1.323; Concentration 3: 1.80; Concentration 4: 4.68
+
+b. From use of the variance-stabilizing transformation in class, we have $2\sqrt{n}(\sqrt{\bar{X}}-\sqrt{\lambda})~N(0,1)$, or that $P(-1.96\leq 2\sqrt{n}(\sqrt{\bar{X}}-\sqrt{\lambda})\leq1.96)$. Rearranging for $\lambda$, we get a confidence interval of $[(-0.98/\sqrt{n}+\sqrt{\bar{X}})^2,(0.98/\sqrt{n}+\sqrt{\bar{X}})^2]$. Plugging in the values we actually have, this is 
+
+Concentration 1: $[0.604,0.766]$; Concentration 2: $[1.212,1.438]$; Concentration 3: $[1.671,1.934]$; Concentration 4: $[4.47,4.894]$
+
+c. Format in each cell of the table is observed,expected. Things generally look pretty good.
+
+\small
+\begin{tabular}{c|c|c|c|c}
+\hline
+\#Cells & C1 & C2 & C3 & C4\\
+\hline
+0 & 213,202 & 103,107 & 75,66 & 0,4 \\
+1 & 128,138 & 143,141 & 103,119 & 20,17 \\
+2 & 37,47 & 98,93 & 121,107 & 43,41 \\
+3 & 18,11 & 42,41 & 54,64 & 53,63 \\
+4 & 3,2 & 8,14 & 30,29 & 86,74 \\
+5 & 1,0 & 4,4 & 13,10 & 70,69 \\
+6 & 0,0 & 2,1 & 2,3 & 54,54 \\
+7 & 0,0 & 0,0 & 1,1 & 37,36 \\
+8 & 0,0 & 0,0 & 0,0 & 18,21 \\
+9 & 0,0 & 0,0 & 1,0 & 10,11 \\
+10 & 0,0 & 0,0 & 0,0 & 5,5 \\
+11 & 0,0 & 0,0 & 0,0 & 2,2 \\
+12 & 0,0 & 0,0 & 0,0 & 2,1 \\
+\hline
+\end{tabular}
+\normalsize
+\subsection*{8.10}
+Using the normal approximation, we have $P(\hat{\lambda}=v)=P(S=nv)=f_{n\lambda_0,n\lambda_0}(nv)=f_{\lambda_0,\lambda_0/n}(v)$, where $f_{\lambda_0,\lambda_0/n}$ is the normal pdf with mean $\lambda_0$ and variance $\lambda_0/n$. The probability calculation we're asked to do is then a calculation for a normal RV. In order to approximate the true mean, we use the sample mean $\hat{\lambda}$.
+
+\begin{tabular}{c|c}
+$\delta$ & $P(|\lambda_0-\lambda|>\delta)$\\
+\hline
+0.5 & 0.644\\
+1 & 0.356\\
+1.5 & 0.166\\
+2 & 0.0647\\
+2.5 & 0.0209\\
+\end{tabular}
+
+\includegraphics[width=0.7\textwidth]{scripts_hw1/8_10.png}
+
+\subsection*{5}
+Let $W$ be a Bernoulli RV taking the value $1$ with probability $e^{-\lambda}$ (corresponding to a zero) and $0$ otherwise (corresponding to nonzero). The expected value of $W$ is $e^{-\lambda}$, so consider $W'=W-e^{-\lambda}$ so we can use CLT. $W$ has variance $\rho^2=e^{-\lambda}(1-e^{-\lambda})$, so so does $W'$. By CLT, the asymptotic distribution of $\frac{\sum{W'_i}}{\rho\sqrt{n}}=\frac{Y}{\rho\sqrt{n}}-\frac{ne^{-\lambda}}{\rho\sqrt{n}}$ is the standard normal distribution. Thus, $Y$ has normal asymptotic distribution with mean $ne^{-\lambda}$ and variance $n\rho^2$, so $Y/n$ is asymptotically normal with mean $\mu=e^{-\lambda}$ and variance $\sigma^2=\rho^2/n$.
+
+Now take the series expansion for log about $\mu$. Since the variance in $Y/n$ decreases with increasing $n$, the higher-order terms in $Y/n-\mu$ will become negligible fairly quickly, so we take the first two terms. This is $-\log\mu-\frac{Y/n-\mu}{\mu}=1+\lambda-\frac{Y/n}{\mu}$. This is still normal with mean $\mu'=\lambda$ and variance $\sigma'^2=1/n(e^{-\lambda}-1)$
+
+The variance of this estimator decreases with $n$ rather than increasing with $n$ like the MLE. 
+\end{document}
