@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{4.2}
+a. True. Prim's algorithm only cares about the ordering of the costs of the edges. Since squaring preserves this order, Prim's algorithm will choose the exact same edge on the new costs as on the old costs, so the same spanning tree will be produced.
+
+b. False. Consider the following graph.
+
+\includegraphics[height=150pt]{scripts_2/4_2b.png}
+
+As is, the shortest path from $v_1$ to $v_2$ follows the edge with cost $2$. However, upon squaring the costs, the shortest path becomes the one along the three edges of cost $1$ each.
+\subsection*{4.5}
+Let the houses be labeled $h_1,\ldots,h_l$ from left to right and spaced at arbitrary distances. Let the towers produced by the below algorithm be labeled $g_1,\ldots,g_n$ from left to right.
+\begin{verbatim}
+Place t_1 4 miles to right of first house.
+let i=1
+while there exist houses more than 4 miles from a tower:
+    place t_(i+1) 4 miles to the right of the leftmost uncovered house
+    i++
+end
+\end{verbatim}
+It is fairly easy to see that this algorithm will produce a cover of the houses. If there exists some uncovered house somewhere, the algorithm would have placed a cell tower 4 miles to its right, thus covering it. To prove optimality, let a set of optimal towers be denoted $s_1,\ldots,s_m$ from left to right. We want to show that $n\leq m$. Further, let the $h_i,s_i,g_i$ take positive real values representing their position.
+
+First, we note that $s_1\leq t_1$. If $s_1>t_1$, then $s_1-h_1>t_1-h_1=4$, which leaves the first house uncovered and therefore is a contradiction. Next, assume by induction that $s_{k-1}\leq t_{k-1}$. Let $h_i$ be the lowest house which is not covered by $s_1,\ldots,s_{k-1}$ and let $h_{i'}$ be the corresponding house for the $t$s. We must have $h_i\leq h_{i'}$, since $s_{k-1}$ has less reach than $t_{k-1}$. Now consider the placement of $s_k$ and $t_k$. We must have $s_k-h_i\leq 4$, since $h_i$ needs to be covered by the next tower. However, from our description of the greedy algorithm, we know that $t_k=h_{i'}+4\geq h_i+4\geq s_k$. Thus, $s_k\leq t_k$ for all $k$.
+
+Suppose now that $m<n$. Then, we have $s_m\leq t_m$. Since $t_{m+1}$ exists, we know that there must still be uncovered houses to the right of $t_m+4$, or to the right of $s_m+4$. This is a contradiction, so we must have $n\leq m$, therefore showing optimality.
+\subsection*{4.9}
+a. No. Consider the following graph
+
+\includegraphics[width=0.4\textwidth]{scripts_2/4_9a.png}
+
+A min. bottleneck tree could include the edges with costs 5,4,3, but this is not a min. spanning tree which would include the edges with costs 5,3,2.
+
+b. Yes. First we do 4.8 so we can use the uniqueness property. Note that in each step in Prim's algorithm, the edge that is added is the min. cost edge from $S$ to $V\backslash S$. By the cut property, this edge is included in every min. spanning tree. Thus, all the edges in the result of Prim's algorithm are part of every min. spanning tree, and therefore the unique  min. spanning tree.
+
+Consider the reverse-deletion algorithm. At some point, we come to an edge $e$ that is not in a cycle. Then, $e$ must be part of any min. bottleneck tree, since removing $e$ would disconnect the graph and the only way to reconnect it is to include one of the more expensive edges. We then have that any spanning tree which includes $e$ and no edges costlier than $e$ is a min. bottleneck tree. In particular, the min. spanning tree which is the result of the reverse deletion algorithm is a min. bottleneck tree. Since the min. spanning tree is unique, all min.spanning trees are min. bottleneck trees.
+\end{document}
