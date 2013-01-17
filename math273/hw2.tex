@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{49.22}
+Writing that equation as a system gives solutions of the form $(y,y',\ldots,y^{(n-1)})$. Arranging these as column vectors in a matrix, we get the wronskian. Theorem 2.4 says that if the wronskian is nonzero for some set of solutions $y_i$, then the $y_i$ form a fundamental matrix. (not really sure what the book wants here...)
+\subsection*{49.24}
+$y_1'=(e^{r_1t},re^{r_1t})'=(r_1e^{r_1t},r_1^2e^{r_1t})$. $Ay_1=(r_1e^{r_1t},-(a_2+r_1a_1)e^{r_1t})=y_1'$ by the algebraic relation between the $r_i$ and $a_i$. Thus the first column is a solution. By a similar calculation and replacing $r_1$ with $r_2$, the second column is a solution also. The solution matrix at time $0$ is
+$$\begin{pmatrix}1&1\\r_1&r_2\\\end{pmatrix}$$
+whose determinant is $r_1+r_2$. This is $-a_1$, which we're going to assume is nonzero. Thus the solution matrix is fundamental.
+\subsection*{50.26}
+We have $A(t+2\pi)Y(t+2\pi)=Y'(t+2\pi)=A(t)Y(t+2\pi)$. Similarly, $Y'(t)=A(t)Y(t)$. Rearranging and substituting to eliminate the factor of $A$, we have $Y'(t+2\pi)Y^{-1}(t+2\pi)=Y'(t)Y^{-1}(t)$. At time $0$, this is equivalent to saying $Y'(2\pi)=Y'(0)Y^{-1}(0)Y(2\pi)$, or $Y(2\pi)=Y(0)Y^{-1}(0)Y(2\pi)$. Now, we know that $Y(t+2\pi)$ is a fundamental matrix because it satisfies $Y'(t+2\pi)=A(t)Y(t+2\pi)=A(t+2\pi)Y(t+2\pi)$ and its determinant is nonzero because $\det Y$ is nonzero. Since we know that this fundamental matrix is equal to another fundamental matrix, $Y(t)Y^{-1}(0)Y(2\pi)$, at time $0$, they must be equal everywhere, so the constant matrix we're looking for is $C=Y^{-1}(0)Y(2\pi)$.
+\subsection*{54.5}
+Use the fundamental matrix $Y=\begin{pmatrix}t^2&t\\2t&1\\\end{pmatrix}$ given in the text. Let $$\Psi(t)=Y(t)\int_2^tY^{-1}(s)\begin{pmatrix}t^4\\t^3\end{pmatrix}ds=\openm t^2&t\\2t&1\closem\int_2^t\openm 0\\s^3\closem ds=-\openm t^2&t\\2t&1\closem\openm0\\t^4/4-4\closem=-\openm t^5/4-4t\\t^4/4-4\closem$$
+This is a solution of the inhomogenous equation with initial condition $\Psi(2)=\vec{0}$. Since the fundamental matrix is valid everywhere but $0$, this solution is valid on $(0,\infty)$. 
+
+Let $\Phi_h(t)=Y(t)Y^{-1}(2)\openm1\\4\closem=\openm-3t^2/2+3t\\-3t+3\closem$. This is a solution to the homogenous equation with initial condition as specified, so the solution to the inhomogenous equation with the specifie initial conditions is the sum of the two, or $\Phi(t)=\openm t^5/4-3t^2/2-t\\t^4/4-3t-1\closem$.
+\subsection*{54.6}
+
+Let $\vec{y}=\openm y\\y'\closem$, where $y$ is a solution of the scalar equation, so $\vec{y}'=-\openm y'\\p(t)y'+q(t)y\closem+\openm0\\f(t)\closem$. If we let $A=\openm0&1\\q(t)&p(t)\closem$, then we have $A\vec{y}=\vec{f}(t)-\vec{y'}$ or $\vec{y'}=\vec{f}(t)-A\vec{y}$, where $\vec{f}(t)=\openm0\\f(t)\closem$.
+
+Since the two solutions $\varphi_1$ and $\varphi_2$ are independent, so are the columns of the matrix $\Phi(t)$. In addition, since the $\varphi$s are solutions of the homogenous scalar equation, the columns are also solutions of the homogenous system obtained by letting $\vec{f}(t)=0$. 
+
+b. The determinant of $\Phi$ is $\vphi_1\vphi_2'-\vphi_1'\vphi_2$, so the inverse is $\frac{1}{|\Phi|}\openm\vphi_2'&-\vphi_2\\-\vphi_1'&\vphi_1\closem$. Multiplying this by $\openm0\\f(t)\closem$ gives $\frac{1}{|\Phi|}\openm-\vphi_2f\\\vphi_1f\closem$. Integrate this from $t_0$ to $t$ and multiply by $\Phi(t)$ to get the solution $\Psi$ (no explicit formula available).
+
+c. The first component of the above is the equation presented in the book, which can be obtained by moving the matrix $\Phi(t)$ inside the integral and evaluating the first component. It and its derivative are both zero at $t_0$ because $\psi_1'=\psi_2$, and they're both components of $\Psi$, which is $0$ at $t_0$.
+\subsection*{59.8}
+We evaluate $e^{At}=e^{-2It}e^{Ut}$, where $U=\openm0&1&0\\0&0&1\\0&0&0\closem$. The first exponential is just a diagonal matrix with all nonzero entries $e^{-2t}$. We have $U^2=\openm0&0&1\\0&0&0\\0&0&0\closem$, and this is the last nonzero power of $U$. Thus,
+$$e^{Ut}=\left(I_3+Ut+U^2t^2/2\right)=\openm1&t&t^2/2\\0&1&t\\0&0&1\closem$$
+so
+$$e^{At}=e^{-2t}\openm1&t&t^2/2\\0&1&t\\0&0&1\closem$$
+
+Derivative of $e^{At}$ is 
+$$\openm-2e^{-2t}&e^{-2t}-2te^{-2t}&te^{-2t}-t^2e^{-2t}\\0&e^{-2t}&e^{-2t}-2te^{-2t}\\0&0&e^{-2t}\closem$$
+and
+$$Ae^{At}=e^{2t}\openm-2&1&0\\0&-2&1\\0&0&-2\closem\openm1&t&t^2/2\\0&1&t\\0&0&1\closem=e^{-2t}\openm-2&-2t+1&-t^2+t\\0&-2&-2t+1\\0&0&-2\closem$$ which is equal to the derivative.
+\subsection*{70.13}
+\end{document}
