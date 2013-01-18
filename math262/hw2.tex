@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\qn}{\mathbb{Q}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\topo}{\mathscr{T}}
+\nc{\basis}{\mathscr{B}}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{101.6}
+a. Let $C_\alpha$ be the family of closed sets containing $B$. Then each of them contains $A$ as well. Thus, the family of closed sets containing $A$ includes the $C_\alpha$, so their intersection is contained in the intersection of the $C_\alpha$, so $\bar{A}\subset\bar{B}$.
+
+b. `$\subset$': Let $\{C_\alpha\}$ be the family of closed sets containing $A\cup B$, $\{D_\alpha\}$ be those containing $A$, and $\{E_\alpha\}$ those containing $B$. The family $\{C_\alpha\}$ is the intersection of the families $\{D_\alpha\}$ and $\{E_\alpha\}$: if some closed set contains both $A$ and $B$, then it contains $A\cup B$, and if some closed set contains $A\cup B$, then it contains $A$ and $B$. Suppose $x\in\overline{A\cup B}$. Then $x\in C_\alpha$ for all $\alpha$. We WTS that $x\in D_\alpha$ for all $\alpha$ or $x\in E_\alpha$ for all $\alpha$. Suppose not. Let $A',B'$ be closed sets such that $A'\supset A$ and $B'\supset B$ and $x\not\in A'\cup B'$. Since $A'\cup B'$ is still a closed set, it's a closed set containing $A\cup B$, which means that $x$ must be in it. Thus, contradiction, and we have what we wanted.
+
+`$\supset$': Same notation as above. Suppose WLOG that $x\in D_\alpha$ for all $\alpha$. Since each $C_\alpha$ is also a $D_\alpha$, we have that $x\in C_\alpha$ for all $\alpha$.
+
+c. Note that the second part of the above argument made no use of the fact that the collection of things being unioned was finite. A counterexample: let $A_\alpha$ be the collection of all rational singletons in $\rn$. Using the standard topology, the closure of each of these is just the singleton, so the union of the closures is $\qn$. On the other hand, the closure of the union id $\rn$ since $\qn$ is dense in $\rn$.
+
+\subsection*{101.7}
+Every neighborhood $U$ of $x$ must intersect the same $A_\alpha$ for $x$ to be in $\overline{A_\alpha}$.
+\subsection*{101.8}
+a. Equality does not hold. $\overline{A\cap B}\subset\bar{A}\cap\bar{B}$. Consider the intervals $(0,1)$ and $(1,2)$. They have empty intersection, so the LHS is empty. However, the intersection of their closures is the singleton $\{1\}$. To show inclusion, let $x\in\overline{A\cap B}$. Then, every neighborhood of $x$ intersects $A\cap B$, so every neighborhood of $x$ intersects both $A$ and $B$, so $x\in\bar{A}\cap\bar{B}$.
+
+b. Same inclusion as in (a). The proof is the same, as any neighborhood of $x$ which intersects $\cap A_\alpha$ intersects all $A_\alpha$.
+
+c. Equality does not hold. Instead, $\overline{A-B}\supset\bar{A}-\bar{B}$. Let $A=[0,1)$, $B=\{0\}$. We have $\overline{A-B}=\overline{(0,1)}=[0,1]$, whereas $\bar{A}-\bar{B}=[0,1]-\{0\}=(0,1]$. To show the inclusion, note that $\overline{A\cup B}=\overline{A-B}\cup\bar{B}\supset\bar{A}$, so subtracting $\bar{B}$ from both gives the desired result.
+\subsection*{101.9}
+Let $\basis$ and $\basis'$ be bases for the topologies of $X$,$Y$, resp. Let $(x,y)\in\bar{A}\times\bar{B}$. Then, every element of $\basis$ containing $x$ intersects $A$ and similar for $\basis'$. Denote these by $\basis(x)$ and $\basis'(y)$, resp. The sets in the basis of $X\times Y$ which contain $(x,y)$ are the sets in the product $\basis(x)\times\basis'(y)$. Intersecting any set in this product with $A\times B$ gives a nonempty result, as every set in $\basis(x)$ has nonempty intersection with $A$ and same for $\basis'(y)$ and $B$. Argument runs the same backwards, since the clause in thm. 17.5 is a two-sided implication.
+\subsection*{101.10}
+Suppose WLOG that $x_1<x_2$. Then, the neighborhood $(-\infty,x_2)$ contains $x_1$ but not $x_2$, and the neighborhood $(x_1,\infty)$ contains $x_2$ but not $x_1$.
+\end{document}
