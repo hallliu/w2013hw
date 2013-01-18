@@ -55,4 +55,5 @@ $$\openm-2e^{-2t}&e^{-2t}-2te^{-2t}&te^{-2t}-t^2e^{-2t}\\0&e^{-2t}&e^{-2t}-2te^{
 and
 $$Ae^{At}=e^{2t}\openm-2&1&0\\0&-2&1\\0&0&-2\closem\openm1&t&t^2/2\\0&1&t\\0&0&1\closem=e^{-2t}\openm-2&-2t+1&-t^2+t\\0&-2&-2t+1\\0&0&-2\closem$$ which is equal to the derivative.
 \subsection*{70.13}
+The characteristic polynomial is $(1-x)(3-x)-8=0$ or $x^2-4x-5=0$, which has solutions $5$ and $-1$. The eigenvectors corresponding to 5 can be found by $\openm1&2\\4&3\closem\openm a\\b\closem=\openm5a\\5b\closem$. We get $\openm1\\2\closem$ here, and solving a similar equation for $-1$ gives $\openm1\\-1\closem$. Then, two independent solutions are $\openm e^{5t}\\2e^{5t}\closem$ and $\openm e^{-t}\\-e^{-t}\closem$. The fundamental matrix is then obtained by putting these two together. To find the particular solution with given initial conditions, we take the inverse of the fundamental matrix and evaluate it at zero, multiply it by $\openm3\\3\closem$, then multiply the fundamental matrix by that.  
 \end{document}
