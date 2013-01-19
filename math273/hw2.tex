@@ -114,5 +114,21 @@ $$\openm
 t\et & \et-\ent & -t\et & 2\ent-\et\\
 \closem$$
 The nice thing about this fundamental matrix is that its initial value is the identity, so all we have to do to get the particular solution is to multiply by $\eta$, so we get $(4\et-3\ent,4t\et,2\et-3\ent,2t\et)$. This works, I think.
+\subsection*{71.18}
+Let $\vec{y}=\openm y\\y'\closem$, so we have $\vec{y}'=\openm y'\\y''\closem=\openm y'\\-py'-qy\closem$. 
+
+Consider any pair $\vec{y}=\openm y_1\\y_2\closem$ which satisfies $A\vec{y}=\vec{y}'\implies\vec{y}'=\openm y_2\\-qy_1-py_2\closem$. This implies that $y_1'=y_2$ and $y_2'=-qy_1-py_2$, so $y_1''=-qy_1-py_1'$, which means that $y_1$ is a solution to the second order equation. Conversely, let $\vec{y}=\openm y\\y'\closem$, so we have $\vec{y}'=\openm y'\\y''\closem=\openm y'\\-py'-qy\closem=A\vec{y}$, so $\vec{y}$ is a solution to the first-order equation uniquely determined by a solution to the second-order equation.
+
+Char. polynomial of $A$ is $x(p+x)+q$ (so THAT's why they called this thing the characteristic polynomial when I took diffeq in high school...). The roots of this are $1/2(-p\pm\sqrt{p^2-4q})$. Let $\lambda_1$ be the $+$ case and $\lambda_2$ be the other.
+\subsection*{71.19}
+In this case, the two eigenvalues are distinct. Eigenvectors for $\lambda_1$ found by solving $(A-\lambda_1I)v=0$, or just the equation $v_2=\lambda_1v_1$. Fix $v_1=1$, so we have the eigenvector $\openm1\\\lambda_1\closem$. It's exactly the same for $\lambda_2$, so the fundamental matrix is 
+$$\openm e^{\lambda_1t}&e^{\lambda_2t}\\\lambda_1e^{\lambda_1t}&\lambda_2e^{\lambda_2t}\closem$$
+The general solution is the fundamental matrix multiplied by some vector $\openm A\\B\closem$, so we have $y=Ae^{\lambda_1t}+Be^{\lambda_2t}$.
+
+\subsection*{71.20}
+Eigenvalues are indistinct. Since $p^2=4q$, we have that $\lambda=-p/2$. We now want vectors in the kernel of $(A-\lambda I)^2$. Fortunately, this kernel is guaranteed to be dimension $2$, so it's just the whole space. We construct a fundamental matrix by taking the initial conditions to be the standard basis vectors $e_1$ and $e_2$, so we have $e^{At}e_i=e^{\lambda t}(I+(A-\lambda I)t)e_i=e^{\lambda t}\openm1-\lambda t\\-qt\closem$ for $e_1$ and $\openm t\\1-(p+\lambda)t\closem$ for $e_2$. The fundamental matrix is then 
+$$e^{\lambda t}\openm1-\lambda t&t\\-qt&1-(p+\lambda)t\closem$$
+General solution is again multiplying this by $\openm A\\B\closem$, so we have $y=Ae^{-pt/2}+te^{-pt/2}(B-pA/2)$
+
 
 \end{document}
