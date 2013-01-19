@@ -13,6 +13,9 @@
 \nc{\vphi}{\varphi}
 \nc{\openm}{\begin{pmatrix}}
 \nc{\closem}{\end{pmatrix}}
+%for this hw only
+\nc{\et}{e^t}
+\nc{\ent}{e^{-t}}
 \nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
 \nc{\ep}{\epsilon}
 \setlength{\parindent}{0mm}
@@ -72,4 +75,44 @@ The actual solution is really god-awful. Trust me on its correctness. I checked 
 \large
 $$\openm\frac{13}{e^{3 t} 3}-\frac{13}{6} e^{\left(2-\sqrt{7}\right) t}-\frac{e^{\left(2-\sqrt{7}\right) t}}{3 \sqrt{7}}-\frac{13}{6} e^{\left(2+\sqrt{7}\right) t}+\frac{e^{\left(2+\sqrt{7}\right) t}}{3 \sqrt{7}}\\-\frac{91}{9 e^{3 t}}+\frac{73}{18} e^{\left(2-\sqrt{7}\right) t}+\frac{187 e^{\left(2-\sqrt{7}\right) t}}{9 \sqrt{7}}+\frac{73}{18} e^{\left(2+\sqrt{7}\right) t}-\frac{187 e^{\left(2+\sqrt{7}\right) t}}{9 \sqrt{7}}\\-\frac{52}{9 e^{3 t}}-\frac{11}{18} e^{\left(2-\sqrt{7}\right) t}+\frac{89 e^{\left(2-\sqrt{7}\right) t}}{18 \sqrt{7}}-\frac{11}{18} e^{\left(2+\sqrt{7}\right) t}-\frac{89 e^{\left(2+\sqrt{7}\right) t}}{18 \sqrt{7}}\closem$$
 \normalsize
+\subsection*{71.16}
+Well isn't that nice. They gave us the characteristic polynomial. Too bad it has multiple roots. I'm going to use row and column vectors interchangably due to ease of notation. Should be clear from context what everything is. Consider eigenvectors with eigenvalue $1$, or the kernel of $A-I$. Fiddling with the system of equations gives that this eigenspace is one-dimensional, so we have to take the long way around and consider the kernels of $(A-I)^2$ and $(A+I)^2$. The first is the matrix 
+$$\left(
+\begin{array}{cccc}
+ -4 & 4 & 8 & -8 \\
+ 0 & -4 & 0 & 8 \\
+ -4 & 4 & 8 & -8 \\
+ 0 & -4 & 0 & 8
+\end{array}
+\right)$$
+This looks pretty singular. Fixing the first and second components will determine the rest of them in the kernel. Thus, let one basis vector be $b_1=(2,0,1,0)$ and the other one be $b_2(0,2,0,1)$.
+
+The next matrix, $(A+I)^2$ is 
+$$\left(
+\begin{array}{cccc}
+ 8 & 0 & -8 & 0 \\
+ 8 & 8 & -8 & -8 \\
+ 4 & 0 & -4 & 0 \\
+ 4 & 4 & -4 & -4
+\end{array}
+\right)$$
+
+Same setup as above: first two components determine the rest of it. Two nice basis vectors are $b_3=(1,0,1,0)$ and $b_4=(0,1,0,1)$. 
+
+Now write the conventional basis vectors in terms of these. We have $e_1=(2,0,1,0)-(1,0,1,0)$, $e_2=(0,2,0,1)-(0,1,0,1)$, $e_3=(2,0,2,0)-(2,0,1,0)$, and $e_4=(0,2,0,2)-(0,2,0,1)$. The solutions corresponding to these initial conditions are:
+
+$e_1$: $e^t(I+t(A-I))b_1-e^{-t}(I+t(A+I))b_3=e^t(2,2t,1,t)-e^{-t}(1,0,1,0)$\\
+$e_2$: $e^t(I+t(A-I))b_2-e^{-t}(I+t(A+I))b_4=e^t(0,2,0,1)-e^{-t}(t,1,t,1)$\\
+$e_3$: $2e^t(I+t(A-I))b_3-e^{-t}(I+t(A+I))b_1=e^{-t}(2,0,2,0)-e^t(2,2t,1,t)$\\
+$e_4$: $2e^t(I+t(A-I))b_4-e^{-t}(I+t(A+I))b_2=2e^{-t}(t,1,t,1)-e^t(0,2,0,1)$
+
+The fundamental matrix is 
+$$\openm
+2\et-\ent & -t\ent & 2\ent-2\et & 2t\ent\\
+2t\et & 2\et-\ent & -2t\et & 2\ent-2\et\\
+\et-\ent & -t\ent & 2\ent-\et & 2t\ent\\
+t\et & \et-\ent & -t\et & 2\ent-\et\\
+\closem$$
+The nice thing about this fundamental matrix is that its initial value is the identity, so all we have to do to get the particular solution is to multiply by $\eta$, so we get $(4\et-3\ent,4t\et,2\et-3\ent,2t\et)$. This works, I think.
+
 \end{document}
