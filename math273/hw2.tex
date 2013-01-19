@@ -55,5 +55,21 @@ $$\openm-2e^{-2t}&e^{-2t}-2te^{-2t}&te^{-2t}-t^2e^{-2t}\\0&e^{-2t}&e^{-2t}-2te^{
 and
 $$Ae^{At}=e^{2t}\openm-2&1&0\\0&-2&1\\0&0&-2\closem\openm1&t&t^2/2\\0&1&t\\0&0&1\closem=e^{-2t}\openm-2&-2t+1&-t^2+t\\0&-2&-2t+1\\0&0&-2\closem$$ which is equal to the derivative.
 \subsection*{70.13}
-The characteristic polynomial is $(1-x)(3-x)-8=0$ or $x^2-4x-5=0$, which has solutions $5$ and $-1$. The eigenvectors corresponding to 5 can be found by $\openm1&2\\4&3\closem\openm a\\b\closem=\openm5a\\5b\closem$. We get $\openm1\\2\closem$ here, and solving a similar equation for $-1$ gives $\openm1\\-1\closem$. Then, two independent solutions are $\openm e^{5t}\\2e^{5t}\closem$ and $\openm e^{-t}\\-e^{-t}\closem$. The fundamental matrix is then obtained by putting these two together. To find the particular solution with given initial conditions, we take the inverse of the fundamental matrix and evaluate it at zero, multiply it by $\openm3\\3\closem$, then multiply the fundamental matrix by that.  
+The characteristic polynomial is $(1-x)(3-x)-8=0$ or $x^2-4x-5=0$, which has solutions $5$ and $-1$. The eigenvectors corresponding to 5 can be found by $\openm1&2\\4&3\closem\openm a\\b\closem=\openm5a\\5b\closem$. We get $\openm1\\2\closem$ here, and solving a similar equation for $-1$ gives $\openm1\\-1\closem$. Then, two independent solutions are $\openm e^{5t}\\2e^{5t}\closem$ and $\openm e^{-t}\\-e^{-t}\closem$. The fundamental matrix is then obtained by putting these two together. To find the particular solution with given initial conditions, we take the inverse of the fundamental matrix and evaluate it at zero, multiply it by $\openm3\\3\closem$, then multiply the fundamental matrix by that. This is $\openm2e^{5t}+e^{-t}\\4e^{5t}-e^{-t}\closem$
+\subsection*{71.14}
+Char. poly is $(2-x)(-4-x)+9=0$ which has a double root at $-1$. Trying to find eigenvectors gets us only the vector $\openm1\\1\closem$, which doesn't form a basis. Then, we want to look at the space $X_1$ spanned by solutions of $(A+I)^2\vec{x}=0$. Since we expect this to be a 2-dimensional space, it actually spans all of $\rn^2$, so we have $\eta\in X_1$, and the solution we want is $e^{tA}\eta=e^{-t}e^{(A+I)t}\eta$. Expanding out the matrix exponential gets us $I+(A+I)t+\cdots$, with the tail of the series omitted because it's sent to zero upon multiplying by $\eta$. Thus, the solution is $$e^{-t}\eta+te^{-t}\openm3&-3\\3&-3\closem\eta=\openm e^{-t}-3te^{-t}\\2e^{-t}-3te^{-t}\closem$$
+To make a fundamental matrix, just replace $\eta$ with something independent of what we're given. Use $\openm1\\0\closem$, and we get another solution $\openm e^{-t}+3te^{-t}\\3te^{-t}\closem$, and we get the fundamental matrix $e^{-t}\openm1-3t&1+3t\\2-3t&3t\closem$
+\subsection*{71.15}
+Char polynomial is $(1-x)((1-x)(-1-x)+1)+3(8-5(1-x))=-x^3+x^2+15x+9$ from expanding along the first row. This has $\lambda_1=-3$ as a root, leaving behind the polynomial $-x^2+4x+3$ which has roots $\lambda_2,\lambda_3=2\pm\sqrt{7}$, so the matrix has $3$ distinct eigenvalues. Omitting the work for finding eigenvectors because it's a pain in the ass to type up. Eigenvector for $-3$ is $\openm3\\-7\\-4\closem$, eigenvector for $2+\sqrt{7}$ is $\openm-3/2+\lambda_2/2\\17/2-3\lambda_2/2\\1\closem$, and eigenvector for $2-\sqrt{7}$ is $\openm-3/2+\lambda_3/2\\17/2-3\lambda_3/2\\1\closem$. This makes the fundamental matrix 
+\begin{equation*}
+\openm 
+3e^{-3t}&(-3/2+\lambda_2/2)e^{\lambda_2t}&(-3/2+\lambda_3/2)e^{\lambda_3t}\\
+-7e^{-3t}&(17/2-3\lambda_2/2)e^{\lambda_2t}&(17/2-3\lambda_3/2)e^{\lambda_3t}\\
+-4e^{-3t}&e^{\lambda_2t}&e^{\lambda_3t}
+\closem
+\end{equation*}
+The actual solution is really god-awful. Trust me on its correctness. I checked in Mathematica.
+\large
+$$\openm\frac{13}{e^{3 t} 3}-\frac{13}{6} e^{\left(2-\sqrt{7}\right) t}-\frac{e^{\left(2-\sqrt{7}\right) t}}{3 \sqrt{7}}-\frac{13}{6} e^{\left(2+\sqrt{7}\right) t}+\frac{e^{\left(2+\sqrt{7}\right) t}}{3 \sqrt{7}}\\-\frac{91}{9 e^{3 t}}+\frac{73}{18} e^{\left(2-\sqrt{7}\right) t}+\frac{187 e^{\left(2-\sqrt{7}\right) t}}{9 \sqrt{7}}+\frac{73}{18} e^{\left(2+\sqrt{7}\right) t}-\frac{187 e^{\left(2+\sqrt{7}\right) t}}{9 \sqrt{7}}\\-\frac{52}{9 e^{3 t}}-\frac{11}{18} e^{\left(2-\sqrt{7}\right) t}+\frac{89 e^{\left(2-\sqrt{7}\right) t}}{18 \sqrt{7}}-\frac{11}{18} e^{\left(2+\sqrt{7}\right) t}-\frac{89 e^{\left(2+\sqrt{7}\right) t}}{18 \sqrt{7}}\closem$$
+\normalsize
 \end{document}
