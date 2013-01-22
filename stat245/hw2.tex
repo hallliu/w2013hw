@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\setlength{\parindent}{0mm}
+\newcommand{\ep}{\epsilon}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{1}
+Let $F$ be the CDF of $X/Y$, and let $F_1$ be the CDF of $X/|Y|$. First, note that since the pdf of $N(0,1)$ is an even function, the distribution of $|Y|$ is simply twice the distribution of $Y$ but restricted to the interval $[0,\infty)$. We have
+$$F(z)=\int_{-\infty}^0\int_{yz}^\infty f(x,y) dx dy+\int_0^\infty\int_{-\infty}^{yz}f(x,y)dx dy$$
+where the first term accounts for the $y<0$ case and the second terma accounts for the $y\geq0$ case. Keeping in mind the distribution of $|Y|$, we have
+$$F_1(z)=\int_0^\infty\int_{-\infty}^{yz}2f(x,y)dx dy$$
+Now, if we make the change of variables $y'=-y$ in the first term of $F(z)$, we get $-\int_0^\infty\int_{-y'z}^\infty f(x,y') dx dy'$. Making the change of variables $x'=-x$, we get that the second term is actually equal to the first term, so their sum is equal to $F_1(z)$, thus proving that the two CDFs are equal.
+\subsection*{3.22}
+WLOG, let $t_0=0$ for notational convenience, and let $N_1$ denote the number of events until $t_1$ and $N_2$ denote the number of events until $t_2$. Further, let $\lambda$ be the rate parameter for the interval $(0,t_2)$. We then have that $P(N_1=m|N_2=n)=P(N_2=n|N_1=m)P(N_1=m)/P(N_2=n)$. Examine this piece by piece. First, $P(N_2=n|N_1=m)$ is simply $P(N(t_1,t_2)=n-m)$, or $\frac{(\lambda(1-t_1/t_2))^{n-m}}{(n-m)!}e^{\lambda(1-t_1/t_2)}$. Next, $P(N_1=m)$ is also simple, given by $\frac{(\lambda t_1/t_2)^m}{m!}e^{\lambda t_1/t_2}$. Finally, $P(N_2=n)$ is $\frac{\lambda^n}{n!}e^{\lambda}$. Putting these together, we get 
+$$P(N_1=m|N_2=n)=\frac{\frac{(\lambda(1-t_1/t_2))^{n-m}}{(n-m)!}e^{\lambda(1-t_1/t_2)}\cdot\frac{(\lambda t_1/t_2)^m}{m!}e^{\lambda t_1/t_2}}{\frac{\lambda^n}{n!}e^{\lambda}}=\frac{n!(1-t_1/t_2)^{n-m}(t_1/t_2)^m}{m!(n-m)!}=\binom{n}{m}(1-t_1/t_2)^{n-m}(t_1/t_2)^m$$
+
+%is the sum of $N_1$ and $N(t_1,t_2)$, which are independent RVs because their intervals are disjoint. Thus, the distribution of $N_2$ is the convolution of the two distributions, or 
+%$$\sum_{x=0}^n\frac{(\lambda t_1/t_2)^x}{x!}e^{\lambda t_1/t_2}\cdot\frac{(\lambda(1-t_1/t_2))^{n-x}}{(n-x)!}e^{\lambda(1-t_1/t_2)}=\lambda^ne^\lambda\sum_{x=0}^n\frac{(t_1/t_2)^x(1-t_1/t_2)^{n-x}}{x!(n-x)!}$$
+\subsection*{3.54}
+Joint density of $\Theta,\Phi,R$ at $\theta,\phi,r$ is $P(R\in[r,r+dr],\Theta\in[\theta,\theta+d\theta],\Phi\in[\phi,\phi+d\phi])$. The probability of this is equal to $f_{X,Y,Z}(x,y,z)dxdydz$ or $f_{X,Y,Z}(x,y,z)r^2\sin\phi dr d\theta d\phi=f_{X,Y,Z}(r\sin\phi\cos\theta,r\sin\phi\sin\theta,r\cos\phi)r^2\sin\phi drd\theta d\phi$. Since X,Y,Z are independent, we have $$f_{X,Y,Z}(x,y,z)=\frac{1}{(2\pi\sigma)^{3/2}}\exp\left(\frac{-(x^2+y^2+z^2)}{2\sigma^2}\right)\implies f_{R,\Theta,\Phi}(r,\theta,\phi)=\frac{1}{(2\pi\sigma^2)^{3/2}}e^{\frac{-r^2}{2\sigma^2}}r^2\sin\phi$$
+
+Marginal densities:
+
+$R$: $$\frac{1}{(2\pi\sigma^2)^{3/2}}e^{\frac{-r^2}{2\sigma^2}}r^2\int_0^{2\pi}\int_0^\pi\sin\phi d\phi d\theta=\frac{2}{(2\pi\sigma^2)^{3/2}}e^{\frac{-r^2}{2\sigma^2}}r^2\int_0^{2\pi} d\theta=\frac{4\pi}{(2\pi\sigma^2)^{3/2}}e^{\frac{-r^2}{2\sigma^2}}r^2$$
+
+$\Theta$: Since the joint density has no $\theta$ dependence, integrating out the other two should leave a constant, so the distribution is uniform over $[0,2\pi]$
+
+$\Phi$: This should just be $\sin\phi$ times a constant, which should be $1/2$ for normalization.
+\subsection*{3.56}
+From example A on p100, the joint distribution of $R,\Theta$ is $f_{R,\Theta}(r,\theta)=rf_{X,Y}(r\cos\theta,r\sin\theta)=r\lambda^2e^{-r\lambda(\cos\theta+\sin\theta)}$ for $\theta\in[0,\pi/2]$ and zero elsewhere. To determine if $R,\Theta$ are independent, find the marginal distribution of $\Theta$: we have 
+$$\lambda^2\int_0^\infty re^{-r\lambda(\cos\theta+\sin\theta)}dr=\frac{1}{1+\sin(2\theta)}$$
+Dividing the joint density by this, it's pretty clear that the result is not independent of $\theta$, so the two are not independent.
+\subsection*{3.62}
+This is the same as $P(R^2<1)$ when considering the polar form, which was worked out in example A. From p100, we have that the marginal distribution of $R$ is $re^{r^2/2}$ on $[0,\infty]$, so the density of $R^2$ is $f_{R^2}(r')=\sqrt{r'}e^{r'/2}\cdot\frac{1}{2\sqrt{r'}}=\frac{e^{r'/2}}{2}$. Integrating this from $0$ to $1$ gives $$\frac{1}{2}\int_0^1e^{r'/2}dr'=e^{1/2}-1$$
+\subsection*{3.64}
+Joint density of $X$ and $Y$ is $\lambda^2e^{-\lambda(x+y)}$. Let $W=X+Y$ and $Z=X/Y$, so $X=\frac{WZ}{1+Z}$ and $Y=\frac{W}{Z+1}$. The Jacobian is then
+$$\left|
+\begin{array}{cc}
+\frac{Z}{1+Z}&\frac{W}{(1+Z)^2}\\
+\frac{1}{1+Z}&-\frac{W}{(1+Z)^2}\\
+\end{array}\right|=-\frac{W}{(1+Z)^2}$$
+Then, the joint density of $W,Z$ is $f_{W,Z}(w,z)=\lambda^2e^{-\lambda w}(\frac{w}{(z+1)^2})$. $W$ and $Z$ are clearly independent, as we can write this joint distribution as $f_W(w)f_Z(z)$ where $f_W(w)=\lambda^2 we^{-\lambda w}$ and $f_Z(z)=\frac{1}{(z+1)^2}$.
+\subsection*{7}
+Want to compute $E(s^2)$. We have that $(n-1)s^2/\sigma^2$ follows a $\chi^2_{n-1}$ distribution. Since expectation is linear, $E(s^2)=\sigma^2E(\chi^2_{n-1})/(n-1)=\sigma^2$, so $s^2$ is unbiased. On the other hand, $n\hat{\sigma}^2/\sigma^2$ follows a $\chi^2_{n-1}$ distribution, so $E(\hat{\sigma})=\sigma^2\cdot\frac{n}{n-1}$, so it's biased.
+
+Computing MSEs: Let $A\sim\chi^2_{n-1}$. Then, $E((s^2-\sigma^2)^2)=E((\frac{\sigma^2 A}{n-1}-\sigma^2)^2)$. This is equal to the integral 
+$$\sigma^4\frac{(1/2)^{(n-1)/2}}{\Gamma((n-1)/2)}\int_0^\infty\left(\frac{x}{n-1}-1\right)^2x^{\frac{n-3}{2}}e^{-x/2}dx$$
+Breaking this integral into 3 pieces (the 3 terms from the expansion of the square term), the $1$ term becomes $\sigma^4$, as it's just integrating the gamma distribution. The $2x/(n-1)$ term incurs an extra factor of $\frac{2}{n-1}\cdot\frac{\Gamma((n+1)/2)}{(1/2)^{(n+1)/2}}$ out front, so multiplying it with the factor already present gives $2\sigma^4\frac{n+1}{n-1}$. Finally, the $x^2/(n-1)^2$ term incurs an extra factor of $\frac{1}{(n-1)^2}\cdot\frac{\Gamma((n+3)/2)}{(1/2)^{(n+3)/2}}$, which gives $\sigma^4\frac{(n+3)(n+1)}{(n-1)^2}$. Thus, the MSE is $\sigma^4\left(1-2\frac{n+1}{n-1}+\frac{(n+3)(n+1)}{(n-1)^2}\right)$
+
+For $\hat{\sigma}^2$, we have $E((\hat{\sigma}^2-\sigma^2)^2)=E((\frac{\sigma^2 A}{n}-\sigma^2)^2)$. Tracing through the steps of the previous derivation, we get that the MSE here is $\sigma^4\left(1-2\frac{n+1}{n}+\frac{(n+3)(n+1)}{n^2}\right)$. For large $n$, the mle has a smaller MSE.
+\subsection*{8}
+We want to find $c$ such that $P(s^2>c(0.01)^2)=0.05$. Given the previous problem, we have that $9s^2/(0.01)^2$ follows a $\chi^2_{9}$ distribution, so $P(s^2>c(0.01)^2)=P(9s^2/(0.01)^2>9c)$. Using computerized methods, this probability is $0.05$ when $c=1.88$, so the threshold for $s^2$ is about $(0.013)^2$, so our conclusion would be that the stated variance is too low if we measured $0.02^2$.
+\end{document}
