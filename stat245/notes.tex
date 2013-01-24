@@ -10,19 +10,36 @@
 \newcommand{\dd}{\partial}
 \setlength{\parindent}{0mm}
 \newcommand{\ep}{\epsilon}
+\newcommand{\la}{\lambda}
+\newcommmand{\nc}{\newcommand}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+
 \begin{document}
 Name: Hall Liu
 
 Date: 1/24/13
 \vspace{1.5cm}
 
-Dirchlet distribution: useful for generalizing a beta distribution, multivariate version of it. Useful for analyzing data that has several RVs which sum up to something less than $1$. Recall that if we have two gamma distros $X$ adn $Y$, then $X/Y$ is essentially a beta distro. Try this as exercise. Specifically, let $x\simGamma(y,\lambda), Y\sim Gamma(s,\lambda)$, and ifnd joint density of $X/(X+y)$ and $X+Y$. $X$ and $Y$ are indep.
+Dirchlet distribution: useful for generalizing a beta distribution, multivariate version of it. Useful for analyzing data that has several RVs which sum up to something less than $1$. Recall that if we have two gamma distros $X$ adn $Y$, then $X/Y$ is essentially a beta distro. Try this as exercise. Specifically, let $x\sim Gamma(y,\lambda), Y\sim Gamma(s,\lambda)$, and ifnd joint density of $X/(X+y)$ and $X+Y$. $X$ and $Y$ are indep.
 
 The dirchlet distribution is actually defined in a similar way. Supp. $X\sim Gamma(r,\lambda)$, $Y\sim Gamma(s,\lambda)$, $Z\sim Gamma(t,\lambda)$. Consider $U=X/(X+Y+Z)$, $V=Y/(X+Y+Z)$. Then want to find joint distro of $U,V$. (if we want more components, we just throw in more gammas) Know joint distro of $X,Y,Z$. Want the trivariate transformation, so take $W=X+Y+Z$. Now want to transform to $U,V,W$. Afterwards we can integrate out $W$. The inverse transformation is is $X=UW$,$Y=VW$,$Z=W(1-U-V)$. The jacobian is 
 $$\left|\begin{pmatrix}
 W&0&-W\\
 0&W&-W\\
 U&V&1-U-V\\
-\end{pmatrix}\right|=W(W(1-U-V)+WV)-W(WU)=W^2(1-2U)$$
+\end{pmatrix}\right|=W(W(1-U-V)+WV)-W(-WU)=W^2$$
 
+Specify values of $U,V,W$. $W$ ranges to $\infty$, but $U+V$ is between 0 and 1 and so are each of them individually. Now plug into that formula. the joint distro is 
+$$f_{U,V,W}=f_{X,Y,Z}(UW,VW,W(1-U-V))W^2=\frac{\lambda^r}{\Gamma(r)}u^{r-1}w^{r-1}e^{-\lambda uw}\cdot\frac{\lambda^s}{\Gamma{s}}v^{s-1}w^{s-1}e^{-\lambda vw}\cdot\frac{\lambda^t}{\Gamma(t)}(1-u-v)^{t-1}w^{t-1}e^{-\lambda w(1-u-v)}=\frac{\lambda^{r+s+t}}{\Gamma(r)\Gamma(s)\Gamma(t)}w^{r+s+t-1}u^{r-1}v^{s-1}(1-u-v)^{t-1}^{-\lambda w}=u^{r-1}v^{s-1}(1-u-v)^{t-1}\frac{\Gamma(r+s+t)}{\Gamma(r)\Gamma(s)\Gamma(t)}\frac{\lambda^{r+s+t}}{\Gamma(r+s+t)}w^{r+s+t-1}e^{-\lambda w}$$
+The separation immediately implies independence of $W$, and integrating out gives the joint density of $U,V$ which is $u^{r-1}v^{s-1}(1-u-v)^{t-1}\frac{\Gamma(r+s+t)}{\Gamma(r)\Gamma(s)\Gamma(t)}$. This joint density is known as the Dirichlet density. It looks a lot like the beta distribution. It actually turns out that the marginal density of either U or V is the beta. 
+
+Marginal density of $U$: integrate from $0$ to $1$
+$$\frac{\Gamma(r+s+t)}{\Gamma(r)\Gamma(s)\Gamma(t)}u^{r-1}\int_0^{1-u}v^{s-1}(1-u-v)^{t-1}dv$$
+substitute $v=x(1-u)$. Then $$\frac{\Gamma(r+s+t)}{\Gamma(r)\Gamma(s)\Gamma(t)}u^{r}\int_0^{1}x^{s-1}(1-u)^{s-1}(1-u-x(1-u))^{t-1}dv=\frac{\Gamma(r+s+t)}{\Gamma(r)\Gamma(s)\Gamma(t)}u^{r-1}\int_0^{1}x^{s-1}(1-u)^{s-1}(1-u)^{t-1}(1-x)^{t-1}(1-u)dx=frac{\Gamma(r+s+t)}{\Gamma(r)\Gamma(s)\Gamma(t)}u^{r-1}(1-u)^{s+t-1}\int_0^{1}x^{s-1}(1-x)^{t-1}dx$$
+Now the integral is the beta form, and $U$ ends up as a beta distro with parameters $r,s+t$. 
+
+Next: back to multivariate normal distro. Interpretation in terms of linear algebra. Bivariate first, since it's simpler. Take $\vec{X}=\openm X_1\\X_2\closem$ and $\vec{\mu}=E\vec{X}=\openm EX_1\\EX_2\closem$ and $\sigma=\openm\sigma_{11}&\sigma_{12}\\\sigma{21}&\sigma{22}\closem=\openm var(X_1)&Cov(X_1,X_2)\\Cov(X_2,X_1)&var(X_2)\closem=\openm\sigma_1^2&\sigma_1\sigma_2\rho\\\sigma_1\sigma_2\rho&\sigma_2^2\closem$. Actually the same as saying $E((X-E(X))(X-E(X))^{T})$. 
+
+Then, the bivariate density of $X_1,X_2$ can be expressed as $f_{X_1,X_2)=\frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}\exp\left(\frac{-1}{2(1-\rho^2)}\cdots\right)$. This can alternatively be expressed in matrix form as $$\frac{1}{2\pi\sqrt{\det\Sigma}}\exp\left(-1/2(X-\mu)^{T}\Sigma^{-1}(X-\mu)\right)$$. Derivation is straightforward but involves a lot of annoying manipulations. 
 \end{document}
