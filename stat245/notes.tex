@@ -41,5 +41,10 @@ Now the integral is the beta form, and $U$ ends up as a beta distro with paramet
 
 Next: back to multivariate normal distro. Interpretation in terms of linear algebra. Bivariate first, since it's simpler. Take $\vec{X}=\openm X_1\\X_2\closem$ and $\vec{\mu}=E\vec{X}=\openm EX_1\\EX_2\closem$ and $\sigma=\openm\sigma_{11}&\sigma_{12}\\\sigma{21}&\sigma{22}\closem=\openm var(X_1)&Cov(X_1,X_2)\\Cov(X_2,X_1)&var(X_2)\closem=\openm\sigma_1^2&\sigma_1\sigma_2\rho\\\sigma_1\sigma_2\rho&\sigma_2^2\closem$. Actually the same as saying $E((X-E(X))(X-E(X))^{T})$. 
 
-Then, the bivariate density of $X_1,X_2$ can be expressed as $f_{X_1,X_2)=\frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}\exp\left(\frac{-1}{2(1-\rho^2)}\cdots\right)$. This can alternatively be expressed in matrix form as $$\frac{1}{2\pi\sqrt{\det\Sigma}}\exp\left(-1/2(X-\mu)^{T}\Sigma^{-1}(X-\mu)\right)$$. Derivation is straightforward but involves a lot of annoying manipulations. 
+Then, the bivariate density of $X_1,X_2$ can be expressed as $f_{X_1,X_2)=\frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}\exp\left(\frac{-1}{2(1-\rho^2)}\cdots\right)$. This can alternatively be expressed in matrix form as $$\frac{1}{2\pi\sqrt{\det\Sigma}}\exp\left(-1/2(X-\mu)^{T}\Sigma^{-1}(X-\mu)\right)$$. Derivation is straightforward but involves a lot of annoying manipulations. This is an alternative way to define a multivariate normal distro: give the mean vector $\vec{\mu}$ and the cov matrix $\Sigma$. However, the $1/(2\pi)$ out front needs to have a power of $p/2$ on it for a $p$-dimensional distro. Notation is $X\sim N(\mu,\Sigma)$. Supp. $X$ is such a multivar. RV with dimension $p$. Examine distro of $AX$, where $A$ is a constant matrix. Turns out $AX\sim N(A\mu, A\Sigma A^{T})$. 
+
+First let's prove it for a full-rank square matrix. Let $Y=AX$, and $X=A^{-1}Y$. The Jacobian of the transformation is $\det(A^{-1})$ which is $1/\det(A)=1/\det(A^T)=\frac{1}{\sqrt{\det(AA^T)}$. Then $$f_Y(y)=f_X(A^{-1}y)\frac{1}{\sqrt{\det(AA^T)}=\frac{1}{\sqrt{2\pi}^p\frac{1}{\det\Sigma}e^{-1/2(A^{-1}Y-\mu)^T\Sigma^{-1}(A^{-1}Y-\mu)}\frac{1}{\sqrt{\det(AA^T)}$$
+Squeeze the determinants together. then 
+$$\frac{1}{\sqrt{2\pi}^p\frac{1}{\det(A\Sigma^T}\exp\left(-1/2(y-A\mu)^T(A^{-1})^T\Sigma^{-1}A^{-1}(y-A\mu)\right)$$
+Collapse the middle mess of matrices and we get what we wanted. 
 \end{document}
