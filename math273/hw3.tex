@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\usepackage{subfigure}
+\usepackage{float}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\tr}{tr}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{2.7.2}
+First, consider the fundamental matrix $Y$obtained by calculating $e^{\lambda_it}e^{A-\lambda_iI}v_j$ and using them as columns, where $v_j$ is a generalized eigenvector corresponding to the eigenvalue $\lambda_i$. If $\lambda_i$ is simple, then the series expansion for $e^{A-\lambda_iI}$ terminates after the identity, so any entry in $Y$ containing a $e^{\lambda_it}$ has at most a constant term in front of it.
+
+Going back to the argument in the proof of theorem 2.10, we obtain any solution by multiplying $Y$ by some matrix constant in $t$. Thus, the resulting solution vector will have in each entry some expression of the form $\sum_{j=1}^kp_j(t)e^{\lambda_jt}$. Now, if we examine the behavior of this as $t\to\infty$, we have that for all $\Re(\lambda_j)<0$, the exponential term dominates the polynomial term and goes to $0$. For $\Re(\lambda_j)=0$, the exponential part is bounded and oscillating, but its associated polynomial part is constant, so the term remains bounded also. Add up a finite number of these and it's still bounded. 
+\subsection*{2.7.3}
+Let $Y$ be the fundamental matrix referenced in the previous problem. For any solution of the inhomogenous equation with initial conditions $\eta$, we have $\phi(t)=Y(t)Y^{-1}(t_0)\eta+\int_{t_0}^tY(t)Y^{-1}(s)g(s)ds$. Assuming that the equation satisfies the hypotheses, the first term is automatically bounded because it's a solution of the homogenous equation. Now examine the integral, ignoring the $Y(t)$ term for now. We have that the entries of $Y^{-1}(s)$ are linear combinations of the elements of $Y(s)$ (its cofactors) divided by the determinant, which in turn evolves according to $\exp\left(\int_{t_0}^t\tr(A) ds\right)$. The trace is simply the sum of the eigenvalues of $A$, which we know to be negative, so the determinant goes to zero faster than any of the entries of the cofactor matrix. 
+
+The discussion of the determinant of $Y$ implies then that the entries of $Y^{-1}(s)$ are monotonically increasing for large enough $s$. Thus, $\int_{t_0}^tY^{-1}(s)g(s)ds$ is bounded above by $\int_{t_0}^tY^{-1}(t)g(s)ds$. Pulling out the $Y^{-1}(t)$ lets it cancel out with the $Y(t)$ that was there out front, so the entire second term is bounded above by the integral of $g(s)$. Assuming then that this is bounded, we have that $\phi(t)$ is bounded.
+\subsection*{2.8.2,3,4}
+\begin{figure}[H]
+\mbox{\subfigure[2.8.2]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_2.pdf}}
+      \subfigure[2.8.3]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_3.pdf}}
+      \subfigure[2.8.4]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_4.pdf}}}
+\end{figure}
+\subsection*{2.8.5}
+Note: Mathematica wouldn't let me plot anything that had a variable like $g/L$ in it, so I'm going to assume that $L=1m$.
+\begin{figure}[H]
+\mbox{\subfigure[2.8.5]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_5.pdf}}
+      \subfigure[2.8.3]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_3.pdf}}
+      \subfigure[2.8.4]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_4.pdf}}}
+\end{figure}
+
+\end{document}
