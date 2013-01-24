@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\setlength{\parindent}{0mm}
+\newcommand{\ep}{\epsilon}
+\begin{document}
+Name: Hall Liu
+
+Date: 1/24/13
+\vspace{1.5cm}
+
+Dirchlet distribution: useful for generalizing a beta distribution, multivariate version of it. Useful for analyzing data that has several RVs which sum up to something less than $1$. Recall that if we have two gamma distros $X$ adn $Y$, then $X/Y$ is essentially a beta distro. Try this as exercise. Specifically, let $x\simGamma(y,\lambda), Y\sim Gamma(s,\lambda)$, and ifnd joint density of $X/(X+y)$ and $X+Y$. $X$ and $Y$ are indep.
+
+The dirchlet distribution is actually defined in a similar way. Supp. $X\sim Gamma(r,\lambda)$, $Y\sim Gamma(s,\lambda)$, $Z\sim Gamma(t,\lambda)$. Consider $U=X/(X+Y+Z)$, $V=Y/(X+Y+Z)$. Then want to find joint distro of $U,V$. (if we want more components, we just throw in more gammas) Know joint distro of $X,Y,Z$. Want the trivariate transformation, so take $W=X+Y+Z$. Now want to transform to $U,V,W$. Afterwards we can integrate out $W$. The inverse transformation is is $X=UW$,$Y=VW$,$Z=W(1-U-V)$. The jacobian is 
+$$\left|\begin{pmatrix}
+W&0&-W\\
+0&W&-W\\
+U&V&1-U-V\\
+\end{pmatrix}\right|=W(W(1-U-V)+WV)-W(WU)=W^2(1-2U)$$
+
+\end{document}
