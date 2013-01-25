@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+%\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{1.7}
+We shall show that this problem is equivalent to problem 1.6, which has already been assigned as homework. Assign each input wire to a ship, and each output wire to a port. View each junction between an input wire and an output wire as a port stop. Then, the ship's schedule for input wire $i$ is the list of output wires it crosses in order from upstream to downstream. For each input wire $i$, view the junction at which it crosses over onto the output wire $j$ as the truncation in the ship's schedule. Then, no input wire may cross output $j$ downstream of input $i$ (corresponding to no ship may visit a port after another ship has truncated there). The algorithm is then the same as for the ship problem, and a copy of the solution from hw1 follows:
+
+Algorithm: For each of the $n$ ships, construct a "preference list" of ports that is the list of ports which they visit, in order. For each of the $n$ ports, construct a "preference list" of ships that is the list of ships which visit them, in reverse order. Apply G-S to the ships and ports, with ships taking the role of men and ports that of women. Truncate each ship's schedule at the port which they were matched to by G-S.
+\subsection*{2.8}
+This was extra credit on hw1. I'm just going to c/p my answer from there. 
+
+a. Drop the jar at rung $i^2$ for increasing $i$ until we reach the top of the ladder or until the jar breaks. If the jar breaks, start at the last place where we dropped the jar and move up one rung at a time until the jar breaks again. We make at most $\sqrt{n}$ drops in the first pass, and at most $n-(\sqrt{n}-1)^2=2\sqrt{n}-1$ drops in the second pass, for a total of $\Theta(\sqrt{n})$ drops. This grows strictly slower than linear.
+
+b. Drop the jar at rung $i^k$ for increasing $i$ like we did in (a), but when the jar drops, start at the last safe rung and start moving up in increments of $i^{k-1}$. To be precise,
+\begin{verbatim}
+let current_rung=1
+let last_safe_rung=1
+while k>0:
+    let base_rung=last_safe_rung
+    let i=0
+    while jar remains intact:
+        let last_safe_rung=current_rung
+        increment i
+        let current_rung be base_rung+i^k
+        drop jar from current_rung
+return last_safe_rung
+\end{verbatim}
+
+Use induction to determine the running time of this algorithm. Suppose that the running time for $k-1$ jars is $\Theta(\sqrt[k-1]{n})$. Then, for $k$ jars, we make at most $\sqrt[k]{n}$ drops until the first jar breaks. Then, we essentially follow the algorithm for $k-1$ jars but on a ladder of size $n-(\sqrt[k]{n}-1)^k=\Theta(n^{(k-1)/k})$. The inner algorithm takes $\Theta(n^{1/k})$ time to run on an input of this size, as obtained by plugging it in. Thus, the overall running time is $\Theta(\sqrt[k]{n})$.
+
+\subsection*{4.24}
+First, make a pass through the leaves of the tree to determine the maximum distance of a leaf from the root and store this distance in a data structure associated with the leaf. This takes $O(n\log_2n)$ time, as there are $n$ leaves and it takes $\log_2n$ steps to trace back to the root and determine the distance. Call this maximum distance $d$. We aim to make all leaves distance $d$ from the root. 
+
+Next, go through the leaves again, this time increasing the cost of their edge so that their distance to the root is $d$, but preserve the original cost of the edge in some data structure. This is a satisfactory tree, but not an optimal one. Next, we iterate upwards through the layers, performing the following steps:
+
+\begin{verbatim}
+We are on layer j
+for each node n on layer j:
+    let e_n1 and e_n2 be the new costs of the child edges of n
+    let e_o1 and e_o2 be the original costs of the child edges of n
+    let x be min(e_n1-e_o1,e_n2-e_o2)
+    if x is zero, continue
+    subtract x from e_n1 and e_n2
+    add x to the cost of n's parent edge while preserving its original cost
+end loop
+if no modifications are made, quit. otherwise go up a layer.
+\end{verbatim}
+
+It's fairly easy to see that these steps do not affect the equidistance property. We are effectively taking edge costs and pushing them upwards to concentrate them in fewer edges in order to minimize the sum of costs. In order to show that the tree $T$ produced in this manner is optimal, we first note the following: for each node $n$ in this new tree, there is a path to a leaf under $n$ such that the cost of this path in the new tree is the same as the cost of the path in the old tree. This is easily seen, as the algorithm will always restore one of the child edges of any node $n$ it touches to its original cost. If the algorithm does not touch some node $n$, that means that the algorithm did nothing to the layer under $n$, so the child edges of $n$ are unmodified. Call this path the ``path to ground'' from $n$. It is fairly easy to see that any optimal tree must have this property: if any node has two child edges which are both above their original cost, perform the above steps on it to reduce the total cost of the tree. Now we just need to prove that any two trees with this property have the same total cost.
+
+Consider trees $T$ and $T'$ with the path to ground property, and examine their leaves in pairs (leaves immediately connected to the same parent). Call these $l_1$ and $l_2$. By the zero-skew condition, the costs of the parent edges of $l_1$ and $l_2$ must be the same, as their paths back to root merge after that point. However, we also have that the parent of $l_1$ and $l_2$ has a path to ground, so one of the edge costs of $l_1$ and $l_2$ must be the original. Since we cannot decrease the edge cost, the costs of the edges of $l_1$ and $l_2$ are uniquely determined, so $T$ and $T'$ are identical, at least on the lowermost layer.
+
+Now, moving up a few layers, refer to the following picture.
+
+\includegraphics[width=0.4\textwidth]{scripts_3/4_24.png}
+
+By induction, we are guaranteed that the cost of any path $c_1,c_2$ from node $y$ to a leaf is the same in $T$ and $T'$ and same for node $z$. We wish to show that this implies that $b_1$ and $b_2$ are the same across $T$ and $T'$ as well. As shown in the picture, we have $c_1=c_2$ and $c_3=c_4$. We must then have that $b_1+c_1=b_2+c_3$, implying that the relationship between $b_1$ and $b_2$ is determined by the values of the $c_i$. However, since we have the path to ground property in both $T$ and $T'$, one of $b_1$ or $b_2$ must retain its original value, so this uniquely determines the $b_i$ as well. Then, we have shown that $T$ and $T'$ are in fact identical trees, so we are guaranteed that the above algorithm produces a unique optimal tree for this problem.
+
+\subsection*{4.27}
+$\mathcal{H}$ is always connected. To see this, let $T$ and $T'$ be any two distinct spanning trees. It is sufficient to show that we can always find an edge $e$ in $T$ and an edge $e'$ in $T'$ such that $e\not\in T'$,$e'\not\in T$, and replacing $e$ with $e'$ in $T$ produces another spanning tree. This is sufficient, as this'll get us to $T'$ in at most $|V|-1$ steps if we iterate it. Choose any edge in $T$ that's not in $T'$. Removing this edge will partition $T$ into two pieces. There must be some edge $e'$ in $T'$ that bridges these two pieces, or else $T'$ would not be connected. Thus, replacing with this edge will do the trick.
+\end{document}
