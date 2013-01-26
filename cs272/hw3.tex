@@ -77,4 +77,15 @@ By induction, we are guaranteed that the cost of any path $c_1,c_2$ from node $y
 
 \subsection*{4.27}
 $\mathcal{H}$ is always connected. To see this, let $T$ and $T'$ be any two distinct spanning trees. It is sufficient to show that we can always find an edge $e$ in $T$ and an edge $e'$ in $T'$ such that $e\not\in T'$,$e'\not\in T$, and replacing $e$ with $e'$ in $T$ produces another spanning tree. This is sufficient, as this'll get us to $T'$ in at most $|V|-1$ steps if we iterate it. Choose any edge in $T$ that's not in $T'$. Removing this edge will partition $T$ into two pieces. There must be some edge $e'$ in $T'$ that bridges these two pieces, or else $T'$ would not be connected. Thus, replacing with this edge will do the trick.
+
+\subsection*{5.1}
+%For simplicity's sake, assume that $n$ is a power of $2$ so I don't make any off-by-one errors when I'm explaining this thing. This won't affect the overall running time, as expanding the size of the databases to a power of $2$ resizes them to at most $2n$, so running time is at most $\log 2n=\log2+\log n$. 
+
+Let the databases be labeled $A$ and $B$. Query the $n/2$th element of each database and call them $a$ and $b$. If $a<b$, then none of the first $n/2-1$ elements of $A$ are the median, as they have at least $a$,$b$, the $n/2-1$ elements in the top half of $A$, and the $n/2-1$ elements in the top half of $B$ above them. Similarly, the last $n/2-1$ elements of $B$ are excluded (there may be some off-by-one errors here, so to be safe we can exclude all but one of them, which doesn't actually change the running time). We can then pretend like the top half of $A$ is the new database $A$ and the lower half of $B$ is the new database $B$, and keep doing this until we're down to a single element.
+\subsection*{6}
+Let the carrying capacity be $24$, and let the weights be $23$ and $12$. The greedy algorithm would grab the $23$ weight and be done, but grabbing two $12$ weights is optimal. 
+
+Let the carrying capacity and weights take real values. Then, the sup of the ratio of the optimal solution to the greedy solution is $2$. First, we can make this ratio arbitrarily close to $2$ as follows: let the carrying capacity be $C$, and let there be two weights $C/2$ and $C/2+\ep$. The greedy solution will produce a total weight of $C/2+\ep$ whereas the optimal solution produces a total weight of $C$. We may then make the ratio approach $2$ by taking $\ep\to0$. Now suppose that the greedy algorithm produces a solution less than one-half the optimal. The greedy algorithm stops when there are no weights available that would not take the total past the carrying capacity. This implies that the lightest weight is at least half the weight of the optimal capacity, since otherwise the greedy algorithm would have grabbed the lightest weight available to increase itself beyond half the optimal. However, this presents a contradiction, as the greedy algorithm grabbing any weight whatsoever would take its weight above half the optimal.
+\subsection*{7}
 \end{document}
+
