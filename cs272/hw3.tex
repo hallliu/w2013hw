@@ -87,5 +87,17 @@ Let the carrying capacity be $24$, and let the weights be $23$ and $12$. The gre
 
 Let the carrying capacity and weights take real values. Then, the sup of the ratio of the optimal solution to the greedy solution is $2$. First, we can make this ratio arbitrarily close to $2$ as follows: let the carrying capacity be $C$, and let there be two weights $C/2$ and $C/2+\ep$. The greedy solution will produce a total weight of $C/2+\ep$ whereas the optimal solution produces a total weight of $C$. We may then make the ratio approach $2$ by taking $\ep\to0$. Now suppose that the greedy algorithm produces a solution less than one-half the optimal. The greedy algorithm stops when there are no weights available that would not take the total past the carrying capacity. This implies that the lightest weight is at least half the weight of the optimal capacity, since otherwise the greedy algorithm would have grabbed the lightest weight available to increase itself beyond half the optimal. However, this presents a contradiction, as the greedy algorithm grabbing any weight whatsoever would take its weight above half the optimal.
 \subsection*{7}
+The algorithm goes as follows: 
+\begin{verbatim}
+If tree T has diameter n>2:
+    View T as the joining-together of k trees each of diameter n-1 at a single node
+    Apply algorithm recursively to each of these k subtrees
+If tree T has diameter 1 or 2:
+    Remove any leaf. This leaves a set of disconnected vertices
+    Remove all the disconnected vertices one by one
+\end{verbatim}
+We prove optimality by induction. The $n=2$ case is simple, as all trees with diameter $2$ are a bunch of vertices connected to a central vertex. In this case, removal of any vertex will also remove the central vertex, so our algorithm does the best. 
+
+Now assume that our algorithm is optimal on trees of diameter $n-1$. Then, any tree of diameter $n$ is $k$ of these stuck together at one additional vertex. Then, we note that while removing vertices from the tree of diameter $n$, operations on the subtrees of diameter $n-1$ do not affect the other subtrees at all. Thus, the optimal solution is the optimal solution applied to all the subtrees, then removing the central binding vertex.
 \end{document}
 
