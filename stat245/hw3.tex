@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\setlength{\parindent}{0mm}
+\newcommand{\ep}{\epsilon}
+\newcommand{\openm}{\begin{pmatrix}}
+\newcommand{\closem}{\end{pmatrix}}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{1}
+a,b.By Example C in section 3.5, the conditional distribution $X|Y$ is normal with mean $\mu_X+\rho(y-\mu_Y)\sigma_X/\sigma_Y$ and variance $\sigma_X^2(1-\rho^2)$. Plugging the given values and $y=8$, we have that the conditional mean is $6.5$ and the conditional variance is $7.56$.
+
+c. We find this probability by integrating the joint density over the strip $[3,5]\times[-\infty,\infty]$, which is really just integrating up the marginal density of $X$ over $[3,5]$. This gives $0.088$.
+
+d. Integrating the conditional distribution over this range gives $0.099$.
+\subsection*{2}
+a. If we let $A,B$ be iid standard normal distributions, then taking $\openm X\\Y\closem=\openm3&0\\4\rho &4\sqrt{1-\rho^2}\closem\openm A\\B\closem+\openm3\\1\closem$ will yield $X$ and $Y$ with the parameters that we want. This follows directly from the formulas for computing correlation and variances for linear combinations of RVs. Now, we have $\openm W_a\\V\closem=\openm a&1\\1&2\closem\openm X\\Y\closem+\openm12\\9\closem=\openm3a+4\rho&4\sqrt{1-\rho^2}\\3+8\rho&8\sqrt{1-\rho^2}\closem\openm A\\B\closem+\openm3a+13\\14\closem$. The vector at the end there doesn't really matter, as it only tweaks with the mean. Recall that the covariance of two RVs given by a linear combination $\openm a&b\\c&d\closem$ of two standard normal RVs is $ac+bd$, so if we want to make $W_a$ and $V$ independent, we need $(3a+4\rho)(3+8\rho)+32(1-\rho)^2=0$, or $a=-\frac{4(3\rho+8)}{3(8\rho+3)}$. For $\rho=1/3$, this yields $a=-36/11$. If $\rho_0=-3/8$, no value of $a$ will make the two independent.
+
+b. Starting again from $(3a+4\rho)(3+8\rho)+32(1-\rho)^2=0$, we have $\rho=-\frac{32+9a}{24a+12}=-41/36$ for $a=1$. This is outside of the domain of $\rho$, so this $a$ doesn't work. In fact, for all $a$ such that $\frac{32+9a}{24a+12}>1$ or $\frac{32+9a}{24a+12}<-1$, there exists no $\rho$ that will work. This works out to the invalid values being $[-4/3,4/3]$.
+\subsection*{3}
+a. Let $K$ be a 3-dimensional random variable with independent standard normal components. Then, we have 
+$$\openm S\\E_1\\E_2\closem=\openm7&0&0\\0&5&0\\0&0&5\closem K+\openm70\\0\\0\closem$$
+Introduce the new variable $Z=-5S/7+7E_1/5+7E_2/5$ (yes, really random, but it makes things look nice later). Then, we have 
+$$\openm X\\Y\\Z\closem=\openm1&1&0\\1&0&1\\-5/7&7/5&7/5\closem\openm S\\E_1\\E_2\closem=\openm7&5&0\\7&0&5\\-5&7&7\closem K+\openm70\\70\\-50\closem$$
+Let that matrix in the last equation be $A$. Then, by a theorem given in class, we have that the joint density of $X$, $Y$, and $Z$ is 
+$$\frac{1}{(2\pi)^{3/2}\sqrt{|\det(AA^T)|}}\exp\left(-\frac{1}{2}\langle x-\mu|A^{-T}A^{-1}|x-\mu\rangle\right)$$
+where $x$ is the vector consisting of $X,Y$, and $Z$. We have 
+$$AA^T=\openm74&49&0\\49&74&0\\0&0&123\closem\quad\text{and}\quad (AA^T)^{-1}=\openm\frac{74}{3075}&-\frac{49}{3075}&0\\-\frac{49}{3075}&\frac{74}{3075}&0\\0&0&\frac{1}{123}\closem$$
+This is nice. These things are block-diagonal, which means that we'll be able to separate the $Z$ term out in the exponential without doing any annoying integration. In fact, the determinant out front will spit out the right term for the $Z$ variable, which means we can just write the joint distribution of $X$ and $Y$ as 
+$$\frac{1}{2\pi\sqrt{3075}}\exp\left(-\frac{1}{2}\openm X-70&Y-70\closem\Sigma^{-1}\openm X-70\\Y-70\closem\right)$$
+where $\Sigma=\openm74&49\\49&74\closem$
+
+b. The matrix $\Sigma$ above provides us that the variance of $X$ and $Y$ are both $74$, and their correlation is $49/74$. Using the formula given in the book again to determine the conditional distribution of $Y$ given $X=70-\sqrt{74}$, we have that the conditional mean is $64.3$.
+
+c. Two standard deviations above the midterm mean is $x=70+2\sqrt{74}$, so the conditional distribution of $Y$ has mean $81.39$ and variance $41.55$. The probability that such a student will receive a score at least two standard deviations above the final mean (same as the midterm mean) is $0.44$. Thus, more than $50\%$ of the students who were two standard deviations above average on the midterm are expected to score below that on the final. It thus seems plausable that ``many'' of the high-scoring students would score below the two standard deviation mark.
+\end{document}
