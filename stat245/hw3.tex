@@ -12,6 +12,10 @@
 \newcommand{\ep}{\epsilon}
 \newcommand{\openm}{\begin{pmatrix}}
 \newcommand{\closem}{\end{pmatrix}}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\var}{var}
+\newcommand{\nc}{\newcommand}
+\newcommand{\rn}{\mathbb{R}}
 \begin{document}
 Name: Hall Liu
 
@@ -44,4 +48,23 @@ where $\Sigma=\openm74&49\\49&74\closem$
 b. The matrix $\Sigma$ above provides us that the variance of $X$ and $Y$ are both $74$, and their correlation is $49/74$. Using the formula given in the book again to determine the conditional distribution of $Y$ given $X=70-\sqrt{74}$, we have that the conditional mean is $64.3$.
 
 c. Two standard deviations above the midterm mean is $x=70+2\sqrt{74}$, so the conditional distribution of $Y$ has mean $81.39$ and variance $41.55$. The probability that such a student will receive a score at least two standard deviations above the final mean (same as the midterm mean) is $0.44$. Thus, more than $50\%$ of the students who were two standard deviations above average on the midterm are expected to score below that on the final. It thus seems plausable that ``many'' of the high-scoring students would score below the two standard deviation mark.
+\subsection*{4}
+We can express $Y_1$ and $Y_2$ as $\openm Y_1\\Y_2\closem=\openm1&0\\1&1\closem\openm X_1\\X_2\closem$, where $X_1$ and $X_2$ are independent standard normal RVs. Then, to find a linear combination of the $Y$s such that they result in indep. std. normal RVs, all we have to do is invert that matrix up there. It's got determinant $1$, so this gives us $\openm 1&0\\-1&1\closem$.
+\subsection*{5}
+I couldn't think of an easy way to do this, so I'm doing it the hard way. Using the definition of correlation, we want to get $\frac{\cov(X^2,Y^2)}{\var(X^2)\var(Y^2)}=\frac{E(X^2Y^2)-E(X^2)E(Y^2)}{\var(X^2)\var(Y^2)}$. We know that $E(X^2)=E(Y^2)=\sigma^2_X=\sigma^2_Y=4$, since the means of $X$ and $Y$ are both $0$. We know the marginal densities of $X$ and $Y$, so we can calculate $\var(X^2)=\var(Y^2)=E(X^4)-(E(X^2))^2$. From Wikipedia, $E(X^4)=3!!\sigma_X^4=48$, so $\var(X^2)=32$. Now, we just need to calculate $E(X^2Y^2)$.
+
+We need to compute the integral $\int_{\rn^2}x^2y^2f(x,y) dx dy$. First, let's look at the inside of the exponential and make it nicer. We have 
+$$-\frac{1}{2(1-\rho^2)}\left(\frac{x^2}{4}+\frac{y^2}{4}-\frac{\rho xy}{2}\right)$$
+Complete the square in $x$ by adding and subtracting $y^2/4-\rho^2y^2/4$ to get 
+$$-\frac{1}{2(1-\rho^2)}\left(\frac{x}{2}-\frac{y\rho}{2}\right)^2+\frac{y^2}{8}$$
+Now put everything up into the exponential and examine the integral in $x$. We have
+$$\frac{y^2e^{-y^2/8}}{8\pi\sqrt{1-\rho^2}}\int_{-\infty}^{\infty}x^2\exp\left(-\frac{1}{2(1-\rho^2)}\left(\frac{x}{2}-\frac{y\rho}{2}\right)^2\right)dx$$
+Substituting $u=\frac{1}{\sqrt{2(1-\rho^2)}}(x/2-y\rho/2)$, we incur a factor of $\sqrt{8(1-\rho^2)}$ in front, and the integral itself turns into 
+$$\int_{-\infty}^{\infty}(2u\sqrt{2(1-\rho^2}-y\rho)^2e^{-u^2}du$$
+Fortunately, a table of integrals informs me that the integral over the real line of $(au+b)e^{-u^2}$ is equal to $\frac{\sqrt{\pi}}{2}(a^2+2b^2)$, so this integral is actually $\sqrt{\pi}(4(1-\rho^2)+y^2\rho^2)$. Putting this together with the terms in front, we have that the $y$ integral is 
+$$\frac{1}{8\sqrt{\pi}}\int_{-\infty}^\infty\sqrt{8}(y^2\rho^2+4(1-\rho^2))y^2e^{-y^2/8} dy$$
+Making the substitution $u=y/\sqrt{8}$, we incur a factor of $\sqrt{8}$ out front and we get the integral 
+$$\frac{8}{\sqrt{\pi}}\int_{-\infty}^\infty(8u^2\rho^2+4(1-\rho^2))u^2e^{-u^2}du$$
+The table of integrals informs me that the integral of $u^2e^{-u^2}$ is $\frac{\sqrt{\pi}}{2}$ and the integral of $u^4e^{-u^2}$ is $\frac{3\sqrt{\pi}}{4}$, so the integral above is now essentially solved in two pieces, with the $u^4$ piece evaluating to $6\rho^2\sqrt{\pi}$ and the $u^2$ piece evaluating to $2(1-\rho^2)\sqrt{\pi}$. Thus, we have that the final result is $32\rho^2+16$. Subtracting off the $E(X^2)E(Y^2)$ term gives $32\rho^2$, and dividing by $32^2$ gives 
+$$\frac{\rho^2}{32}$$
 \end{document}
