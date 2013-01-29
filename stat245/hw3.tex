@@ -71,4 +71,18 @@ $$\frac{\rho^2}{32}$$
 The book gives a construction of joint RVs using copulas. Let $c(x,y)=2x+2y-4xy$. This is shown on p77 to have uniform marginals. Let $X,Y$ be standard normal RVs, and denote their density by $\phi$ and cumulative density by $\Phi$. Then, the density function $(2\Phi(x)+2\Phi(y)-4\Phi(x)\Phi(y))\phi(x)\phi(y)$ has normal marginals, but it's not bivariate normal because it can't be expressed in terms of elementary functions.
 \subsection*{7}
 From Example A on p340, the LRT rejects for large values of $\frac{n}{\sigma^2}(\bar{X}-\mu_0)^2$. Call this $L$, which is distributed according to $\chi^2_1$. From Theorem B in Section 6.3, we have that $K=\frac{(n-1)S^2}{\sigma^2}$ is distributed according to $\chi^2_{n-1}$. Then, substituting for $\sigma_2$, we have that $L=\frac{nK(\bar{X}-\mu_0)^2}{(n-1)S^2}$ or $\frac{\sqrt{n}(\bar{X}-\mu_0)}{S}=\sqrt{\frac{L}{K/(n-1)}}$. Note that the RHS has a $t$-distribution with $n-1$ degrees of freedom by definition. Now, note that $s_{\bar{X}}=\frac{S}{\sqrt{n}}$, and we have that the two tests are equivalent.
+\subsection*{8}
+Transformation to polar coords is given by $x=r\cos\theta$ and $y=r\sin\theta$, so the Jacobian determinant is 
+$$\left|\begin{array}{cc}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{array}\right|=r$$
+Thus, taking the pdf of the bivariate distro and plugging in these things, we get 
+$$\frac{r}{2\pi\sqrt{1-\rho^2}}\exp\left(\frac{-1}{2(1-\rho^2)}(r^2\cos^2\theta+r^2\sin^2\theta-2r^2\rho\sin\theta\cos\theta)\right)=\frac{r}{2\pi\sqrt{1-\rho^2}}\exp\left(\frac{-r^2}{2(1-\rho^2)}(1-\rho\sin2\theta)\right)$$
+We want to integrate this wrt $r$ from $0$ to $\infty$. Let $u=$ the whole thing inside the integral without the minus, so the exp term just integrates out to $1$, and the outside is left with
+$$\frac{1-\rho^2}{2\pi\sqrt{1-\rho^2}(1-\rho\sin2\theta)}=\frac{\sqrt{1-\rho^2}}{2\pi(1-\rho\sin2\theta)}$$
+which is what we wanted but with that trig identity in there. If $\rho=0$, then we're left with $1/2\pi$ which is the uniform distro over $[0,2\pi)$.
+
+$P(XY>0)$ is the integral over the first and third quadrants, so integrate the density from $0$ to $\pi/2$ and from $\pi$ to $3\pi/2$. Rewrite the important part as $$\frac{1+\tan^2\theta}{1+\tan^2\theta-2\rho\tan\theta}$$ and make the substitution $u=\tan x$, or $dx=\frac{du}{1+u^2}$. Then, the integrand becomes 
+$$\frac{1}{1+u^2+2\rho u}=\frac{1}{(u-\rho)^2+1-\rho^2}=\frac{1/(1-\rho^2)}{\left(\frac{u-\rho^2}{\sqrt{1-\rho^2}}\right)^2+1}$$
+Make another substitution $v=\frac{u-\rho^2}{\sqrt{1-\rho^2}}$, so that the integrand becomes 
+$$\frac{1/\sqrt{1-\rho^2}}{v^2+1}\text{ which integrates to }\frac{\tan^{-1}(v)}{\sqrt{1-\rho^2}}=\frac{\tan^{-1}\left(\frac{u-\rho}{\sqrt{1-\rho^2}}\right)}{\sqrt{1-\rho^2}}=\frac{\tan^{-1}\left(\frac{\tan\theta-\rho}{\sqrt{1-\rho^2}}\right)}{\sqrt{1-\rho^2}}$$
+Now plugging in $\theta=0$ gives $\frac{-\sin^{-1}(\rho)}{\sqrt{1-\rho^2}}$. Plugging in $\theta=\pi/2$ gives something undefined, but taking the limit from the left gives $\frac{\pi/2}{\sqrt{1-\rho^2}}$. Plugging in $\pi$ gives the same as $0$, and plugging in $-\pi/3$ gives $\frac{\pi/2}{\sqrt{1-\rho^2}}$ with the appropriate limit. Then, the $0$ to $\pi/2$ part put together and multiplied by that stuff we forgot earlier on gives us $$\frac{\pi/2+\sin^{-1}\rho}{2\pi}=1/2(0.5+\pi^{-1}\sin^{-1}\rho)$$ The $\pi$ to $3\pi/2$ part is the same, so in total that gives us a probability of $$1/2+\pi^{-1}\sin^{-1}\rho$$
 \end{document}
