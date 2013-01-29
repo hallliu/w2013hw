@@ -60,11 +60,15 @@ $$-\frac{1}{2(1-\rho^2)}\left(\frac{x}{2}-\frac{y\rho}{2}\right)^2+\frac{y^2}{8}
 Now put everything up into the exponential and examine the integral in $x$. We have
 $$\frac{y^2e^{-y^2/8}}{8\pi\sqrt{1-\rho^2}}\int_{-\infty}^{\infty}x^2\exp\left(-\frac{1}{2(1-\rho^2)}\left(\frac{x}{2}-\frac{y\rho}{2}\right)^2\right)dx$$
 Substituting $u=\frac{1}{\sqrt{2(1-\rho^2)}}(x/2-y\rho/2)$, we incur a factor of $\sqrt{8(1-\rho^2)}$ in front, and the integral itself turns into 
-$$\int_{-\infty}^{\infty}(2u\sqrt{2(1-\rho^2}-y\rho)^2e^{-u^2}du$$
+$$\int_{-\infty}^{\infty}(2u\sqrt{2(1-\rho^2)}-y\rho)^2e^{-u^2}du$$
 Fortunately, a table of integrals informs me that the integral over the real line of $(au+b)e^{-u^2}$ is equal to $\frac{\sqrt{\pi}}{2}(a^2+2b^2)$, so this integral is actually $\sqrt{\pi}(4(1-\rho^2)+y^2\rho^2)$. Putting this together with the terms in front, we have that the $y$ integral is 
 $$\frac{1}{8\sqrt{\pi}}\int_{-\infty}^\infty\sqrt{8}(y^2\rho^2+4(1-\rho^2))y^2e^{-y^2/8} dy$$
 Making the substitution $u=y/\sqrt{8}$, we incur a factor of $\sqrt{8}$ out front and we get the integral 
 $$\frac{8}{\sqrt{\pi}}\int_{-\infty}^\infty(8u^2\rho^2+4(1-\rho^2))u^2e^{-u^2}du$$
 The table of integrals informs me that the integral of $u^2e^{-u^2}$ is $\frac{\sqrt{\pi}}{2}$ and the integral of $u^4e^{-u^2}$ is $\frac{3\sqrt{\pi}}{4}$, so the integral above is now essentially solved in two pieces, with the $u^4$ piece evaluating to $6\rho^2\sqrt{\pi}$ and the $u^2$ piece evaluating to $2(1-\rho^2)\sqrt{\pi}$. Thus, we have that the final result is $32\rho^2+16$. Subtracting off the $E(X^2)E(Y^2)$ term gives $32\rho^2$, and dividing by $32^2$ gives 
 $$\frac{\rho^2}{32}$$
+\subsection*{6}
+The book gives a construction of joint RVs using copulas. Let $c(x,y)=2x+2y-4xy$. This is shown on p77 to have uniform marginals. Let $X,Y$ be standard normal RVs, and denote their density by $\phi$ and cumulative density by $\Phi$. Then, the density function $(2\Phi(x)+2\Phi(y)-4\Phi(x)\Phi(y))\phi(x)\phi(y)$ has normal marginals, but it's not bivariate normal because it can't be expressed in terms of elementary functions.
+\subsection*{7}
+From Example A on p340, the LRT rejects for large values of $\frac{n}{\sigma^2}(\bar{X}-\mu_0)^2$. Call this $L$, which is distributed according to $\chi^2_1$. From Theorem B in Section 6.3, we have that $K=\frac{(n-1)S^2}{\sigma^2}$ is distributed according to $\chi^2_{n-1}$. Then, substituting for $\sigma_2$, we have that $L=\frac{nK(\bar{X}-\mu_0)^2}{(n-1)S^2}$ or $\frac{\sqrt{n}(\bar{X}-\mu_0)}{S}=\sqrt{\frac{L}{K/(n-1)}}$. Note that the RHS has a $t$-distribution with $n-1$ degrees of freedom by definition. Now, note that $s_{\bar{X}}=\frac{S}{\sqrt{n}}$, and we have that the two tests are equivalent.
 \end{document}
