@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{5.3}
+The following algorithm finds the size of the largest equivalence class in the pile and a representative for that class, or just false if the largest equivalence class is smaller than the half the pile
+\begin{verbatim}
+Input is a pile of k cards
+if k is 1, return the one equivalence class and the one element
+otherwise
+divide the collection into two roughly equal subpiles
+let (size1,rep1) be the result on the first subpile
+let (size2,rep2) be the result on the second subpile
+if both calls return false, return false as well
+if one returns false, WLOG assume that the first call returns true. then:
+    expand the class of rep1 by testing it against everything in the second subpile
+    if the new size of class rep1 is more than k/2, return (new size,rep1)
+    otherwise return false
+if both return true:
+    do the same as if one is false, except we also test rep2 against everything 
+    in the first subpile and return false only if both expanded classes are smaller than k/2
+\end{verbatim}
+
+The running time of this algorithm is at worst given by the recurrence $T(k)=2T(k/2)+2k$, which is the same as the recurrence of mergesort with a solution of $k\log_2k$. We now want to show that it's correct. Suppose by induction that the inner calls return correct results. 
+
+If both calls return false, then the potentially largest equivalence class in the pile is formed by joining the two biggest equivalence classes in the subpiles. However, this sum is less than $k/4+k/4=k/2$, so we return false.
+
+If only the first call returns true, then we get a size and a representative $r$. We want to show that if a equivalence class larger than $k/2$ exists, it must contain this representative. Let there be a class $A$ with $|A|>k/2$. Then, at least one of the subpiles must contain a subset of $A$ with size greater than $k/4$. Since we know that the second subpile does not, the first subpile contains such a subset of $A$, and by construction of the subset we have $r\in A$. Then, we can feel free to return false if the class of $r$ is smaller than $k/2$ or return the class of $r$ if it is larger.
+
+If both calls return true, then by a similar argument, any class $A$ with $|A|>k/2$ must contain either $r_1$ or $r_2$, and we have the same result.
+\subsection*{6.1}
+a. Consider the path \begin{verbatim}16---17---16\end{verbatim} The greedy algorithm would produce the independent set $v_2$, but the maximum total weight is produced by $\{v_1,v_3\}$.
+
+\noindent b. Consider the path \begin{verbatim}100---1---1---100\end{verbatim} Maximum total weight is given by $\{v_1,v_4\}$, but the alternate algorithm produces $\{v_1,v_3\}$.
+
+\noindent c. Arrays are indexed from 1 (sorry). $A[i,j]$ is the max. indep. set on the subpath from $v_i$ to $v_j$, inclusive.
+\begin{alltt}
+Let A be the upper triangular region of an nxn array of pairs (weight, indep. set)
+For each i in [1,n], let A[i,i]=(w\(\sb{i}\),v\(\sb{i}\))
+For each i in [1,n-1]:
+    For each j in [1,n-i]:
+        Let A[j,j+i]=(\(-\infty,\nullset\))
+        For each k in [j,j+i]:
+            If A[j,k-1].1+A[k+1,j+i].1<A[j,j+i].1:
+                let A[j,j+i]=(A[j,k-1].1+A[k+1,j+i].1,A[j,k-1].2\(\cup\)A[k+1,j+i].2)
+        end loop
+    end loop
+end loop
+return A[1,n]
+\end{alltt}
+
+Any array indexing problems above should be handled as returning $(0,\nullset)$. Basically what it does is it constructs the upper triangular portion of a matrix by scanning up the superdiagonals. At each point, it computes the max. indep. set by removing each element from consideration, looking up the weights of the max. indep. subsets of the two subpaths formed, and taking the maximum of these over all elements in the path.
+
+This algorithm's correctness depends on this fact: for a path of length $n$, there is some vertex $i$ such that the union of max. indep. sets on the subpaths $[1,i-1]$ and $i+1,n]$ is a max. indep. set. This is due to the following: consider any max. indep set $A$ on $[1,n]$. There must be some vertex $i\not\in A$. Ca;; the union of max. indep. sets on the disconnected subpaths formed by removing $i$ $A'$. We WTS that the weight of $A'$ is the same as that of $A$. 
+
+Consider the partition of $A$ into two sets $A_1,A_2$, where all elements of $A_1$ are nodes numbered below $i$ and all elements of $A_2$ are nodes numbered above $i$. $A_1$ and $A_2$ are max. indep. sets for $[1,i-1]$ and $[i+1,n]$, resp., since otherwise we could just replace them by a max. indep. set and increase the weight of $A$. Thus, we have that $w(A)=W(A')$.
+
+With this result, it is easy to see that we can obtain a max. indep. set on $[1,n]$ by considering the max. weight of all unions of the type $\text{max\_wt}([1,i-1])\cup\text{max\_wt}([i+1,n])$ for $i\in[1,n]$. This is the step we do in the inner loop of the above algorithm. 
+\end{document}
