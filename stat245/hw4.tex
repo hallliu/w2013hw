@@ -37,6 +37,13 @@ a. If we have $H_a:\sigma_X>\sigma_Y$, then $s_X^2/s_Y^2$ would be distributed a
 
 \noindent c. We want to test if $\sigma_A=\sigma_B$. The statistic in question is $s_A^2/s_B^2=0.599$. We have $13$ samples in $A$ and $8$ in $B$, so this statistic follows $F_{12,7}$. The cdf at this point is $0.208$, so we do not reject. To construct the confidence interval, we calculate the inverse cdf at $p=0.025$ and $p=0.975$, which come out to be $0.277$ and $4.666$, resp. Then, the confidence interval for $s_A^2/s_B^2$ is $[0.128,2.162]$
 \subsection*{4}
-$\bar{D}=\bar{X}-\bar{Y}=0.44$, and $s_{\bar{D}}=4.63$. If we ignored the pairing, we'd have that $s_{\bar{X}-\bar{Y}}=s_p\sqrt{1/n+1/m}=7.805$. Since the differences are independent and distributed normally, we have from results given in the book that a $95\%$ percent confidence interval is given by $\bar{D}\pm t_{14}(0.025)s_\bar{D}=[-9.492,10.372]$. Thus, there is no significant difference in the mean of the two samples. 
+$\bar{D}=\bar{X}-\bar{Y}=0.44$, and $s_{\bar{D}}=4.63$. If we ignored the pairing, we'd have that $s_{\bar{X}-\bar{Y}}=s_p\sqrt{1/n+1/m}=7.805$. Since the differences are independent and distributed normally, we have from results given in the book that a $95\%$ percent confidence interval is given by $\bar{D}\pm t_{14}(0.025)s_{\bar{D}}=[-9.492,10.372]$. Thus, there is no significant difference in the mean of the two samples. 
 \subsection*{5}
+First, compute the sample correlation using 
+$$\hat{\rho}=\frac{\frac{1}{n}\sum(X_i-\bar{X})(Y_i-\bar{Y})}{\sqrt{\frac{1}{n}\sum(X_i-\bar{X})^2}\sqrt{\frac{1}{n}\sum(Y_i-\bar{Y})^2}}$$
+Running the data through, we get $0.9767$. From class notes, if we use the variance-stabilizing transformation $f(\rho)=1/2\log\left(\frac{1+\rho}{1-\rho}\right)$, we get that $\sqrt{n}(f(\hat{\rho})-f(\rho))\sim N(0,1)$ for large enough $n$. We can then construct a $95\%$ CI for $f(\rho)$ as $f(\hat{\rho})\pm1.96/\sqrt{15}=[1.7137,2.7258]$. Inverting $f$, we have that a $95\%$ CI for $\rho$ is $[0.9371,0.9915]$
+\subsection*{6}
+We have $s_p^2=\frac{(n-1)s_X^2+(n-1)s_Y^2}{2(n-1)}=\frac{s_X^2+s_Y^2}{2}$ when $m=n$. Multiplying this by $\frac{2}{n}$ gives $\frac{s_X^2+s_Y^2}{n}=\frac{s_X^2}{n}+\frac{s_Y^2}{n}$.
+\subsection*{7}
+
 \end{document}

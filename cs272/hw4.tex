@@ -183,13 +183,13 @@ We modify the possibilities in (6.15) to read the following:
 \item the $n$th position of $Y$ is not matched and there is a character immediately preceding the gap that $y_n$ is matched to
 \end{enumerate}
 
-We separate out the possibilities in this manner due to the modified gap cost. If a gap comes directly after another gap, its marginal cost is $b$, and if it doesn't, its marginal cost is $a$. 
+We separate out the possibilities in this manner due to the modified gap cost. If a gap comes directly after another gap, its marginal cost is $b$, and if it doesn't, its marginal cost is $a+b$. 
 
 With this in mind, let $\opt(i,j,l)$ denote the cost of the optimal alignment for subsequences $x_1x_2\ldots x_i$ and $y_1y_2\ldots y_j$, with $x_i$ matched to $y_j$ if $l=0$, $x_i$ unmatched if $l=1$, and $y_j$ unmatched if $l=2$. Then, we have 
 \begin{align*}
 \opt(i,j,0)&=\alpha_{x_iy_j}+\min\{\opt(i-1,j-1,0),\opt(i-1,j-1,1),\opt(i-1,j-1,2)\}\\
-\opt(i,j,1)&=\min\{a+\opt(i-1,j,0),a+\opt(i-1,j,2),b+\opt(i-1,j,1)\}\\
-\opt(i,j,2)&=\min\{a+\opt(i,j-1,0),a+\opt(i,j-1,1),b+\opt(i,j-1,2)\}
+\opt(i,j,1)&=\min\{a+b+\opt(i-1,j,0),a+b+\opt(i-1,j,2),b+\opt(i-1,j,1)\}\\
+\opt(i,j,2)&=\min\{a+b+\opt(i,j-1,0),a+b+\opt(i,j-1,1),b+\opt(i,j-1,2)\}
 \end{align*}
 
 The first equation above is simple to understand: if $x_i$ and $y_j$ are matched to each other, then we have the cost of that matching plus an unconstrained optimization on the rest of the sequence. The second equation above is the case in which $x_i$ is unmatched. Then, we have three options for the last two steps in the alignment. They are as follows:
