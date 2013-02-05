@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+\DeclareMathOperator{\opt}{opt}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{0.5cm}
+
+\noindent Note: When I write a.i, where a is a tuple and i is an integer, this means the $i$th component of a.
+
+\subsection*{5.3}
+The following algorithm finds the size of the largest equivalence class in the pile and a representative for that class, or just false if the largest equivalence class is smaller than the half the pile
+\begin{verbatim}
+Input is a pile of k cards
+if k is 1, return the one equivalence class and the one element
+otherwise
+divide the collection into two roughly equal subpiles
+let (size1,rep1) be the result on the first subpile
+let (size2,rep2) be the result on the second subpile
+if both calls return false, return false as well
+if one returns false, WLOG assume that the first call returns true. then:
+    expand the class of rep1 by testing it against everything in the second subpile
+    if the new size of class rep1 is more than k/2, return (new size,rep1)
+    otherwise return false
+if both return true:
+    do the same as if one is false, except we also test rep2 against everything 
+    in the first subpile and return false only if both expanded classes are smaller than k/2
+\end{verbatim}
+
+The running time of this algorithm is at worst given by the recurrence $T(k)=2T(k/2)+2k$, which is the same as the recurrence of mergesort with a solution of $k\log_2k$. We now want to show that it's correct. Suppose by induction that the inner calls return correct results. 
+
+If both calls return false, then the potentially largest equivalence class in the pile is formed by joining the two biggest equivalence classes in the subpiles. However, this sum is less than $k/4+k/4=k/2$, so we return false.
+
+If only the first call returns true, then we get a size and a representative $r$. We want to show that if a equivalence class larger than $k/2$ exists, it must contain this representative. Let there be a class $A$ with $|A|>k/2$. Then, at least one of the subpiles must contain a subset of $A$ with size greater than $k/4$. Since we know that the second subpile does not, the first subpile contains such a subset of $A$, and by construction of the subset we have $r\in A$. Then, we can feel free to return false if the class of $r$ is smaller than $k/2$ or return the class of $r$ if it is larger.
+
+If both calls return true, then by a similar argument, any class $A$ with $|A|>k/2$ must contain either $r_1$ or $r_2$, and we have the same result.
+\subsection*{6.1}
+a. Consider the path \begin{verbatim}16---17---16\end{verbatim} The greedy algorithm would produce the independent set $v_2$, but the maximum total weight is produced by $\{v_1,v_3\}$.
+
+\noindent b. Consider the path \begin{verbatim}100---1---1---100\end{verbatim} Maximum total weight is given by $\{v_1,v_4\}$, but the alternate algorithm produces $\{v_1,v_3\}$.
+
+\noindent c. Arrays are indexed from 1. $A[i,j]$ is the max. indep. set on the subpath from $v_i$ to $v_j$, inclusive.
+\begin{alltt}
+Let A be the upper triangular region of an nxn array of pairs (weight, indep. set)
+For each i in [1,n], let A[i,i]=(w\(\sb{i}\),v\(\sb{i}\))
+For each i in [1,n-1]:
+    For each j in [1,n-i]:
+        Let A[j,j+i]=(\(-\infty,\nullset\))
+        For each k in [j,j+i]:
+            If A[j,k-1].1+A[k+1,j+i].1<A[j,j+i].1:
+                let A[j,j+i]=(A[j,k-1].1+A[k+1,j+i].1,A[j,k-1].2\(\cup\)A[k+1,j+i].2)
+        end loop
+    end loop
+end loop
+return A[1,n]
+\end{alltt}
+
+Any array indexing problems above should be handled as returning $(0,\nullset)$. Basically what it does is it constructs the upper triangular portion of a matrix by scanning up the superdiagonals. At each point, it computes the max. indep. set by removing each element from consideration, looking up the weights of the max. indep. subsets of the two subpaths formed, and taking the maximum of these over all elements in the path.
+
+This algorithm's correctness depends on this fact: for a path of length $n$, there is some vertex $i$ such that the union of max. indep. sets on the subpaths $[1,i-1]$ and $i+1,n]$ is a max. indep. set. This is due to the following: consider any max. indep set $A$ on $[1,n]$. There must be some vertex $i\not\in A$. Ca;; the union of max. indep. sets on the disconnected subpaths formed by removing $i$ $A'$. We WTS that the weight of $A'$ is the same as that of $A$. 
+
+Consider the partition of $A$ into two sets $A_1,A_2$, where all elements of $A_1$ are nodes numbered below $i$ and all elements of $A_2$ are nodes numbered above $i$. $A_1$ and $A_2$ are max. indep. sets for $[1,i-1]$ and $[i+1,n]$, resp., since otherwise we could just replace them by a max. indep. set and increase the weight of $A$. Thus, we have that $w(A)=W(A')$.
+
+With this result, it is easy to see that we can obtain a max. indep. set on $[1,n]$ by considering the max. weight of all unions of the type $\text{max\_wt}([1,i-1])\cup\text{max\_wt}([i+1,n])$ for $i\in[1,n]$. This is the step we do in the inner loop of the above algorithm. 
+\subsection*{6.2}
+a. Consider the following schedule
+
+\begin{tabular}{l|cc}
+&Week 1&Week 2\\
+\hline
+Low&50&50\\
+High&70&60\\
+\end{tabular}
+
+The algorithm as given will choose the low-stress job for both weeks, since $50+50>60$ and $50+0>0$. However, the correct answer is to choose the high-stress job in week 1 and the low-stress job in week 2, for a total value of $120$ rather than $100$.
+
+\noindent b. We first make the observation that each plan must end with either a low-stress job or a high-stress job; it makes no sense to end on a free week because a low-stress job can just be taken instead. If an optimal plan ends on a low-stress job, then the plan for weeks $1\ldots n-1$ must be an optimal plan for a schedule of length $n-1$, since otherwise we could take an optimal plan for weeks $1\ldots n-1$ and tack on the last low-stress job for a better plan on $1\ldots n$. Similarly, if an optimal plan ends on a high-stress job, then we know that week $n-1$ is free and the plan for weeks $1\ldots n-2$ is optimal on that interval. Thus, for a schedule of length $n$, if we know the optimal plans for the intervals $1\ldots n-1$ and $1\ldots n-2$, we can find the optimal plan for $1\ldots n$ by taking $\max(\opt(n-1)+l_n,\opt(n-2)+h_n)$.
+\begin{alltt}
+Allocate array A of n elements
+let A[1]=max(\(l\sb{1},h\sb{1}\))
+for i in [2,n]:
+    let A[i]=max(A[i-1]+\(l\sb{i}\),A[i-2]+\(h\sb{i}\))
+return A[n]
+\end{alltt}
+\subsection*{6.5}
+We can take the same work-backwards approach as in 6.2. If the string $y$ has length $n$, then the last block can be of length $1$ to $n$. The total quality of the segmentation is the quality of the last block plus the total quality of the stuff that's left over. If the total quality of the stuff left over is optimal, then the total quality is going to be optimal for some last block for the same reason as in 6.2. 
+
+In the following algorithm, let $y[i:j]$ denote the substring of $y$ beginning at $i$ and ending at $j$, inclusive. Let $q(x)$ denote the quality. An entry of $k$ in the list of breakpoints means break the string after the $k$th character.
+
+\begin{alltt}
+Let B be an array of pairs (breakpoints, quality), each list of breakpoints empty upon initialization.
+Let B[0]=(\(\nullset\),0)
+Let B[1]=([1],q(y[1:2]))
+for i in [2,n]:
+    let qmax=\(-\infty\)
+    let max_j=0
+    for j in [0,i-1]:
+        if qmax<B[j].2+q(y[j+1:i]):
+            let qmax=B[j].2+q(y[j+1:i])
+            let max_j=j
+        endif
+    endfor
+    let B[i]=(B[max_j].1.append(i),B[max_j].2+q(y[max_j+1,i]))
+endfor
+return B[n]
+\end{alltt}
+
+The idea here is to iterate over all possible last blocks, and find the maximum quality that can result by adding the quality of the last block to the maximum quality of the stuff left over.
+\subsection*{6.7}
+Suppose we have $k$ days of data, where the price on the $i$th day is $p_i$. Then, in an optimum solution on these $k$ days, either we sell on day $k$ or we don't sell on day $k$. If we don't sell on day $k$, then the optimum solution is the same as the optimum solution on $k-1$ days. If we do sell on day $k$, then the optimum buying point is the $i$ for which $p_i$ is lowest. The optimum solution on $k$ days is then the best of the optimal solution on $k-1$ days or buying on the lowest point so far and selling on day $k$.
+
+The following algorithm returns the pair $(i,j)$, where $i$ is the best day to buy and $j$ is the best day to sell. If no money can be made, it will return $(0,0)$.
+\begin{alltt}
+let lowest_so_far=min(\(p\sb{1},p\sb{2}\))
+let lowest_day be the day on which lowest_so_far was attained
+let prev_soln=(1,2)
+let prev_profit=\(p\sb{2}-p\sb{1}\)
+for i in [3,n]:
+    lowest_so_far=min(lowest_so_far,\(p\sb{i}\))
+    update lowest_day if necessary
+    k_profit=\(p\sb{k}\)-lowest_so_far
+    if k_profit>prev_profit:
+        prev_profit=k_profit
+        prev_soln=(lowest_day,k)
+    endif
+endfor
+if prev_profit==0 return (0,0)
+otherwise return prev_soln
+\end{alltt}
+
+This takes linear time, since everything in the loop runs in constant time.
+\subsection*{6.12}
+Suppose that in some configuration, a copy is placed in $S_i$ for $i\neq n$. Then, the key observation is that changing any part of the configuration relating to copies in $S_j$ for $j<i$ will not affect access or placement costs for the rest of the configuration, and changing any part of the configuration for copies in $S_k$ for $k>i$ doesn't affect the forward segment either. This implies that if the configuration is optimal, then the subconfigurations obtained by splitting about some $S_i$ must be optimal as well on the subsets of the servers concerned, since otherwise we could modify one of the subconfigurations independently of the other one and obtain a better total configuration. Then, any optimal configuration on $n$ servers must be either the union of subconfigurations on servers $1\ldots i$ and on servers $i+1\ldots n$ or just one server placed at $S_n$.
+
+This algorithm works similarly to the one in 6.1.
+\begin{alltt}
+Let A be the upper triangular region of a nxn array of pairs (configuration, cost)
+Populate the diagonal of A with A[i,i]=([i],\(c\sb{i}\))
+for each i in [1,n-1]:
+    for each j in [1,n-i]:
+        //first compute the cost of the empty configuration (one server at the end)
+        let empty_cost=\(c\sb{j+i}+\frac{i(i+1)}{2}\)
+        let optimal_cost=empty_cost
+        let optimal_config=[j+i]
+        for each k in [j,j+i-1]:
+            let split_cost=A[j,k].2+A[k+1,j+i].2
+            if split_cost<optimal_cost:
+                optimal_cost=split_cost
+                optimal_config=A[j,k].1 union A[k+1,j+i].1
+            endif
+        endfor
+        let A[j,j+i]=(optimal_config,optimal_cost)
+    endfor
+endfor
+return A[1,n]
+\end{alltt}
+\subsection*{6.22}
+We can use basically the same algorithm as is presented in the book, except we need to keep track of the multiplicity of the minimum cost. Each optimal path of length at most $i$ from $v$ to $t$ is either an optimal path of length at most $i-1$ from $v$ to $t$ or the the join of an edge from $v$ to a neighbor $w$ with an optimal path from $w$ to $t$ with length at most $i-1$. Then, the number of optimal edges from $v$ to $t$ of length at most $i$, denoted by $\#\opt(i,v)$, is $\#\opt(i-1,v)+\sum\#\opt(i-1,w)$, where the sum is over all vertices $w$ such that there is an optimal path of length at most $i$ from $v$ to $t$ passing through $w$. Sticking this recurrence in the algorithm presented in the book and adding something to the data structure of $M$ to keep track of it, we'll get a solution.
+\subsection*{EC}
+We modify the possibilities in (6.15) to read the following:
+
+\begin{enumerate}
+\item $(m,n)\in M$
+\item the $m$th position of $X$ is not matched and there is a gap immediately preceding the gap that $x_m$ is matched to
+\item the $m$th position of $X$ is not matched and there is a character immediately preceding the gap that $x_m$ is matched to
+\item the $n$th position of $Y$ is not matched and there is a gap immediately preceding the gap that $y_n$ is matched to
+\item the $n$th position of $Y$ is not matched and there is a character immediately preceding the gap that $y_n$ is matched to
+\end{enumerate}
+
+We separate out the possibilities in this manner due to the modified gap cost. If a gap comes directly after another gap, its marginal cost is $b$, and if it doesn't, its marginal cost is $a$. 
+
+With this in mind, let $\opt(i,j,l)$ denote the cost of the optimal alignment for subsequences $x_1x_2\ldots x_i$ and $y_1y_2\ldots y_j$, with $x_i$ matched to $y_j$ if $l=0$, $x_i$ unmatched if $l=1$, and $y_j$ unmatched if $l=2$. Then, we have 
+\begin{align*}
+\opt(i,j,0)&=\alpha_{x_iy_j}+\min\{\opt(i-1,j-1,0),\opt(i-1,j-1,1),\opt(i-1,j-1,2)\}\\
+\opt(i,j,1)&=\min\{a+\opt(i-1,j,0),a+\opt(i-1,j,2),b+\opt(i-1,j,1)\}\\
+\opt(i,j,2)&=\min\{a+\opt(i,j-1,0),a+\opt(i,j-1,1),b+\opt(i,j-1,2)\}
+\end{align*}
+
+The first equation above is simple to understand: if $x_i$ and $y_j$ are matched to each other, then we have the cost of that matching plus an unconstrained optimization on the rest of the sequence. The second equation above is the case in which $x_i$ is unmatched. Then, we have three options for the last two steps in the alignment. They are as follows:
+
+\begin{tabular}{cc}
+$x_{i-1}$ & $x_i$\\
+$y_j$ & \_
+\end{tabular}
+\qquad
+\begin{tabular}{cc}
+\_ & $x_i$\\
+$y_j$ & \_
+\end{tabular}
+\qquad
+\begin{tabular}{cc}
+$x_{i-1}$ & $x_i$\\
+\_ & \_
+\end{tabular}
+
+We have no other options besides these if we want to avoid matching a gap to a gap. In the first and second cases, the gap that $x_i$ is matched to is the first in a sequence of gaps, so it incurs a cost of $a$. In the last option, it incurs a cost of $b$. The third equation is also build out of these options, except with $y$s in place of the $x$s. 
+
+Now, for the algorithm, we just need to modify the original sequence alignment algorithm slightly. Instead of computing one value to fill in each entry in the matrix, we compute three. In the end, when we want to get $\opt(m,n)$, we just get the minimum of $\opt(m,n,l)$ over $l=0,1,2$. If we wanted the actual alignments instead of their costs, then we just add in something in the entries to keep track of them.
+
+
+
+\end{document}

@@ -41,11 +41,80 @@ The discussion of the determinant of $Y$ implies then that the entries of $Y^{-1
       \subfigure[2.8.4]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_4.pdf}}}
 \end{figure}
 \subsection*{2.8.5}
+See Figure \ref{578}
 Note: Mathematica wouldn't let me plot anything that had a variable like $g/L$ in it, so I'm going to assume that $L=1m$.
+
+\subsection*{2.8.6}
+Any solution with eigenvalues as described will have exponentially increasing terms in $t$ in both components, causing the overall vector to evolve away from $0$ as $t$ increases.
+\subsection*{2.8.7}
+See Figure \ref{578}. Numbers mean nothing. I just did something to get the overall shape.
+\subsection*{2.8.8}
+See Figure \ref{578}
 \begin{figure}[H]
 \mbox{\subfigure[2.8.5]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_5.pdf}}
-      \subfigure[2.8.3]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_3.pdf}}
-      \subfigure[2.8.4]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_4.pdf}}}
+     \subfigure[2.8.7]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_7.pdf}}
+     \subfigure[2.8.8]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_8.png}}}
+\caption{5,7,8}
+\label{578}
+\end{figure}
+\subsection*{2.8.9}
+See Figure \ref{91011}
+\subsection*{2.8.10}
+See Figure \ref{91011}
+\begin{figure}[H]
+\mbox{\subfigure[2.8.9]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_9.png}}
+     \subfigure[2.8.10]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_10.png}}
+     \subfigure[2.8.11]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_11.png}}}
+\caption{9,10,11}
+\label{91011}
+\end{figure}
+
+\subsection*{2.8.11}
+For 11-19, if we write the scalar equation as $x''+px'+qx=0$, the matrices are all going to be in the form $\openm0&1\\-q&-p\closem$. The characteristic polynomial is simply $\lambda^2+p\lambda+q$. If $p^2>4q$, then we end up in case i or iii. If $p^2<4q$, then we end up in case v or vi. The only one for which $p^2=4q$ is 17, but it's kinda annoying to do it in symbols so we'll take care of it when we get there.
+
+Now, for 11. Here $p=0,q=1$, so this is case vi with eigenvalues $\pm i$. See Figure \ref{91011}. Origin is not an attractor.
+
+\subsection*{2.8.12}
+$p^2>4q$ here, and the eigenvalues turn out to be both positive, so this is a case i. Origin is not an attractor. See Figure \ref{121314}
+\subsection*{2.8.13}
+Same thing as above, though now the eigenvalues are both negative. Origin is an attractor. See Figure \ref{121314}
+\subsection*{2.8.14}
+$p^2>4q$ still, but now the eigenvalues are one above and one below zero. Origin is not an attractor. See Figure \ref{121314}
+
+\begin{figure}[H]
+\mbox{\subfigure[2.8.12]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_12.png}}
+     \subfigure[2.8.13]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_13.png}}
+     \subfigure[2.8.14]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_14.png}}}
+\caption{12,13,14}
+\label{121314}
+\end{figure}
+
+\subsection*{2.8.15}
+Eigenvalues are $1$ and $2$. Case i. Origin not an attractor. See Figure \ref{151617}
+\subsection*{2.8.16}
+Eigenvalues are $-1$ and $-2$. Case i. Origin is an attractor. See Figure \ref{151617} 
+\subsection*{2.8.17}
+There is only one eigenvalue, $1$. It's case iv, and the origin is not an attractor. See Figure \ref{151617}
+
+\begin{figure}[H]
+\mbox{\subfigure[2.8.15]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_15.png}}
+     \subfigure[2.8.16]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_16.png}}
+     \subfigure[2.8.17]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_17.png}}}
+\caption{15,16,17}
+\label{151617}
+\end{figure}
+
+\subsection*{2.8.18}
+Eigenvalues are crossed positive-negative, so it's case iii. Origin is not an attractor. See Figure \ref{1819}
+\subsection*{2.8.19}
+a. Consider all points $y_1=y_2$. Applying the matrix $\openm1&-1\\2&-2\closem$ to this, we see that all such points are in the kernel, so all such points are critical points of the system. 
+
+b. See Figure \ref{1819}
+\begin{figure}[H]
+\mbox{\subfigure[2.8.18]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_18.png}}
+     \subfigure[2.8.19]{\includegraphics[width=0.33\textwidth]{scripts_3/2_8_19.png}}}
+\caption{18,19}
+\label{1819}
 \end{figure}
 
 \end{document}
