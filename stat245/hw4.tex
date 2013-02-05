@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\newcommand{\ep}{\epsilon}
+\newcommand{\openm}{\begin{pmatrix}}
+\newcommand{\closem}{\end{pmatrix}}
+\DeclareMathOperator{\cov}{cov}
+\newcommand{\nc}{\newcommand}
+\newcommand{\rn}{\mathbb{R}}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{1}
+Let $Z=X$, $W=X/Y$. Then $X=Z$ and $Y=Z/W$, so the Jacobian determinant is $Z/W^2$. The joint distribution of $W,Z$ is 
+$$\frac{z}{w^2}e^{-z(1+\frac{1}{w})}$$
+We want to integrate $z$ out from this. Noting that this takes the form of a gamma distribution in $z$ with $\lambda=(1+\frac{1}{w})$ and $r=2$, we have that the integral over $[0,\infty)$ in $z$ is $1/(1+\frac{1}{w})^2$. Thus, the distribution of $W$ is
+$$\frac{1}{(w+1)^2}$$
+If we look at the pdf of the $F_{2,2}$ distribution, then we have 
+$$f(w)=\frac{\Gamma(4/2)}{\Gamma(1)\Gamma(1)}\left(\frac{2}{2}\right)^{2/2}w^{2/2-1}\left(1+\frac{2}{2}w\right)^{-(2+2)/2}=\frac{1}{(1+w)^2}$$
+so the two are the same distribution.
+\subsection*{2}
+From Theorem B, we have that $\frac{(n-1)S_x^2}{(m-1)S_y^2}$ is distributed like the quotient of a $\chi_{n-1}^2$ RV by a $\chi_{m-1}^2$ RV. Then, if we divide both sides by $(n-1)$ and multiply by $(m-1)$, we have that $S_x^2/S_y^2$ is distributed according to $F_{n-1,m-1}$. Then, if we know the cdf of the $F$ distribution, we can compute $P(S_x^2/S_y^2>c)$.
+\subsection*{3}
+a. If we have $H_a:\sigma_X>\sigma_Y$, then $s_X^2/s_Y^2$ would be distributed according to $\frac{\sigma_X^2}{\sigma_Y^2}W$, where $W\sim F_{n-1,m-1}$ by a similar derivation as in 2. Thus, we want to reject for high values of $s_X^2/s_Y^2$, values for which $1-\text{cdf}(F_{n-1,m-1})(s_X^2/s_Y^2)<\alpha$. Similarly, rejection region for the other one-sided alternative is $\text{cdf}(F_{n-1,m-1})(s_X^2/s_Y^2)<\alpha$, and for the two-sided alternative it is the union of the two above regions, but with $\alpha$ replaced by $\alpha/2$. 
+
+\noindent b. Let $w(p)$ be the inverse cdf of the $F_{n-1,m-1}$ distribution, and let $r=\sigma_X^2/\sigma_Y^2$. We have that $r^{-1}\frac{s_X^2}{s_Y^2}\sim F_{n-1,m-1}$, so we'll reject when $r^{-1}\frac{s_X^2}{s_Y^2}>w(1-\alpha/2)$ or when $r^{-1}\frac{s_X^2}{s_Y^2}<w(\alpha/2)$, so the confidence interval is $$\left[\frac{s_X^2}{w(1-\alpha/2)s_Y^2},\frac{s_X^2}{w(\alpha/2)s_Y^2}\right]$$
+
+\noindent c. We want to test if $\sigma_A=\sigma_B$. The statistic in question is $s_A^2/s_B^2=0.599$. We have $13$ samples in $A$ and $8$ in $B$, so this statistic follows $F_{12,7}$. The cdf at this point is $0.208$, so we do not reject. To construct the confidence interval, we calculate the inverse cdf at $p=0.025$ and $p=0.975$, which come out to be $0.277$ and $4.666$, resp. Then, the confidence interval for $s_A^2/s_B^2$ is $[0.128,2.162]$
+\subsection*{4}
+$\bar{D}=\bar{X}-\bar{Y}=0.44$, and $s_{\bar{D}}=4.63$. If we ignored the pairing, we'd have that $s_{\bar{X}-\bar{Y}}=s_p\sqrt{1/n+1/m}=7.805$. Since the differences are independent and distributed normally, we have from results given in the book that a $95\%$ percent confidence interval is given by $\bar{D}\pm t_{14}(0.025)s_\bar{D}=[-9.492,10.372]$. Thus, there is no significant difference in the mean of the two samples. 
+\subsection*{5}
+\end{document}
