@@ -47,4 +47,27 @@ First let's prove it for a full-rank square matrix. Let $Y=AX$, and $X=A^{-1}Y$.
 Squeeze the determinants together. then 
 $$\frac{1}{\sqrt{2\pi}^p}\frac{1}{\det(A\Sigma^T)}\exp\left(-1/2(y-A\mu)^T(A^{-1})^T\Sigma^{-1}A^{-1}(y-A\mu)\right)$$
 Collapse the middle mess of matrices and we get what we wanted. 
+
+\section*{01/31/13}
+Comments on the t-test: the data set was 
+\begin{array}{cc}
+$x_1$&$y_1$\\
+\hline
+191&179\\
+195&201\\
+etc&etc
+\end{array}
+
+$x_1$ is head length of first son.., $y_1$ is the head length of the second. Both are normal, with $x_1\simN(\mu_1,\sigma_1^2),x_2\sim N(\nu,\tau_1^2)$. This is bivariate norma, maybe with some correlation. Look at the difference $U=X_1-Y_1$. $U\sim N(\mu_1-\nu_1,\sigma_u^2)$, where the variance is the sum of the two other variances minus $2\rho\sigma\tau$. Can compute sample mean on $U$, turns ot to be $1.88$. sample SD of $U$ us 7.93. The $n$ is 25. The $t$-statistic is $\frac{\sqrt{n}(\var{U}-(\mu_1-\nu_1)}{s_u}$, follows a $t$-distribution with $n-1$ dof. To test the hypothesis that $\mu_1=\nu_1$, we have that under $H_0$, $T=\frac{\sqrt{n}\var{U}}{s_n}=1.2975$ follows a $t_24$ distribution. Then, find probabilities of this value from the distributon. Turns out there's not much siginficance. 
+
+What if we wanted to know if there's any correlation? If there was no correlation above, then we could have done something stronger. To test correlation, we need a distribution for the sample correlation. The actual formula is really god-awful ugly. Instead we'll look for asymptotic distribution of sample correlation. In the above dataset, the correlation as 0.71. 
+
+suppose $(X_1,Y_1),(X_2,Y_2),...$ are $n$ indep bivariate normal RVs, with all of them being standardized with unknown correlation $\rho_i$. Standardinzing doesn't change the correlation. Formula for sample correlation is $\hat{\rho}=\frac{1/n\sum_1^nX_i-\bar{X})(y_i-\bar{Y}}{\sqrt{1/n\sum(x_i-\bar{x})^2}\sqrt{1/n\sum(Y_i-\bar{Y})^2}}4$. What we want to derive is that the asymptotic distribution of $\sqrt{n}(\hat{\rho}-\rho)$ converges in distribution to $N(0,(1-\rho^2)^2)$. We probably want to use CLT at some point. That means showing that $\hat{\rho}$ is some sort of sum or average of RVs. 
+
+Simplify $\hat{\rho}$. Idea is to work with the means being $0$ first: $\hat{\rho}=\frac{1/n\sumX_iY_i}{\sqrt{1/n\sumX_i^2}\sqrt{1/nY_i^2}}$. Justification is that if we look at the numerator, the cross terms disappear and the inside of the sum is left with $X_iY_i-\bar{X}\bar{y}$. As $n$ increases, variance of the bar terms goes to $0$, so the latter term is ignorable for large $n$. 
+
+Let's try to get back to independent RV now. So we want to wrrite thte $Y_i=\rho X_i+\sqrt{1-\rho^2}\ep_i$. Then, $\hat\rho=\frac{1/n\sumX_i(\rhoX_i_\sqrt{1-\rho^2}\ep_i}{...}$, denom still the same. Now separate out. There's a $\rho/n\sum X_i^2$ and a $\sqrt{1-\rho^2}\cdot1/n\sum X_i\ep_i$. The first term can cancell out with the denom term.
+
+Now look $\hat{\rho}-\rho$. This is $$\rho\frac{\sqrt{1/n\sum X_+i^2}-\sqrt{1/n\sum Y_i^2}}{\sqrt{1/n\sum Y_i^2}}+\sqrt{1-\roh^2}\frac{1/n}...$$
+Rationalize the numerator of the first term. turns into $\frac{1/n\sum X_i^2-1/n\sum Y_i^2}}{\sqrt{1/n\sum Y_i^2}(\sqrt{1/n\sum X_i^2}+\sqrt{1/n\sum Y_i^2})}+(1-\rho^2)\frac{1/n\sum X_i\ep_i}{
 \end{document}
