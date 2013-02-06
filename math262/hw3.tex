@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\qn}{\mathbb{Q}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\topo}{\mathscr{T}}
+\nc{\basis}{\mathscr{B}}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{4}
+a. Product topology: basic open sets here are where finitely many of the components are constrained to lie in an open interval, and the rest are unconstrained. Thus:
+
+$f$ is continuous: $t$ lies in the preimage of some open set iff $nt$ lies in an open interval $(a_n,b_n)$ for a finite number of $n$s. This is the same as saying $t$ lies in the open intervals $(a_n/n,b_n/n)$ for a finite number of $n$s, or that $t$ lies in a finite intersection of open sets. Thus the preimage is open. By a similar argument, $g$ and $h$ are continuous as well.
+
+Box topology: basic open sets here are where some of the components are constrained to lie in open intervals. Some is not specified. Here, none are continuous. Consider the open set $((1/2-1/2,1/2+1/2),(1/2-1/4,1/2+1/4),(1/2-1/8,1/2+1/8),\ldots)$. Its preimage under $g$ is the singleton $\{1/2\}$, which is not open. If we apply scaling to the open intervals (multiplying the center by $n$ or $1/n$), we can derive similar results for $f$ and $h$.
+
+Uniform topology: Gonna resort to the $\ep-\delta$ definitions here. $f$ is not continuous. For any two distinct points in the image of $f$, their distance will be $1$, since the progression of increasing $n$ makes sure that any small difference gets amplified above $1$ at some point. $g$ is continuous. For $|t-t'|<1$, $d(f(t),f(t'))=|t-t'|$, and the same holds true for $h$.
+
+b. Product topology: $w$ is convergent. Take $a=(0,0,\ldots)$. Then, for any open set $U$ containing $a$, there exists some $N$ such that components indexed above $N$ can take any value in $U$. Then, $w_n$ for $n>N$ lie in $U$. $x$ is similarly convergent.
+
+$y$ is convergent. Consider $a=(0,0,\ldots)$. Any basic open set $U$ containing $a$, and therefore every open set containing $a$, must have $((-\ep,\ep),(-\ep,ep),\ldots)$, since we can just take $(-\ep,\ep)$ to be in the intersection of the constrained open intervals that $U$ contains. For $1/n<\ep$, $y_n$ is in this set, so it converges. Same for $z$.
+
+Box topology: $w$ does not converge. For any point $a\neq0$, consider the open set consisting of all components unconstrained except one of $a$'s nonzero components is constrained to an interval that doesn't include $0$. Then, after the number of that component, $w_n$ will not be contained in this open set. For $a=0$, the product of infinitely many copies of $(-1,1)$ does not contain $w_n$ for $n\geq2$.
+
+$x$ does not converge. For $a\neq0$, argument runs the same way as for $w$. For $a=0$, the open set $((-1,1),(-1/2,1/2),(-1/4,1/4),\ldots)$ does not contain $x_n$ for any $n$, since there's always some $2^{-k}$ such that $1/n>2^{-k}$.
+
+$y$ does not converge. Use the same open set as for $x$. Then, there is a $1/n$ in the $n$th component of $y^n$, but the $n$th component of the open set is $(-2^{-n},2^{-n})$, which doesn't include $1/n$.
+
+$z$ converges to $0$. For any open set about $0$, the constraints on the first two components are open intervals, so take the intersection and take some symmetric interval about $0$ inside that intersection, then for large enough $n$ the sequence will go inside there.
+
+Uniform topology: $w$ doesn't converge. For $a\neq0$, if $a$ has a nonzero $N$th component, then $d(a,w_n)$ for $n>N$ will be either $1$ or the value of that nonzero component. For $a=0$, $d(a,w_n)$ is always $1$, so no convergence.
+
+$x$ converges to $0$. For any $\ep>0$, if we take $n$ such that $1/n<\ep$, we have $d(0,x_n)=1/n<\ep$, since all the components are either $1/n$ or $0$. Same argument goes for $y$ and $z$
+\subsection*{5}
+It's the set of sequences which converge to $0$. Use Theorem 17.5. For any $\ep>0$ and any convergent sequence $a_n$, we have that an $\ep$-ball about that sequence is just the product of intervals of length $2\ep$ about each element of the sequences. Since $|a_n|<2\ep$ for all $n>N$ for some $N$, the element of $\rn^{\infty}$ with components equal to $a_n$ up to $N$ and $0$ afterwards is included in the $\ep$-ball, so the $\ep$-ball intersects $\rn^{\infty}$. This means that $a_n$ is in the closure. Conversely, if $b_n$ doesn't converge to $0$, then this means that there's some $\ep$ such that infinitely many elements of $b_n$ lie outside of $(-\ep,\ep)$, so an $\ep$-ball about $b_n$ will fail to include $0$ in components infinitely far out, which means it fails to intersect $\rn^{\infty}$
+\end{document}
