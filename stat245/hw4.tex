@@ -45,5 +45,21 @@ Running the data through, we get $0.9767$. From class notes, if we use the varia
 \subsection*{6}
 We have $s_p^2=\frac{(n-1)s_X^2+(n-1)s_Y^2}{2(n-1)}=\frac{s_X^2+s_Y^2}{2}$ when $m=n$. Multiplying this by $\frac{2}{n}$ gives $\frac{s_X^2+s_Y^2}{n}=\frac{s_X^2}{n}+\frac{s_Y^2}{n}$.
 \subsection*{7}
-
+We want to test if $\mu_X=\mu_Y$. The two sets of data should be independent: there is no notion of pairing in the experimental design. Let $X$ denote the controls and let $Y$ denote the ozone-exposed group. Then, we have $\bar{X}=22.4261,\bar{Y}=11.0091,s_X^2=116.138,s_Y^2=361.65$. The sample variances are pretty different, so we can't use the pooled variance method.  Instead, we use the statistic $\frac{\bar{X}-\bar{Y}}{\sqrt{s_X^2/n_Y+s_Y^2/n_Y}}=2.4629$. The dof is given by that long formula which I shall not repeat here, but it comes out to be $6235$. Then, the $p$-value for the statistic we calculated is $0.007$, which is presumably significant. 
+\subsection*{8}
+The estimator used in class is 
+$$\hat{\rho}=\frac{\frac{1}{n}\sum(X_i-\bar{X})(Y_i-\bar{Y})}{\sqrt{\frac{1}{n}\sum(X_i-\bar{X})^2}\sqrt{\frac{1}{n}\sum(Y_i-\bar{Y})^2}}$$
+Since we're assuming that the means are zero, if we take large enough samples we can just ignore the $\bar{X}$ and $\bar{Y}$ terms, so we can instead use 
+$$\hat{\rho}=\frac{\frac{1}{n}\sum X_iY_i}{\sqrt{\frac{1}{n}\sum X_i^2}\sqrt{\frac{1}{n}\sum Y_i^2}}$$
+This is not a MLE. To see this, we first find the likelihood function for the bivariate data. We have 
+$$L(\rho)=\left(\frac{1}{2\pi\sqrt{1-\rho^2}}\right)^n\exp\left(-\frac{1}{2(1-\rho^2)}\sum_{i=1}^n(X_i^2+Y_i^2-2\rho X_iY_i)\right)$$
+and the log-likelihood
+$$l(\rho)=-n\log(2\pi\sqrt{1-\rho^2})-\frac{1}{2(1-\rho^2)}\sum_{i=1}^n(X_i^2+Y_i^2-2\rho X_iY_i)$$
+Denote $\sum X_i^2$ by $a_{xx}$, $\sum Y_i^2$ by $a_{yy}$, and $\sum X_iY_i$ by $a_{xy}$. Then, we have
+$$l(\rho)=-n(\log(2\pi)+1/2\log(1-\rho^2))-\frac{1}{2(1-\rho^2)}(a_{xx}+a_{yy}-2\rho a_{xy})$$
+Taking the derivative wrt $\rho$ and setting equal to $0$, we get
+$$\frac{n\rho}{1-\rho^2}+\frac{a_{xy}}{1-\rho^2}-\frac{\rho}{(1-\rho^2)^2}(a_{xx}+a_{yy}-2\rho a_{xy})=0$$
+$$n\rho(1-\rho^2)+a_{xy}(1-\rho^2)-\rho(a_{xx}+a_{yy}-2\rho a_{xy})=0$$
+$$-n\rho^3+a_{xy}\rho^2+(n-a_{xx}-a_{yy})\rho+a_{xy}=0$$
+Evidently, $\hat{\rho}$ from earlier is not a root of this polynomial, since it has no $n$ dependence.
 \end{document}
