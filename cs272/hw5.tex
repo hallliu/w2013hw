@@ -5,6 +5,7 @@
 \usepackage{multicol}
 \usepackage{mathrsfs}
 \usepackage{graphicx}
+\usepackage{alltt}
 \usepackage[cm]{fullpage}
 \newcommand{\nc}{\newcommand}
 \newcommand{\tab}{\hspace*{5em}}
@@ -14,10 +15,20 @@
 \nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
 \nc{\ep}{\epsilon}
 \nc{\nullset}{\varnothing}
+\DeclareMathOperator{\opt}{opt}
 \begin{document}
 Name: Hall Liu
 
 Date: \today 
-\vspace{1.5cm}
 
+\subsection*{6.8}
+a. Let $3$ robots arrive on day $1$ and $100$ arrive on day $2$, and suppose the EMP destroys $99$ robots after $1$ day of charging and $101$ after two days. Then, the optimal solution is to detonate on both days, destroying $3$ on day $1$ and $99$ on day $2$ for a total of $102$. The algorithm would decide to detonate only on day $2$, only destroying $100$.
+
+\noindent b. The solution should follow a similar flavor to 6.12, in that the "splitting" of the problem is accomplished in much the same way. That is, the 'event' should always occur on the last element in the sequence, and given an optimal solution, if we pick the next-to-last element of the sequence on which the event occurs and split the sequence immediately after that element, then both resulting subsequences will have an optimal arrangement of events. Thus, we have the property that any optimal arrangement of events will be composed of two optimal subarrangements.
+
+Let $A_i$ denote an optimal schedule of EMPs on the first $i$ days and let $d(A_i)$ be the number of robots destroyed by the arrangement. Then, by the argument above, for any $i$, $A_i=A_j\cup\{i\}$ for some $0\leq j<i$. Define $A_0=\nullset$ and $d(A_0)=0$. We have that $A_1=\{1\}$ and $d(A_1)=\min(f(1),x_1)$. Then, looping from $i=2$ to $n$, we calculate $d(A_i)$ by taking $\displaystyle\max_{0\leq j<i}\{d(A_j)+\min(f(i-j),x_i)\}$ and $A_i$ by taking $A_j\cup\{i\}$ for the $j$ at which the aforementioned maximum occurs.
+\subsection*{6.15}
+a. Let the sequence of coordinates be $-1,1,2,-1,1,-1,1$. Then, the $6$th event is illegal, and the algorithm returns the events $1,4,7$. However, we can do better by observing events $2,3,5,7$. 
+
+b. We can do a slight modification on the principle described in the last problem. While this problem doesn't have the property that the splitting an optimal arrangement results in two more optimal arrangements, we at least have that splitting provides an optimal arrangement in the first subsequence. Thus, we can still split at the last event and optimize over that. If we let $c_i$ denote the coordinate of the $i$th event and keep the other notation, we have that $\displaystyle|A_i|=\max_{j\in L_i}\{|A_j|+1\}$, where $L_i$ is the set of `legal' elements ($L_i=\{l|l\in[0,i-1],|c_l-c_j|\leq l-j\}$). 
 \end{document}
