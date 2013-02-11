@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage[margin=0.2in]{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\pd}[3]{\frac{\partial^{#3} {#1}}{\partial {#2}^{#3}}}
+\nc{\del}{\nabla}
+\begin{document}
+\small
+Defn of independence: $P(A\cap B)=P(A)P(B)$. Conditional probability is $P(A|B)=\frac{P(A\cap B)}{P(B)}$, which gives rise to $P(B_j|A)=\frac{P(A|B_j)P(B_j)}{\sum P(A|B_i)P(B_i)}$, Baye's rule. Bernoulli RVs are the binary ones with parameter $p$, binomial random variables are the ones that count successes in indep. Bernoulli, with pmf $\binom{n}{k}p^k(1-p)^{n-k}$. Geometric is the number of trials before first success, pmf is $p(k)=(1-p)^{k-1}p$. Negative binomial is the sum of a bunch of geometrics, has parameters $r$ and $p$. pmf is $\binom{k-1}{r-1}p^r(1-p)^{k-r}$. 
+Poisson is the cts-time version of gemoetric, can be derived by taking $n\to\infty$ with $np=\lambda$. pmf is $\frac{\lambda^k}{k!}e^{-\lambda}$. Exponential density is cts, has pdf $\lambda e^{-\lambda x}$. Normal distr. is $\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/2\sigma^2}$. Gamma distribution is $\frac{\lambda^a}{\Gamma(\alpha)}t^{\alpha-1}e^{-\lambda t}$ with parameters $\lambda$ and $\alpha$. To transform RVs according to a function, the formula is $f_Y(y)=f_X(g^{-1}(y))\big|\frac{d}{dy}g^{-1}(y)\big|$, where g has to be invertible. To generate random numbers with a given cdf $F$, apply $F^{-1}$ to a unif. distribution. Useful fact is that the sum of a bunch of exponential distributions ends up as a gamma distribution with $\lambda=n$.
+
+For joint distributions, extract marginal pdfs by integrating out the other variables over the domain. Extract the marginal cdf by integrating that over part of the domain. Marginals don't uniquely determine a joint - $F(x)G(y)(1+\alpha(1-F(x))(1-G(y)))$ is a cdf that has marginal cdfs $F$ and $G$. 
+Independence works the same way as in other RVs, if the joint factors into the product of marginals. Conditional distr. given by $p_{X|Y}(x|y)=\frac{p_{XY}(x,y)}{p_Y(y)}$. Cts case is similar. To transform joint RVs, the formula is $f_{UV}(u,v)=f_{XY}(h_1(u,v),h_2(u,v))|J^{-1}(h_1,h_2)|$, where the $J^{-1}$ is the inverse of the Jacobian and $x=h_1(u,v)$ and same for $y$. 
+
+Expected value is $\int xf_X(x)$ with obvious discrete counterpart. Integral or sum must not diverge. Markov's ineq states that if $X$ is nonnegative and $EX$ exists then $P(X\geq t)\leq E(X)/t$. proof trivial. Expected value of a function of a RV is $E(g(X))=\int g(x)f_X(x)$. Proof by examining preimages of each $y$ in image of $g$ and writing $p_Y(y)=\sum_{g(x)=y}p_X(x)$. Still holds in multivariate case. Linear combos of $E(X_i)$ 
+are the same linear combinations. $E$ is linear. Variance is defined as $E((X-E(X))^2)$, or $\int(x-\mu)^2f_X(x)$. Alternate form is $E(X^2)-(E(X))^2$, proven by expanding. Chebyshev's ineq is $P(|X-\mu|>t)\leq\frac{\sigma^2}{t^2}$. Mean squared error is $E((X-x_0)^2)$, where $x_0$ is the true value. Covariance of two RVs is $E((X-\mu_x)(Y-\mu_y))$. Alternate form is $E(XY)-E(X)E(Y)$. 
+Covariance is fully bilinear, with Cov$(U,V)=\sum_i\sum_jb_ib_j\text{Cov}(X_i,Y_j)$. Note $var(X)=Cov(X,X)$, so identities for variance follow. Correlation is $\frac{Cov(X,Y)}{\sqrt{var(X)var(Y)}}$. Correlation is always in $[-1,1]$, and it's $\pm1$ iff $P(Y=a+bX)=1$. Show by considering variance of $\frac{X}{\sigma_X}\pm\frac{Y}{\sigma_Y}$.
+
+Conditional expectation is $E(Y|X=x)=\Sigma_yyp_{Y|X}(y|x)$. This is essentially the mean of the conditional distr. We have $E(Y)=E(E(Y|X))$, where the inner $E$ is taken over $Y|X$ and the outer is taken over $X$. Derive by interchanging order of summation. Also $var(Y)=var(E(Y|X))+E(var(Y|X))$, again where the inners are over $Y|X$ and the outers are over $X$. $var(Y|X)=E(Y^2|X)-(E(Y|X))^2$. 
+If we want to minimize the MSE when approximating a RV $Y$ by another RV $X$, we can use $h(X)=E(Y|X)$. For linear predictors, we consider $E(Y-\alpha-\beta X)^2)$, expand, and get two terms of which only one has $\alpha$. If we let $\alpha=\mu_Y-\beta\mu_X$, the second one goes to $0$, and the first one goes to $\sigma_Y^2+\beta^2\sigma_X^2-2\beta\sigma_{XY}$. Minimize wrt $\beta$ and get $\beta=\rho\frac{\sigma_Y}{\sigma_X}$ where $\rho$ is the corr. coef.
+
+Law of large numbers states that for $X_i$ a seq of iid RVs, $P(|\sum_i^nX_i-\mu|>\epsilon)\to0$ as $n\to\infty$ for all $\epsilon>0$. Derive by calculating $E(\conj{X_n})$ and its var, then compare using Chebyshev.
+
+Central limit theorem: Let $X_1,\ldots,X_n$ be iid with mean $0$ and variance $\sigma^2$. Then the cdf of $\frac{S_n}{\sigma\sqrt{n}}$ approaches the standard normal cdf pointwise (for all useful purposes, uniformly as well).
+
+Doing Bayesian inference: Start with prior distribution $f_\Theta(\theta)$ of the `random variable' $\theta$ (usually taken to be uniform). Also know that the data are likely to be distributed according to a pdf depending on $\theta$, so $f_{X|\Theta}(x|\theta)$. Multiply them together to get the joint distr, then integrate out $\theta$ to get the marginal distr. of $X$. We can then find the distr of $\Theta$ given the data $X$ as the quotient of the joint by the X marginal distr.
+
+Maximum likelihood estimators: Define the likelihood function $L(\theta)=f(x_1,\ldots,x_n|\theta)$, where $f$ is a pdf that varies depending on $\theta$. Maximum likelihood estimator is the value of $\theta$ that maximizes $L$. In practice when we have iid data, $L$ is a product of individual pdfs, so usually want to take $\log L(\theta)=l(\theta)$ to convert the product into a sum. DON'T FORGET TO TAKE THE LOG. DON'T JUST TAKE APART THE PRODUCT. 
+
+Theorems on MLEs: Define $I(\theta)=E\left(\pd{}{\theta}{}\log f(X|\theta)\right)^2$. When $f$ is nice, this is equal to $-E\left(\pd{}{\theta}{2}\log f(X|\theta)\right)$. Also, as sample size increases, the distribution of the MLE tends to normal with mean $\theta_0$ (the true parameter) and variance $\frac{1}{nI(\theta_0)}$. One notable condition is that the parameter space is open. THE FORMULA FOR I SHOULD BE DONE WITH ONE X, NOT ALL OF THEM. THE DERIVATIVE INSIDE IS NOT $l''$. The variance should eventually be expressed in terms of the true parameter.
+
+Likelihood ratio test: Compute likelihoods of the two hypotheses given the data and take the ratio, taking prior probabilities into account. Accept $H_0$ if the ratio of $L(H_0)/L(H_a)>1$ and reject otherwise. This is given by the equation $\frac{P(H_0|x)}{P(H_a|x)}=\frac{P(H_0)}{P(H_a)}\frac{P(x|H_0)}{P(x|H_a)}$, and it's equivalent to setting some critical value for $\frac{P(x|H_0)}{P(x|H_a)}$ for rejection.
+
+A few terms: Type I error is rejecting $H_0$ when it's true. Type II error is acception $H_0$ when it's false. Power is probability of rejection when $H_0$ is false. Significance level is the probability of a type I error.
+
+Neyman-Pearson lemma: States that the likelihood ratio test is the most powerful test, in that any other test that has a lower significance level also has a lower power. Related to the concept of uniformly most powerful, where a test is most powerful for all variants of $H_a$. Usually shown by deriving the likelihood ratio as a function of $\conj{X}$, using the Neyman-Pearson lemma to show that the most powerful test for some variant of $H_a$ is reject for $\conj{X}>x_0$, then choosing $x_0$ based on $P(\conj{X}>x_0)=\alpha$ assuming $X$ is distributed according to the null hypothesis. This usually won't depend on the alternative if we're doing it that way.
+
+Generalized LRT: When $H_0$ and $H_a$ are composite, do the LRT a bit differently. For the $H_0$ case, use the MLE of the parameter in question (while remaining within the bounds of the hypothesis) as the thing to plug into the likelihood, and use the MLE of the whole space on the bottom. The GLR is $\Lambda=\frac{\max_{\theta\in H_0}L(\theta)}{\max_{\theta\in\Omega}L(\theta)}$. Distribution of $-2\log\Lambda$ is $\chi^2$ with degree of freedom equal to the dimension of the parameter space minus the dimension of the null hyp space.
+
+Sometimes we need to find $\theta$ subject to a constraint when doing the GLRT. Use Lagrange multipliers. The concept here is that maximization happens when the gradient of the function and the gradient of the constraint are in the same direction, so if $f$ is the function and $g$ is the constraint, we get the equation $\del f=\lambda\del g$, which provides $n$ equations on $n+1$ variables ($\lambda$ included). The last eqn is given by the constraint itself.
+
+Confidence intervals: the duality with hypothesis tests is: if a test at level $\alpha$ for $H_0:\theta=\theta_0$ accepts for statistics in $A(\theta_0)$, then the confidence interval $\{\theta:X\in A(\theta)\}$ is a $1-\alpha$ CI.
+
+Poisson processes: Have $n$ trials, each a realization of a Poisson RV. Each has a pdf given by the poisson pmf. The MLE for the parameter is the average number of counts in each trial. Using this MLE, we can find the number of expected counts per cell. Poisson processes can be distributed in space as well as in time. Poisson processes are completely characterized by independence of disjoint intervals, stationary over time (or space), and no clumping (probability that two or more events occur in interval of length $\delta$ is $o(\delta)$.
+
+Goodness of fit tests for Poisson: Counts are grouped into cells. Under the null hypothesis, each cell has some probability. The distributions of counts in the cells is multinomial. The $X^2$ statistic is given by $\sum\frac{(x_i-np_i(\hat{\theta}))^2}{np_i(\hat{\theta})}$. This is observed minus expected, squared, over expected, where expected is the MLE for  This is approximately equal to $-2\log\Lambda$ under the GLRT. Has degree of freedom two less than number of cells. In general, if we have $m$ cells and a estimator parameter that is $k$ dimensional, $-2\log\Lambda$ is $\chi^2_{m-k-1}$. 
+
+Variance-stabilizing transforms: motivation is to construct confidence interval for poisson RVs. CLT says that $\sqrt{n}(\bar{X}-\lambda)\to N(0,\lambda)$ in distribution. CI is given by $P(-1.96\sqrt{\lambda}<\sqrt{n}(\bar{X}-\lambda)<1.96\sqrt{\lambda})=0.95$. Too hard to solve for $\lambda$. The var. stab. transform is a function $\phi$ such that $\sqrt{n}(\phi(\hat{\theta})-\phi(\theta))$ is asymptotically normal with variance $1$. Know that $\phi=\int\frac{1}{\sqrt{g(\theta)}}d\theta$, where $g(\theta)$ is the function of $\theta$ that is the original variance (e.g. $g(\theta)=\theta$ in poisson case).
+
+Transforming bi/multivariate distributions: If we have $U=f(X,Y),V=g(X,Y)$ and $X,Y$ distributed according to $h_{X,Y}(x,y)$, then the distribution of $U,V$ is given by $h_{X,Y}(f^{-1}(U,V),g^{-1}(U,V))\frac{\partial X,Y}{\partial U,V}$, where $f^{-1}$ and $g^{-1}$ are the inverses of $f,g$. 
+Various integrals: $\int_0^\infty x^{a-1}(1-x)^{b-1}=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$, $\int_0^\infty e^{-x^2}=\sqrt{\pi}/2$, $\int_{-\infty}^\infty e^{-ax^2+bx}=\exp(b^2/4a)\sqrt{\pi/a}$. For even $n=2k$, $\int_0^\infty x^ne^{-ax^2}=\frac{(2k-1)!!}{2^{k+1}a^k}\sqrt{\frac{\pi}{a}}$. For odd $n=2k+1$, the same integral is $\frac{k!}{2a^{k+1}}$. $\int_0^\infty x^ne^{-ax}=\frac{n!}{a^{n+1}}$. 
+
+\end{document}
