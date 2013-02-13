@@ -7,7 +7,9 @@
 \newcommand{\tab}{\hspace*{5em}}
 \newcommand{\conj}{\overline}
 \newcommand{\dd}{\partial}
-\nc{\pd}[3]{\frac{\partial^{#3} {#1}}{\partial {#2}^{#3}}}
+\newcommand{\openm}{\begin{pmatrix}}
+\newcommand{\closem}{\end{pmatrix}}
+\nc{\pd}{\partial}
 \nc{\del}{\nabla}
 \begin{document}
 \small
@@ -53,6 +55,17 @@ Goodness of fit tests for Poisson: Counts are grouped into cells. Under the null
 Variance-stabilizing transforms: motivation is to construct confidence interval for poisson RVs. CLT says that $\sqrt{n}(\bar{X}-\lambda)\to N(0,\lambda)$ in distribution. CI is given by $P(-1.96\sqrt{\lambda}<\sqrt{n}(\bar{X}-\lambda)<1.96\sqrt{\lambda})=0.95$. Too hard to solve for $\lambda$. The var. stab. transform is a function $\phi$ such that $\sqrt{n}(\phi(\hat{\theta})-\phi(\theta))$ is asymptotically normal with variance $1$. Know that $\phi=\int\frac{1}{\sqrt{g(\theta)}}d\theta$, where $g(\theta)$ is the function of $\theta$ that is the original variance (e.g. $g(\theta)=\theta$ in poisson case).
 
 Transforming bi/multivariate distributions: If we have $U=f(X,Y),V=g(X,Y)$ and $X,Y$ distributed according to $h_{X,Y}(x,y)$, then the distribution of $U,V$ is given by $h_{X,Y}(f^{-1}(U,V),g^{-1}(U,V))\frac{\partial X,Y}{\partial U,V}$, where $f^{-1}$ and $g^{-1}$ are the inverses of $f,g$. 
+
+Bi/multivariate normal: Bivariate $(U,V)$ is actually a linear transformation of the indep std normal pair $(X,Y)$. If the transformation matrix is $A=\openm a&b\\c&d\closem$, then the resulting pair has covariance matrix $AA^T$. In addition, given two arbitrary binomial normal RVs $U\sim(\mu,\sigma^2)$ and $V\sim(\nu,\tau^2)$ with correlation $\rho$, the pair $U,V$ is the transformation $\openm\sigma &0\\\tau\rho &\tau\sqrt{1-\rho^2}\closem$ applied to a pair of indep std normal RVs. 
+
+$t$ and $F$ distributions: $X$ has a $t_n$ distribution if $X\sim\frac{Z}{\sqrt{U/n}}$ where $Z$ is std normal and $U\sim\chi^2_n$. Has density $\frac{\Gamma((n+1)/2)}{\sqrt{n\pi}\Gamma(n/2)}(1+t^2/n)^{-(n+1)/2}$. $F_{n,m}$ distribution is $\frac{U/n}{V/m}$ where $U$ is $\chi^2_n$ and $V$ is $\chi^2_{m}$. Has density $\frac{\Gamma((m+n)/2)}{\Gamma(m/2)\Gamma(n/2)}\left(\frac{n}{m}\right)^{n/2}w^{n/2-1}(1+\frac{n}{m}w)^{-(n+m)/2}$.
+
+Disrtibution of sample statistics: If $X_i\sim N(\mu,\sigma^2)$ iid , then $\bar{X}=\frac{1}{n}\sum X_i\sim N(\mu,\sigma^2/n)$ and $s^2=\frac{1}{n-1}\sum(X_i-\bar{X})^2$ is distributed like a chi-sq with $(n-1)s^2/\sigma^2\sim\chi^2_{n-1}$. Notably, $\frac{\bar{X}-\mu}{s/\sqrt{n}}\sim t_{n-1}$. Sample correlation: $\sqrt{n}(\hat{\rho}-\rho)\sim N(0,(1-\rho^2)^2)$ as $n\to\infty$. Appropriate var-stab transformation is $1/2\log\left(\frac{1+\rho}{1-\rho}\right)$. This lets us do tests on sample correlation. 
+
+$t$-testing: three options. 1-sample, 2-sample, and paired. 1- and 2-sample assume independence. 1-sample is based on the above result on distribution of sample variance. Use the $t_{n-1}$ distribution. 2-sample: let $X\sim N(\mu_X,\sigma_X^2)$ and $Y\sim N(\mu_Y,\sigma_Y^2)$. $\bar{X}-\bar{Y}$ is distributed like $N(\mu_X-\mu_y,\sigma_X^2/n+\sigma_Y^2/m)$. Distribution of $\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{\sqrt{s_X^2/n+s_Y^2/m}}$ is approximately a $t$ distro with $\nu=\frac{(s_X^2/n+s_Y^2/m)^2}{((s_X^2/n)^2/(n-1)+(s_Y^2/m)^2/(m-1))}$. If we can assume that $\sigma_X=\sigma_Y$, then we can pool the sample variance and use $t=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{s_p\sqrt{1/n+1/m}}$ where $s_p^2=\frac{(n-1)s_X^2+(m-1)s_Y^2}{n+m-2}$. Paired tests go like 1-sample tests, but instead they test differences. If there is positive correlation, then the variance in $\bar{D}$ will be smaller than that of $\bar{X}-\bar{Y}$.
+
+Bonferroni corrections: when running $k$ tests on $k$ hypotheses, run each test at level $\alpha/k$ where $\alpha$ is the desired overall level.
+
 Various integrals: $\int_0^\infty x^{a-1}(1-x)^{b-1}=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$, $\int_0^\infty e^{-x^2}=\sqrt{\pi}/2$, $\int_{-\infty}^\infty e^{-ax^2+bx}=\exp(b^2/4a)\sqrt{\pi/a}$. For even $n=2k$, $\int_0^\infty x^ne^{-ax^2}=\frac{(2k-1)!!}{2^{k+1}a^k}\sqrt{\frac{\pi}{a}}$. For odd $n=2k+1$, the same integral is $\frac{k!}{2a^{k+1}}$. $\int_0^\infty x^ne^{-ax}=\frac{n!}{a^{n+1}}$. 
 
 \end{document}
