@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage[cm]{fullpage}
+\usepackage[all]{xy}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\qn}{\mathbb{Q}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\topo}{\mathscr{T}}
+\nc{\basis}{\mathscr{B}}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{0.5cm}
+
+\subsection*{1}
+($\implies$): This function can be viewed as the composition of two functions, one from $H\times H$ to itself sending $(x,y)$ to $(x,y^{-1})$ and one from $H\times H$ to $H$ sending $(x,y)$ to $xy$. The first function can be seen to be continuous by writing an open set in $H\times H$ in terms of the product basis and applying the inverse function separately to each part. The second function is continuous by assumption. Thus the original function is continuous.
+
+($\Leftarrow$): The product function is continuous because it is the composition of $(x,y)\mapsto(x,y^{-1})$ and $(x,y)\mapsto xy^{-1}$. The inverse function is continous because it is the compostion of $y\mapsto(1,y)$ and $(x,y)\mapsto xy^{-1}$. The first map is continuous from looking at the basis of the product topology.
+\subsection*{2}
+a. $\mathbb{Z}$ has the discrete topology, so so does $\mathbb{Z}\times\mathbb{Z}$. Thus, every function from $\mathbb{Z}$ into itself is continuous, and the same for functions from $\mathbb{Z}\times\mathbb{Z}$ to $\mathbb{Z}$.
+
+b. Addition is cts: if $|(a,b)-(c,d)|<\delta$, then $|a-c|<\delta$ and $|b-d|<\delta$, so $|(a+b)-(c+d)|<2\delta$. Taking inverses is continuous: if $|a-b|<\delta$, then $|(-a)-(-b)|=|a-b|<\delta$.
+
+c. Multiplication is cts: if $|(a,b)-(c,d)|<\delta$, then $|a-c|<\delta$ and $|b-d|<\delta$, so $|ab-cd|<a\delta+b\delta+\delta^2$. Taking inverses is continuous: if $|a-b|<\delta$, then $|1/a-1/b|=|a-b|/ab<\delta/ab$.
+
+d. Take the metric on $S^1$ to be $d(e^{ia},e^{ib})=\min(|a-b|,2\pi-|a-b|)$ for $a,b\in[0,2\pi)$. This induces the same topology as the subspace topology, as intersections of open balls in $\cn$ with $S^1$ produces open arcs, which are the open balls under this metric. Then, continuity of multiplication is the same as continuity of addition in $\rn$ with a few tweaks, and continuity of inverses is the same as continuity of additive inverses in $\rn$.
+
+e. If two pairs of matrices are closer than $\delta$ together (in $\rn^{2(n\times n)}$), then the entries need to be close than $\delta$ to the corresponding entry in the other pair. The result of the multiplication is a matrix with entries that are linear combinations of the original entries, so as the difference $\delta$ goes to $0$, the difference in the linear combinations also goes to $0$. In matrix inverses, since the matrix has nonzero determinant, each entry is a rational function of the original entries, so the differences in the entries of the inverses again go to $0$ as the difference in the original matrices go to $0$
+\subsection*{5}
+a. Let $\bar{f_\alpha}(xH)=p(f_\alpha(p^{-1}(xH)))=p(f_\alpha(xH))=p(\alpha xH)=\alpha xH$. This is bijective, since if $\alpha\in H$, it's the identity map. Otherwise, if $\alpha xH=\alpha yH$, then multiplying by $\alpha^{-1}$ gives $xH=yH$. Suppose we had some open set $U\subset G/H$. Then $p^{-1}(U)$ is open in $G$, $f_\alpha(p^{-1}(U))$ is open in $G$, and $p(f_\alpha(p^{-1}(U)))$ is open in $G/H$. The inverse is just $\bar{f_{\alpha^{-1}}}$, so $\bar{f_\alpha}$ taking open sets to open sets shows that it's a homeomorphism. For $xH,yH$ in $G/H$, the map $f_{yx^{-1}}$ takes $xH$ to $yH$, so $G/H$ is a homogenous space.
+
+b. If $H$ is a closed set, then so is $xH\subset G$ for any $x\in G$, since left-multiplication is a homeomorphism. Since $xH\subset G$ is the complete preimage of the one-point set $\{xH\}\subset G/H$, the one-point set is closed by defn of the quotient map.
+
+c. Let $U$ be open in $G$. Then, $p(U)=\{uH|u\in U\}=p(\{uh|u\in U,h\in H\})=p(\bigcup_{h\in H} Uh)$. The set $\bigcup_{h\in H} Uh$ is equal to $\bigcup_{u\in U} uH$, which is the preimage of $p(U)$, but it's open because right-multiplication is a homeomorphism. Since the preimage of $p(U)$ is open, so is $p(U)$.
+
+d. $G/H$ is a group by virtue of $H$ being normal, so we need to show that the operations are continuous wrt the product topology. Consider the following diagram:
+\begin{equation*}
+\xymatrix{
+    G\times G \ar[r]^\cdot \ar[d]_{p\times p}& G \ar[d]^p\\
+    G/H\times G/H \ar[r]_{\bar{\cdot}} & G/H
+}
+\end{equation*}
+Suppose we have some open set $U\subset G/H,U=\{xH|x\in X\}$. Then, its preimage under $p$ is open in $G$, that one's preimage under multiplication is open, and the image of that under $p\times p$ is open because the product of open maps is open. This final set is the set of pairs of cosets $(aH,bH)$ such that $ab=xh$ for some $x\in X$ and $h\in H$, and this is the preimage of $U$ under multiplication. The argument is similar for inverses. Since one-point sets are closed, $G/H$ is $T_1$, which makes it a topological group.
+\end{document}
