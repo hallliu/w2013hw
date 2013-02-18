@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\ddt}{\frac{d}{dt}}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\tr}{tr}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{3.1.4}
+First, we have 
+$$\frac{d}{dt}\int_t^\infty H(t,s)ds=-\ddt\lim_{a\to\infty}\int_a^tH(t,s)ds=-H(t,t)+\int_t^\infty\pd{H}{t}(t,s)ds$$
+by the chain rule. Using this, we have 
+$$y'(t)=ie^{it}+\alpha\left(\int_t^\infty\cos(t-s)\frac{y(s)}{s^2}ds\right)$$
+since $\sin(t-t)=0$. We also make the assumption that $t$ stays away from zero, as otherwise the integral blows up. Differentiating again we have
+$$y''(t)=-e^{it}-\alpha\left(\frac{y(t)}{t^2}+\int_t^\infty\sin(t-s)\frac{y(s)}{s^2}ds\right)$$
+Pulling the integral out and combining with $-e^{-it}$, we have 
+$$y''(t)=-y(t)-\alpha\frac{y(t)}{t^2}\implies y''(t)+(1+\alpha/t^2)=0$$
+\subsection*{3.1.5}
+The associated integral equation is 
+$$y(t)=2+\int_0^t-y(s)ds$$
+so we have $\phi_0=2$, $\phi_1=2+\int_0^t-2ds=2-2t$,$\phi_2=2-\int_0^t2-2sds=2-2t+t^2$, and in general,
+$$\phi_n(t)=\sum_{i=0}^n\frac{2t^i(-1)^i}{i!}$$
+which converges to $2e^{-t}$ as $n\to\infty$. This is a solution.
+\subsection*{3.1.7}
+$$|f(t,y_1)-f(t,y_2)|=|t|y_1|-t|y_2||\leq |t|||y_1|-|y_2||\leq |y_1-y_2|$$
+\subsection*{3.1.9}
+$$\phi_n(t)=\sum_{i=0}^n\frac{t^i}{i!}$$
+which approaches $e^t$.
+\subsection*{3.1.12}
+a. Following proof of lemma 3.2, we have that $\phi_0$ is defined for $|t|\leq\alpha$ since it's constant at $y_0$. Assume by induction that $\phi_n$ is defined there. Then,
+$$|\phi_{n+1}-y_0|=\left|z_0t-\int_0^t(t-s)g(s,y(s))ds\right|\leq |z_0t|+\left|\int_0^t(t-s)g(s,y(s))ds\right|\leq|z_0t|+M\int_0^t|t-s|ds\leq|z_0|\alpha+M\alpha^2/2$$
+Plugging in values for $\alpha$ that were given, we have that the above expression is bounded above by
+$$\frac{|z_0|b}{|z_0|+Ma/2}+\frac{Mab/2}{|z_0|+Ma/2}=b$$
+so $\phi_{n+1}$ stays inside $R$.
+
+\end{document}
