@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\newcommand{\ep}{\epsilon}
+\newcommand{\openm}{\begin{pmatrix}}
+\newcommand{\closem}{\end{pmatrix}}
+\DeclareMathOperator{\cov}{cov}
+\newcommand{\nc}{\newcommand}
+\newcommand{\rn}{\mathbb{R}}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{10.5}
+We want to compute $E(F_n(u)F_n(v))-E(F_n(u))E(F_n(v))$. The expected values of $F_n(u)$ and $F_n(v)$ was given in the book to be $F(u)$ and $F(v)$, resp. In considering the first term, suppose WLOG that $u\geq v$, so that $m=v$. Then, we have $nF_n(u)=\sum I_{(-\infty,u]}(X_i)$ and $nF_n(v)=\sum I_{(-\infty,v]}(X_i)$, so $n^2F_n(u)F_n(v)=\sum_i\sum_jI_{(-\infty,u]}(X_i)I_{(-\infty,v]}(X_i)$. Each term $I_{(-\infty,u]}(X_i)I_{(-\infty,v]}(X_i)$ is a Bernoulli RV with probability of success $F(v)$, since it equals $1$ iff both are $1$, but since $u\geq v$, we only need the second part to be positive. Then, $n^2F_n(u)F_n(v)$ is binomial with $n^2$ trials and probability of success $F(v)$, so $E(F_n(u)F_n(v))$ is just $F(v)$.
+\subsection*{10.6.a}
+\includegraphics[width=0.6\textwidth]{scripts_5/10_6.png}
+
+The data are on the $x$ axis and the normal quantiles are on the $y$. The line $y=x$ has been drawn. This looks a bit off-normal at the ends, and the direction suggests that it has more spread than a normal distribution.
+\end{document}
