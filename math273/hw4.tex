@@ -51,4 +51,31 @@ Plugging in values for $\alpha$ that were given, we have that the above expressi
 $$\frac{|z_0|b}{|z_0|+Ma/2}+\frac{Mab/2}{|z_0|+Ma/2}=b$$
 so $\phi_{n+1}$ stays inside $R$.
 
+b. We have 
+$$r_j(t)=|\phi_j(t)-\phi_{j+1}(t)|=\left|\int_0^t(t-s)(g(s,\phi_{j-1})-g(s,\phi_{j}))\right|\leq\int_0^t|t-s||g(s,\phi_{j-1})-g(s,\phi_{j})|\leq K\int_0^t|t-s|r_{j-1}(s)$$
+the last step by the boundedness of the first derivative. For $j=0$, we have
+$$r_0(t)=\left|z_0t-\int_0^t(t-s)g(s,y_0)\right|\leq |z_0t|+Mt^2/2$$
+We hypothesize that 
+$$r_j(t)\leq K^{j-1}\left(\frac{|z_0||t|^{2j+1}}{(2j+1)!}+\frac{M|t|^{2j+2}}{(2j+2)!}\right)$$
+It's obviously true for $j=0$, so assume true for $j=p-1$ and we have
+\begin{align*}
+r_p(t)&\leq K\int_0^t(t-s)r_{p-1}\leq K^{p-1}\int_0^t(t-s)\left(\frac{|z_0|s^{2p-1}}{(2p-1)!}+\frac{Ms^{2p}}{(2p)!}\right)\\
+&=K^{p-1}\int_0^t\left(\frac{|z_0|s^{2p-1}t}{(2p-1)!}+\frac{Ms^{2p}t}{(2p)!}-\frac{|z_0|s^{2p}}{(2p-1)!}-\frac{Ms^{2p+1}}{(2p)!}\right)\\
+&=K^{p-1}\left(\frac{|z_0|s^{2p+1}}{(2p)!}+\frac{Ms^{2p+2}}{(2p+1)!}-\frac{|z_0|s^{2p+1}}{(2p-1)!(2p+1)}-\frac{Ms^{2p+2}}{(2p)!(2p+2)}\right)\\
+&=K^{p-1}\left(\frac{|z_0|t^{2p+1}}{(2p+1)!}+\frac{Mt^{2p+2}}{(2p+2)!}\right)
+\end{align*}
+in the case where $t\geq 0$, and the case where $t<0$ is similar. Now, since we have $|t|<\alpha$, the sum of all the $r_p$ is bounded above by some big constant times $\sum\frac{c^n}{n!}$, so we have the uniform convergence of the sequence of $\phi$s.
+
+Call the limit $\phi(t)$. The argument in the book for continuity of $\phi$ works here too since all it depended on was that $\phi_j$ converges uniformly to $\phi$. To show that it satisfies the integral equation, we just have to show that 
+$$\phi(t)=\lim_{n\to\infty}\phi_n(t)=y_0+z_0t-\lim_{n\to\infty}\int_0^t(t-s)g(s,\phi_{n-1}(t))=y_0+z_0t-\int_0^t(t-s)g(s,\phi(t))$$
+which essentially boils down to showing that the limit of the integral equals the other integral. Then, we have
+$$\left|\int_0^t(t-s)(g(s,\phi_j(s))-g(s,\phi(s)))\right|\leq K\left|\int_0^t|t-s||\phi(s)-\phi_j(s)|\right|$$
+which we can see goes to $0$ as $j\to\infty$ since the difference of the $\phi$s goes to $0$ and the $t-s$ term is bounded by $\alpha$.
+\subsection*{3.1.13}
+later
+\subsection*{3.1.14}
+Each of the successive approximations is $0$, since $f(s,0)=0$ in this case. They converge to a solution, but a trivial one.
+\subsection*{3.3.2}
+$f$ is defined on any closed rectangle about $(0,0)$ as long as the rectangle is less than $2$ wide. For $t\leq0$ on this rectangle, $f$ is constant in $y$, so it's nondecreasing. Fix some $t>0$. Then, as $y$ increases from $-\infty$, $f$ is constant at $2t$ when $y<0$, and is monotone decreasoing from $y=0$ to $y=t^2$, all the while remaining below $2t$. At $y=t^2$, $f=-2t$, and it stays at this value as $y$ further increases. Thus the hypotheses of the theorem are satisfied and we have uniqueness.
+\subsection*{3.4.3}
 \end{document}
