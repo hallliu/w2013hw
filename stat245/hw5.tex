@@ -4,6 +4,9 @@
 \usepackage{amssymb,amsfonts}
 \usepackage{multicol}
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
 \usepackage[cm]{fullpage}
 \newcommand{\tab}{\hspace*{5em}}
 \newcommand{\conj}{\overline}
@@ -21,9 +24,51 @@ Date: \today
 \vspace{1.5cm}
 
 \subsection*{10.5}
-We want to compute $E(F_n(u)F_n(v))-E(F_n(u))E(F_n(v))$. The expected values of $F_n(u)$ and $F_n(v)$ was given in the book to be $F(u)$ and $F(v)$, resp. In considering the first term, suppose WLOG that $u\geq v$, so that $m=v$. Then, we have $nF_n(u)=\sum I_{(-\infty,u]}(X_i)$ and $nF_n(v)=\sum I_{(-\infty,v]}(X_i)$, so $n^2F_n(u)F_n(v)=\sum_i\sum_jI_{(-\infty,u]}(X_i)I_{(-\infty,v]}(X_i)$. Each term $I_{(-\infty,u]}(X_i)I_{(-\infty,v]}(X_i)$ is a Bernoulli RV with probability of success $F(v)$, since it equals $1$ iff both are $1$, but since $u\geq v$, we only need the second part to be positive. Then, $n^2F_n(u)F_n(v)$ is binomial with $n^2$ trials and probability of success $F(v)$, so $E(F_n(u)F_n(v))$ is just $F(v)$.
+We have $\cov(nF_n(u),nF_n(v))=\cov(\sum_iI_u(X_i),\sum_iI_v(X_i))=\sum_i\sum_j\cov(I_u(X_i),I_v(X_j))$. Note that the term inside is zero unless $i=j$ since $X_i$ and $X_j$ are independent otherwise. Then, we get the sum $\sum_i\cov(I_u(X_i),I_v(X_i))$. We have $\cov(I_u(X_i),I_v(X_i))=E(I_u(X_i)I_v(X_i))-E(I_u(X_i))E(I_v(X_i))$. The second term is given in the book to be $F(u)F(v)$. If we assume WLOG that $v\leq u$, then the first term is $1$ iff $I_v(X_i)=1$, so its expected value is just $F(v)=F(m)$. Thus, we have that $\cov(nF_n(u),nF_n(v))=nF(m)(1-F(u))$ or $\cov(F_n(u),F_n(v))=\frac{1}{n}F(m)(1-F(u))$
 \subsection*{10.6.a}
 \includegraphics[width=0.6\textwidth]{scripts_5/10_6.png}
 
 The data are on the $x$ axis and the normal quantiles are on the $y$. The line $y=x$ has been drawn. This looks a bit off-normal at the ends, and the direction suggests that it has more spread than a normal distribution.
+\subsection*{11.11}
+Under $H_0$, we have $\mu_X=\mu+\Delta$ and $\mu_Y=\mu$, where $X$ and $Y$ are independent normal RVs both variance $\sigma^2$. Thus, the $t$-statistic 
+$$\frac{(\bar{X}-\bar{Y})-\Delta}{s_p\sqrt{1/n+1/m}}$$
+has a $t$-distribution with $n+m-2$ degrees of freedom. Then, we can just determine an appropriate cutoff for the level we're testing at with for this statistic.
+\subsection*{11.34}
+Let $\delta=\mu_X-\mu_Y$. For both designs, we wish to plot $P(\text{reject }H_0|\mu_X-\mu_Y=\delta)$ versus $\delta$. Set a significance level of $0.05$ for both.
+
+\noindent a. Under $H_a$, $\bar{D}=\bar{X}-\bar{Y}$ is normally distributed with mean $\delta$ and variance $\sigma_D^2=\sigma_X^2+\sigma_Y^2-2\cov(X,Y)=100$. We reject the null hypothesis when $\bar{D}/\sigma_D$ goes outside the interval $(-1.96,1.96)$, so the probability of rejection is $P(\bar{D}>19.6)+P(\bar{D}>-19.6)$.
+
+\includegraphics[width=0.4\textwidth]{scripts_5/11_34a.png}
+
+\noindent b. Same as above, except $\sigma_D^2=\sigma_X^2+\sigma_Y^2=200$ now, so the probability of rejection is now $P(\bar{D}>1.96\sqrt{2})+P(\bar{D}>-1.96)$
+
+\includegraphics[width=0.4\textwidth]{scripts_5/11_34b.png}
+
+The unpaired design is less powerful than the paired design for all values of $\delta$ except $0$.
+\subsection*{11.44}
+\FloatBarrier
+a. Boxplots for the three cases:
+\vspace{-400pt}
+\begin{figure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scripts_5/11_44/a0h.png}
+        \caption{0-hour}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scripts_5/11_44/a2h.png}
+        \caption{2-hour}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scripts_5/11_44/adiff.png}
+        \caption{Difference}
+    \end{subfigure}
+\end{figure}
+\FloatBarrier
+\noindent b. The standard deviations at 0h are pretty different, so we can't use the pooled $t$-test. At 0h, it also looks like the data isn't very normal, so that could be a problem. At 0h, if we test the equality of the means, the $t$-statistic is $2.222$ with approximate dof $22$, so we get a $p$-value of $0.037$.
+At 2h, the $t$-statistic is $2.693$ with approximate dof $24$, so the $p$-value is $0.0127$. The differences have a $t$-statistic of $1.818$ and a dof of $29$, so the $p$-value is $0.794$. If we're at $\alpha=0.05$, there's not enough evidence to suggest that the difference is different between the two groups.
+
+\noindent c.
 \end{document}
