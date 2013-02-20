@@ -1,0 +1,279 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8304,        269]
+NotebookOptionsPosition[      6870,        214]
+NotebookOutlinePosition[      7231,        230]
+CellTagsIndexPosition[      7188,        227]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.570319946244432*^9, 3.570319956282305*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", "\"\<~/w2013/stat245/scripts_5/11_37\>\"", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.570319969498104*^9, 3.570319990367189*^9}}],
+
+Cell[BoxData["\<\"/home/hall/w2013/stat245/scripts_5/11_37\"\>"], "Output",
+ CellChangeTimes->{3.57031999083594*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"stelA1", "=", 
+  RowBox[{"Import", "[", 
+   RowBox[{"\"\<stelA\>\"", ",", "\"\<List\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5703200065596657`*^9, 3.570320020279512*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "2.3`", ",", "3.1`", ",", "2.`", ",", "2.1`", ",", "1.9`", ",", "2.45`", 
+   ",", "3.1`", ",", "3.7`", ",", "2.2`", ",", "2.54`", ",", "2.3`", ",", 
+   "3.72`", ",", "2.8`", ",", "4.54`", ",", "1.9`", ",", "1.61`", ",", "1.1`",
+    ",", "1.63`"}], "}"}]], "Output",
+ CellChangeTimes->{3.570320020863388*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"stelA1", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.570320052107106*^9, 3.570320068993546*^9}}],
+
+Cell[BoxData["2.3`"], "Output",
+ CellChangeTimes->{3.570320069939022*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"getDiffs", "[", "a_", "]"}], ":=", 
+   RowBox[{"(", "\[IndentingNewLine]", 
+    RowBox[{"result", "=", 
+     RowBox[{
+      RowBox[{"List", "[", "]"}], "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<", 
+         RowBox[{
+          RowBox[{"Length", "[", "a", "]"}], "/", "2"}]}], ",", 
+        RowBox[{"i", "++"}], ",", 
+        RowBox[{"Append", "[", 
+         RowBox[{"result", ",", 
+          RowBox[{
+           RowBox[{"a", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"2", "i"}], "+", "2"}], "]"}], "]"}], "-", 
+           RowBox[{"a", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"2", "i"}], "+", "1"}], "]"}], "]"}]}]}], "]"}]}], 
+       "]"}], "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "result", "]"}]}]}], "\[IndentingNewLine]", 
+    ")"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.570320071786745*^9, 3.570320083261033*^9}, {
+   3.570320145430262*^9, 3.570320268523396*^9}, {3.5703203071451893`*^9, 
+   3.570320356927796*^9}, {3.5703204129355917`*^9, 3.57032041366588*^9}, {
+   3.5703204862922497`*^9, 3.5703205189733877`*^9}, {3.570320552152198*^9, 
+   3.570320587854023*^9}, 3.570320635459221*^9, {3.570320759558432*^9, 
+   3.570320759773182*^9}, {3.570320936881544*^9, 3.570320953547592*^9}, {
+   3.57032112793255*^9, 3.570321164679147*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["i"], "Input",
+ CellChangeTimes->{3.5703207522027082`*^9}],
+
+Cell[BoxData["9"], "Output",
+ CellChangeTimes->{3.570320752526094*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"l", "=", 
+  RowBox[{"List", "[", "]"}]}]], "Input",
+ CellChangeTimes->{{3.570320467167769*^9, 3.570320468410987*^9}, {
+  3.570320532865737*^9, 3.570320533087153*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.570320468966446*^9, 3.5703205372486153`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["result"], "Input",
+ CellChangeTimes->{{3.5703206457402773`*^9, 3.5703206504787617`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.570320652137126*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"AppendTo", "[", 
+  RowBox[{"l", ",", "5"}], "]"}]], "Input",
+ CellChangeTimes->{{3.570320470712165*^9, 3.570320476762171*^9}, 
+   3.570320535749242*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", "5", "}"}]], "Output",
+ CellChangeTimes->{3.570320477410102*^9, 3.570320539232292*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["l"], "Input",
+ CellChangeTimes->{3.570320541181354*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", "5", "}"}]], "Output",
+ CellChangeTimes->{3.5703205415406637`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["result"], "Input",
+ CellChangeTimes->{{3.570320947557044*^9, 3.570320948198697*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5703209488732224`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.570320948897705*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5703209489275303`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5703209489285727`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"getDiffs", "[", "stelA1", "]"}]], "Input",
+ CellChangeTimes->{{3.5703203872216988`*^9, 3.570320394119545*^9}}]
+},
+WindowSize->{740, 867},
+WindowMargins->{{162, Automatic}, {Automatic, 69}},
+CellContext->Notebook,
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 92, 1, 32, "Input"],
+Cell[CellGroupData[{
+Cell[674, 25, 172, 3, 32, "Input"],
+Cell[849, 30, 116, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1002, 36, 202, 4, 32, "Input"],
+Cell[1207, 42, 349, 7, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1593, 54, 148, 3, 32, "Input"],
+Cell[1744, 59, 73, 1, 32, "Output"]
+}, Open  ]],
+Cell[1832, 63, 1498, 35, 187, "Input"],
+Cell[CellGroupData[{
+Cell[3355, 102, 71, 1, 32, "Input"],
+Cell[3429, 105, 70, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3536, 111, 190, 4, 32, "Input"],
+Cell[3729, 117, 111, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3877, 124, 102, 1, 32, "Input"],
+Cell[3982, 127, 87, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4106, 134, 176, 4, 32, "Input"],
+Cell[4285, 140, 114, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4436, 147, 69, 1, 32, "Input"],
+Cell[4508, 150, 94, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4639, 157, 98, 1, 32, "Input"],
+Cell[4740, 160, 476, 10, 23, "Message"],
+Cell[5219, 172, 474, 10, 23, "Message"],
+Cell[5696, 184, 476, 10, 23, "Message"],
+Cell[6175, 196, 542, 11, 41, "Message"]
+}, Open  ]],
+Cell[6732, 210, 134, 2, 32, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
