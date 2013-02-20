@@ -48,8 +48,8 @@ The unpaired design is less powerful than the paired design for all values of $\
 \subsection*{11.44}
 \FloatBarrier
 a. Boxplots for the three cases:
-\vspace{-400pt}
-\begin{figure}
+
+\begin{figure}[h]
     \begin{subfigure}[b]{0.33\textwidth}
         \centering
         \includegraphics[width=\textwidth]{scripts_5/11_44/a0h.png}
@@ -70,5 +70,34 @@ a. Boxplots for the three cases:
 \noindent b. The standard deviations at 0h are pretty different, so we can't use the pooled $t$-test. At 0h, it also looks like the data isn't very normal, so that could be a problem. At 0h, if we test the equality of the means, the $t$-statistic is $2.222$ with approximate dof $22$, so we get a $p$-value of $0.037$.
 At 2h, the $t$-statistic is $2.693$ with approximate dof $24$, so the $p$-value is $0.0127$. The differences have a $t$-statistic of $1.818$ and a dof of $29$, so the $p$-value is $0.794$. If we're at $\alpha=0.05$, there's not enough evidence to suggest that the difference is different between the two groups.
 
-\noindent c.
+\noindent d. Boxplots for the two cases:
+\FloatBarrier
+\begin{figure}[h]
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scripts_5/11_44/ctot.png}
+        \caption{Total}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scripts_5/11_44/cmg.png}
+        \caption{mg/kg}
+    \end{subfigure}
+\end{figure}
+\FloatBarrier
+These don't look particularly normal -- there are some really big outliers on the high end. 
+
+\noindent e. Normality doesn't seem like a reasonable assumption, but that's okay because we have fairly large sample sizes. The sample variances are quite different, so we still can't use the pooled $t$-test. For the total excretion, the $t$-statistic is $1.940$ and the dof is $20$, so the $p$-value is $0.666$. For the mg/kg ratio, the $t$-statistic is $2.025$ and the dof is $22.5$, so the $p$-value is $0.054$. In both cases, at the $0.05$ level, there is insufficint evvidence to conclude that the two groups are different.
+\subsection*{11.37}
+a. We should use a paired test here, since the experiment was done in pairs. For ward A, the difference in the improvements of the two groups has mean $0.4944$ and standard deviation $0.8202$ for a $t$-statistic of $0.6028$ with dof $9$, so the $p$-value (one-sided, since we're testing $H_0:\mu_D>0$) is $0.28$. For ward B, $\bar{D}=0.246$ and $s_D=0.479$, so $t=0.5128$ and $p=0.313$. In both cases, the effect of stelazine is not significant at the $0.05$ level. 
+
+b. There's no pairing here, and we can't pool because the variances are pretty different for the two wards under stelazine. The $t$-statistic of ward A versus ward B under stelazine is $2.729$ with dof $12$, for a $p$-value of $0.018$ (two-sided). This indicates a significant difference in the improvement between the wards, with ward A performing better.
+\subsection*{10.10}
+a. For a uniform distribution, the density becomes $n\binom{n-1}{k-1}x^{k-1}(1-x)^{n-k}$. To find the mean, we multiply this by $x$ and integrate. The resulting expression is
+$$n\binom{n-1}{k-1}\int_0^1x^k(1-x)^{n-k}=\frac{n\binom{n-1}{k-1}}{(n+1)\binom{n}{k}}\int_0^1(n+1)\binom{n}{k}x^k(1-x)^{n-k}=\frac{n\binom{n-1}{k-1}}{(n+1)\binom{n}{k}}=\frac{k}{n+1}$$
+
+To calculate variance, we have that the density of $Y_{(k)}=X_{(k)}^2$ is $n/2\binom{n-1}{k-1}y^{k/2-1}(1-y)^{(n-k)/2}$. Doing the same thing as above, we get
+$$n/2\binom{n-1}{k-1}\int_0^1y^{k/2}(1-y)^{(n-k)/2}=\frac{n/2\binom{n-1}{k-1}}{(n/2+1)\binom{n+1}{k+1}}\int_0^1(n/2+1)\binom{n+1}{k+1}y^{k/2}(1-y)^{(n-k)/2}=\frac{n\binom{n-1}{k-1}}{(n+2)\binom{n+1}{k+1}}=\frac{k(k+1)}{(n+1)(n+2)}$$
+This, minus the mean squared, is 
+$$\frac{k(k+1)}{(n+1)(n+2)}-\frac{k^2}{(n+1)^2}=$$
 \end{document}
