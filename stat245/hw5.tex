@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{geometry}
+\usepackage[top=0.5cm, bottom=0.5cm, left=0.5cm, right=0.5cm]{geometry}
 \usepackage[namelimits,sumlimits]{amsmath}
 \usepackage{amssymb,amsfonts}
 \usepackage{multicol}
@@ -7,7 +7,6 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{placeins}
-\usepackage[cm]{fullpage}
 \newcommand{\tab}{\hspace*{5em}}
 \newcommand{\conj}{\overline}
 \newcommand{\dd}{\partial}
@@ -15,13 +14,13 @@
 \newcommand{\openm}{\begin{pmatrix}}
 \newcommand{\closem}{\end{pmatrix}}
 \DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\var}{var}
 \newcommand{\nc}{\newcommand}
 \newcommand{\rn}{\mathbb{R}}
 \begin{document}
 Name: Hall Liu
 
 Date: \today 
-\vspace{1.5cm}
 
 \subsection*{10.5}
 We have $\cov(nF_n(u),nF_n(v))=\cov(\sum_iI_u(X_i),\sum_iI_v(X_i))=\sum_i\sum_j\cov(I_u(X_i),I_v(X_j))$. Note that the term inside is zero unless $i=j$ since $X_i$ and $X_j$ are independent otherwise. Then, we get the sum $\sum_i\cov(I_u(X_i),I_v(X_i))$. We have $\cov(I_u(X_i),I_v(X_i))=E(I_u(X_i)I_v(X_i))-E(I_u(X_i))E(I_v(X_i))$. The second term is given in the book to be $F(u)F(v)$. If we assume WLOG that $v\leq u$, then the first term is $1$ iff $I_v(X_i)=1$, so its expected value is just $F(v)=F(m)$. Thus, we have that $\cov(nF_n(u),nF_n(v))=nF(m)(1-F(u))$ or $\cov(F_n(u),F_n(v))=\frac{1}{n}F(m)(1-F(u))$
@@ -91,7 +90,7 @@ These don't look particularly normal -- there are some really big outliers on th
 \subsection*{11.37}
 a. We should use a paired test here, since the experiment was done in pairs. For ward A, the difference in the improvements of the two groups has mean $0.4944$ and standard deviation $0.8202$ for a $t$-statistic of $0.6028$ with dof $9$, so the $p$-value (one-sided, since we're testing $H_0:\mu_D>0$) is $0.28$. For ward B, $\bar{D}=0.246$ and $s_D=0.479$, so $t=0.5128$ and $p=0.313$. In both cases, the effect of stelazine is not significant at the $0.05$ level. 
 
-b. There's no pairing here, and we can't pool because the variances are pretty different for the two wards under stelazine. The $t$-statistic of ward A versus ward B under stelazine is $2.729$ with dof $12$, for a $p$-value of $0.018$ (two-sided). This indicates a significant difference in the improvement between the wards, with ward A performing better.
+\noindent b. There's no pairing here, and we can't pool because the variances are pretty different for the two wards under stelazine. The $t$-statistic of ward A versus ward B under stelazine is $2.729$ with dof $12$, for a $p$-value of $0.018$ (two-sided). This indicates a significant difference in the improvement between the wards, with ward A performing better.
 \subsection*{10.10}
 a. For a uniform distribution, the density becomes $n\binom{n-1}{k-1}x^{k-1}(1-x)^{n-k}$. To find the mean, we multiply this by $x$ and integrate. The resulting expression is
 $$n\binom{n-1}{k-1}\int_0^1x^k(1-x)^{n-k}=\frac{n\binom{n-1}{k-1}}{(n+1)\binom{n}{k}}\int_0^1(n+1)\binom{n}{k}x^k(1-x)^{n-k}=\frac{n\binom{n-1}{k-1}}{(n+1)\binom{n}{k}}=\frac{k}{n+1}$$
@@ -99,5 +98,14 @@ $$n\binom{n-1}{k-1}\int_0^1x^k(1-x)^{n-k}=\frac{n\binom{n-1}{k-1}}{(n+1)\binom{n
 To calculate variance, we have that the density of $Y_{(k)}=X_{(k)}^2$ is $n/2\binom{n-1}{k-1}y^{k/2-1}(1-y)^{(n-k)/2}$. Doing the same thing as above, we get
 $$n/2\binom{n-1}{k-1}\int_0^1y^{k/2}(1-y)^{(n-k)/2}=\frac{n/2\binom{n-1}{k-1}}{(n/2+1)\binom{n+1}{k+1}}\int_0^1(n/2+1)\binom{n+1}{k+1}y^{k/2}(1-y)^{(n-k)/2}=\frac{n\binom{n-1}{k-1}}{(n+2)\binom{n+1}{k+1}}=\frac{k(k+1)}{(n+1)(n+2)}$$
 This, minus the mean squared, is 
-$$\frac{k(k+1)}{(n+1)(n+2)}-\frac{k^2}{(n+1)^2}=$$
+$$\frac{k(k+1)}{(n+1)(n+2)}-\frac{k^2}{(n+1)^2}=\frac{k(kn+n+k+1)-(k^2n+2k^2)}{(n+1)^2(n+2)}=\frac{k(n+1)-k^2}{(n+1)^2(n+2)}$$
+which is equal to what they have in the book.
+
+\noindent b. The propagation of error formula given expresses $Y_{(k)}$ as a linear function of $X_{(k)}$, so by the linearity of expectations,
+$$E(Y_{(k)})=\alpha E(X_{(k)})+F^{-1}\left(\frac{k}{n-1}\right)-\frac{k}{n-1}\alpha=F^{-1}\left(\frac{k}{n-1}\right)$$
+where $\alpha=\frac{d}{dx}F^{-1}(x)\big|_{k/(n-1)}$. Similarly, $\var(Y_{(k)})=\var(X_{(k)})\alpha^2$, and now we need to show that $\alpha^2=\frac{1}{(f(F^{-1}(k/(n-1))))^2}$. This is just a result of the property that $(f^{-1})'(x)=(f'(f^{-1}(x)))^{-1}$, as $F'(x)=f(x)$.o
+
+\noindent c. The $p$th sample quantile is $Y_{(k)}$ where $p=k/(n+1)$. Also, $F^{-1}(p)$ is defined to be the $p$th quantile, so we have that the variance is approximately $p(1-p)/(nf^2(x_p))$, where the extra $2$ doesn't really matter when $n$ is large.
+
+\noindent d. The median corresponds to $p=1/2$ and $x_p=\mu$, so the approximate variance is $\frac{\sqrt{2\pi}\sigma}{4n}$. This is $O(\sigma)$ instead of $O(\sigma^2)$ like the the variance of the sample mean.
 \end{document}
