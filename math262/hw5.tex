@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\qn}{\mathbb{Q}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\topo}{\mathscr{T}}
+\nc{\basis}{\mathscr{B}}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\diam}{diam}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{171.8}
+($\Rightarrow$): Suppose $f$ is continuous. Pick some point $(a,b)$ of $X\times Y$ not on $G_f$. Then, $b$ and $f(a)$ have disjoint n'hoods in $Y$. Denote these n'hoods as $V_b$ and $V_a$, resp. Then, $f^{-1}(V_a)$ is open in $X$, so $f^{-1}(V_a)\times V_b$ is a neighborhood of $(a,b)$ in $X\times Y$. This does not intersect $G_f$, since $x\in f^{-1}(V_a)\implies f(x)\in V_a$, which means $f(x)$ can't be in $V_b$.
+
+($\Leftarrow$): Suppose $G_f$ is closed. Then pick some point $x_0\in X$ and let $V$ be a n'hood of $f(x_0)$. Then $Y-V$ is closed, so $G_f\cap X\times(Y-V)$ is closed. The projection of this set to $X$ is closed, since the projection is a closed map. The projection to $X$ is $\{x\in X|f(x)\in Y-V\}$ or $\{x\in X|f(x)\not\in V\}$, so its complement in $X$ is just the preimage of $V$ under $f$. Since the projection was closed, the preimage is open, and we have continuity.
+\subsection*{171.11}
+Suppose $Y=C\cap D$ with $C,D$ open, nonempty, and disjoint in $Y$. Then $C,D$ are closed in $Y$, so they're compact. Thus we can find disjoint, nonempty open sets $U\supset C$ and $V\supset D$ in $X$. For each $A\in\mathscr{A}$, we have that $A-(U\cup V)$ is closed. Assume that $Y\neq A$ for any $A\in\mathscr{A}$, for otherwise we have immediately that $Y$ is connected. Then, consider finite intersections $\bigcap (A-(U\cup V))=\bigcap(A\cap U^c\cap V^c)=U^c\cap V^c\cap\left(\bigcap A\right)$. Since the $A_i$ are simply ordered by inclusion, this is simply $A\cap U^c\cap V^c$ for some $A\in\mathscr{A}$. If this were empty, then $A\subset U\cup V$, but this would imply that $A$ is disconnected, so the intersection can't be empty. Thus, by the finite intersection characterization of compactness, the intersection $\bigcap_{A\in\mathscr{A}}(A-(U\cup V))$ is nonempty. However, this intersection consists of all elements which are in each $A$ but not in $Y$, which should be empty. Thus we have a contradiction.
+\subsection*{181.6}
+Injectivity is implied by the positive definiteness of the metric. To show surjectivity, suppose that there is some $a\not\in f(X)$. Since $f$ is continuous, $f(X)$ is a compact subspace of $X$, so $a$ and $f(X)$ can be separated by neighborhoods. Choose some $\ep>0$ such that $B_\ep(a)$ is disjoint with $f(X)$. Construct a sequence $x_n$ by letting $x_1=a$, $x_{n+1}=f(x_n)$. We have $d(x_1,x_k)=d(a,f^{k-1}(a))\geq\ep$, and by the isometry property $d(x_n,x_m)=d(f^{n-1}(a),f^{m-1}(a))=d(a,f^{n-m-2}(a))\geq\ep$, which contradicts sequential compactness. Thus $f$ is bijective.
+\subsection*{181.7}
+a. First, $f$ is continuous using the $\ep-\delta$ definition -- just choose $\delta=\ep$. Then, each set $A_n=f^n(X)$ is compact therefore closed, with $\diam(A_n)\leq\alpha\diam(A_{n-1})$. Then, the diameter of the intersections of all the $A_i$ must be less than the diameter of each of the $A_i$, so it's zero, so the intersection is either empty or a one-point set. Now, suppose we took a finite intersection of the $A_i$. Then choose a point $x$ from the highest $i$ that appears. Since $x=f^i(x_0)$ for some $x_0\in X$, we have for each other index $j$ in the intersection, $x=f^j(f^{i-j}(x_0))\in f^j(X)$, so the intersection contains $x$ and is therefore nonempty. By the finite intersection property, we have that the intersection $\bigcap A_n$ is nonempty, so it contains one element $y$. $y$ is a fixed point, since $f(y)$ should also lie in all the $A_i$. $y$ is the only fixed point, since if there were some other fixed point, it would also lie in all the $A_i$.
+
+b. The non-emptiness of the intersection of the $A_i$ still follows, so we just have to show that the diameter of the intersection $A$ is $0$. Pick some point $x$ in the intersection, and take a sequence $x_n$ such that $f^{n+1}(x_n)=x$ (we know that at least one of these exists -- the constant sequence at $x$). Let $y_n=f^n(x_n)$ so that $f(y_n)=x$ for all $n$. The sequence $y_n$ has some subsequence limit $a$. Suppose $a\not\in A$. Then, we have some $\ep$-ball about $a$ that is disjoint from $A$, which means that it's disjoint from some $A_n$. However, we have $d(a,A_{n_i})\leq d(a,y_{n_i})<\ep$ for all $n_i>N$. which is a contradiction. In addition, by the shrinking property of $f$, we have $d(f(a),x)\leq d(f(a),f(y_{n_i}))+d(f(y_{n_i}),x)=d(f(a),f(y_{n_i}))<d(a,y_{n_i})<\ep$ for all $\ep>0$ for some $n_i$, so $x=f(a)$. Thus, we have that $A\subset f(A)$, and since we showed above that $f(A)\subset A$, we have $A=f(A)$. However, since $\diam(f(A)<\diam(A)$ for multipoint $A$, this presents a contradiction and we must have that $A$ is a single point.
+ \end{document}
