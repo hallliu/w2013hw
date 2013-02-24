@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+\DeclareMathOperator{\opt}{opt}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{6.16}
+The hiearchy can be seen as a tree, with the ranking officer as the root node. Assume by induction that we have obtained the optimal number of rounds and the calling sequence for that optimum for the subtrees rooted at each of the root node's children. The only thing that needs to be determined now is the order in which the root node calls its children, as we cannot possibly decrease the number of rounds needed by increasing the number of rounds needed in a subtree. 
+
+If we designate some order $c_1,c_2,\ldots c_n$ for the root to call its $n$ children in, the number of rounds needed will be $\max\{\opt(c_i)+i\}$ where $\opt(c_i)$ is the optimal number of rounds needed for the child $c_i$ to call its subtree. Then, to minimize this maximum, we merely need to call the children in decreasing order of how long it takes to call their subtrees. 
+
+This works by an exchange argument: suppose we have $c_i$ and $c_j$ with $\opt(c_i)>\opt(c_j)$ and $j<i$. Then the maximum cost between these is $\opt(c_i)+i$, but swapping them results in the maximum cost being the greater of $\opt(c_i)+j$ and $\opt(c_j)+i$, neither of which can be larger than $\opt(c_i)+i$.
+
+Now, if we define the optimal number of rounds needed for a leaf to call all its children as $0$, we get an inductive algorithm which essentially takes the same amount of time as sorting a bunch of disjoint subsets of the tree's nodes, which in turn takes less time than sorting all the tree's nodes, so this runs in $O(|V|\log|V|)$ time.
+\subsection*{6.21}
+Suppose we have an optimal $k$-shot sequence on $n$ days. On day $n$, we can either do nothing or have $s_m=n$. If we do nothing on day $n$, then the optimal sequence on $n$ days is the same as the optimal sequence on $n-1$ days. On the other hand, if we have $s_m=n$, let $b_m=i$. The optimal sequence on $n$ days is then an optimal $k-1$ sequence on $i-1$ days concatenated with $(i,n)$. Removing $(b_m,s_m=n)$ from an optimal $k$-sequence on $n$ days will give rise to an optimal $k-1$-sequence on $b_m-1$ days, since otherwise taking a better $k-1$-sequence on $b_m-1$ days will make the $k$-sequence on $n$ days better with the same $b_m$.
+
+Let $v(a,j)$ be the maximum value of a $a$-sequence on the first $j$ days. We have $v(a,2)=\max(p_2-p_1,0)$ for all $a>0$ and $v(0,j)=0$ for all $j$. From the above discussion, we take $v(a,j)=\max(v(a,j-1),\max\{v(a-1,i)+(p(j)-p(i+1))|i<j-1\})$, where we assume that we have computed all the necessary values beforehand. If we want the actual sequence of $b_i$ and $s_i$, we just include it along with $v(a,j)$ as an object and take unions. The desired result is $v(k,n)$.
+
+The running time of this algorithm is $O(kn^2)$, as there are $kn$ values of $v(a,j)$ to compute and each one takes $O(n)$ time to compute.
+\end{document}
