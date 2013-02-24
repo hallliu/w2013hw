@@ -76,4 +76,22 @@ f. let $t_0>0$. then it's asm stable. solutions look like $K/t$, which go to zer
 Let $\boldp=(\psi,\psi',\ldots,\psi^{(n-1)})$. Then, let the $i$th component of $f(t,\boldp)$ be $\psi^{i+1}$ for $i<n$ and the $n$th component be $f(t,\psi,\ldots,\psi^{(n-1)})$. Then $\boldp'=f(t,\boldp)$. Let the initial condition on the $i$th component of $\boldp$ be $u_{i-1}$ for $i$ up to $n-1$, corresponding to the $n-1$ initial conditions on the scalar equation (for the derivatives). Then, since we have a first-order system now, we can just directly apply the definitions of stability and asymptotic stability. 
 \subsection*{4.2.7}
 Stability implies some sort of conservation law for initial conditions close to $0$, as the vector being required to stay near zero implies that the magnitude of the first component has to stay near zero as well. Asymptotic stability implies that the zero point attracts and damps motion, so objects will move towards zero and not move away as time goes on.
+\subsection*{4.2.9}
+Assume $t_0=0$.
+
+a. Corresponds to the matrix $\openm0&1\\0&0\closem$ which has solutions $\openm at+b\\a\closem$. this is unstable because the first term blows up as $t\to\infty$ unless $a$ is zero, and there are initial conditions arbitrarily close to $0$ without having $a$ be zero
+
+b. unstable for same reason as above. slight deviations in $a$ will be magnified by the $t$ term.
+
+c. corresponds to matrix $\openm0&1\\-4&0\closem$ which has eigenvalues $\pm2i$ and therefore is similar to $\openm0&2\\-2&0\closem$ whose phase portrait is circles about the origin. thus all solutions are oscillatory so nothing converges to $0$, but $0$ is stable because things that start near $0$ remain near $0$.
+
+d. $\cos 2t$ is one of the circles about the origin, so it's stable but still not asm stable because the distance between it and any other solution is both bounded below and above as a function of the diff in the initial conditions.
+
+e. corresponds to matrix $\openm0&1\\-4&-4\closem$ which has one eigenvalue $-2$, so it's similar to $\openm-2&1\\0&-2\closem$. Since all eigenvalues are negative, all solutions go to $0$ eventually as given by that formula whose name i don't remember. thus it's asm stable.
+
+f. since all solns go to zero eventually, all solutions are also asm stable.
+
+g. corresponds to matrix $\openm0&1\\4&0\closem$ which has eigenvalues $\pm 2$ so solutions look like $Ae^{2t}+Be^{-2t}$. $0$ is unstable because starting anywhere on the line $y=2x$ takes the solution out to infinity.
+
+h. unstable because the solution $\delta e^{2t}+e^{-2t}$ diverges to infinity for any value of $\delta$.
 \end{document}
