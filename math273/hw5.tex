@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\boldp}{\mathbf{\psi}}
+\nc{\boldy}{\mathbf{y}}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\tr}{tr}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{3.5.1}
+We have $\phi(t)=\eta+\int_{t_0}^tf(s,\phi(s))$ and $\psi(t)=\hat{\eta}+\int_{t_0}^tg(s,\psi(s))$, so subtracting and taking norms gives
+\begin{align*}
+|\phi(t)-\psi(t)|&=\left|(\eta-\hat{\eta})+\int_{t_0}^t(f(s,\phi(s))-f(s,\psi(s)))+\int_{t_0}^t(f(s,\psi(s))-g(s,\psi(s)))\right|\\
+&\leq|\eta-\hat{\eta}|+\left|\int_{t_0}^t|f(s,\phi(s))-f(s,\psi(s))|\right|+\left|\int_{t_0}^t|f(s,\psi(s))-g(s,\psi(s))|\right|\\
+\end{align*}
+By the hypothesis, the last term is bounded above by $\ep(\beta-\alpha)$. By the Lipschitz condition from continuity of partials, the second term is bounded above by 
+$$K\left|\int_{t_0}^t|\phi(s)-\psi(s)|\right|$$
+so we have
+$$|\phi(s)-\psi(s)|\leq(\ep(\beta-\alpha)+|\eta-\hat{\eta}|)\exp(K|t_0-t|)$$
+by Grunwall's
+\subsection*{3.5.2}
+We need to show that $|\psi_n(t)-\phi(t)|$ gets small as $n\to\infty$. By the last exercise, $|\psi_n(t)-\phi(t)|\leq(\ep_n(\beta-\alpha)+|\eta-y_n|)\exp(K|t_0-t|)\leq(\ep_n(\beta-\alpha)+|\eta-y_n|)\exp(K(\beta-\alpha))$. The exponential term is constant given the constant bounds, $\ep_n$ goes to zero by hypothesis, and $|\eta-y_n|$ also goes to zero. Thus we get uniform convergence.
+\subsection*{4.2.1}
+Example 2: stable and asm. stable
+
+Exc. 1: unstable
+
+Exc. 2: unstable
+
+Exc. 3: unstable
+
+Exc. 4: stable but not asm. stable
+\subsection*{4.2.2}
+Stable: Fix $\ep>0$. Let $\delta=\ep$. All solns take the form $Ke^{-\alpha t}$ which is monotonic decreasing in $t$. Thus if $|K|<\delta=\ep$ at $t=t_0$, $Ke^{-\alpha t}<\ep$ for all $t>t_0$.
+
+Asm. stable: Let $\delta_0=$number of peach rings you've ever eaten or Emma Watson's bra size interpreted as a hexadecimal number. Then $K$ is fixed at some function of $t_0$, finite for each $t_0$, so for any $t_0$ the exponential term will go to $0$ as $t\to\infty$ so the solution converges to $0$.
+
+Drawings: too lazy to draw. solutions in $(t,y)$ space are just exponential decay curves, and the phase diagram is a line with arrows pointing in towards $0$.
+\subsection*{4.2.3}
+Since the book so kindly provided the solution for us, I'm not going to bother actually deriving it and instead will just check that it's a solution. Plugging in $t_0$ gives $y_0$, and plugging it back into the diff.eq... oh wait, the book appears to be wrong. The thing in the exponent shouldn't have a negative in it. We'll just go with that then. $y=1$ and $y=0$ are solutions for all $t$, so not all solutions tend to $0$. However, if we take $0<y_0<1$, then the exponential in the denominator blows up and sends the whole thing to zero as $t\to\infty$. In phase space, we just have arrows pointing towards $0$ on $(0,1)$, but the solution fails to be defined for all time outside that interval because the solution evolves towards infinity when the bottom starts to approach $0$. Here's a pretty picture for you.
+
+\includegraphics[width=260pt]{scripts_5/4_2_3.png}
+\subsection*{4.2.4}
+Fix $t_0$ at $0$ unless otherwise stated
+
+a. stable but not asm stable. starting close to $1$ makes you stay at the same distance to $1$, but doesn't actually converge since the solution can't move anywhere
+
+b. unstable. solutions look like $Ke^t$, and no matter how small we take $K$, the solution's going to blow up
+
+c. unstable. for a solution $(1+\delta)e^t$, the diff between that and the given solution is $\delta e^t$, which blows up.
+
+d. asm stable. take any $K$ and $Ke^{-t}$ will go to $0$ as $t\to\infty$.
+
+e. asm stable. convergence is transitive from above.
+
+f. let $t_0>0$. then it's asm stable. solutions look like $K/t$, which go to zero for all $K$ as $t\to\infty$.
+\subsection*{4.2.6}
+Let $\boldp=(\psi,\psi',\ldots,\psi^{(n-1)})$. Then, let the $i$th component of $f(t,\boldp)$ be $\psi^{i+1}$ for $i<n$ and the $n$th component be $f(t,\psi,\ldots,\psi^{(n-1)})$. Then $\boldp'=f(t,\boldp)$. Let the initial condition on the $i$th component of $\boldp$ be $u_{i-1}$ for $i$ up to $n-1$, corresponding to the $n-1$ initial conditions on the scalar equation (for the derivatives). Then, since we have a first-order system now, we can just directly apply the definitions of stability and asymptotic stability. 
+\subsection*{4.2.7}
+Stability implies some sort of conservation law for initial conditions close to $0$, as the vector being required to stay near zero implies that the magnitude of the first component has to stay near zero as well. Asymptotic stability implies that the zero point attracts and damps motion, so objects will move towards zero and not move away as time goes on.
+\end{document}
