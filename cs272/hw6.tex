@@ -16,6 +16,8 @@
 \nc{\ep}{\epsilon}
 \nc{\nullset}{\varnothing}
 \DeclareMathOperator{\opt}{opt}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
 \begin{document}
 Name: Hall Liu
 
@@ -35,4 +37,88 @@ Suppose we have an optimal $k$-shot sequence on $n$ days. On day $n$, we can eit
 Let $v(a,j)$ be the maximum value of a $a$-sequence on the first $j$ days. We have $v(a,2)=\max(p_2-p_1,0)$ for all $a>0$ and $v(0,j)=0$ for all $j$. From the above discussion, we take $v(a,j)=\max(v(a,j-1),\max\{v(a-1,i)+(p(j)-p(i+1))|i<j-1\})$, where we assume that we have computed all the necessary values beforehand. If we want the actual sequence of $b_i$ and $s_i$, we just include it along with $v(a,j)$ as an object and take unions. The desired result is $v(k,n)$.
 
 The running time of this algorithm is $O(kn^2)$, as there are $kn$ values of $v(a,j)$ to compute and each one takes $O(n)$ time to compute.
+\subsection*{7.12}
+Find a min-cut $(A,B)$ using Ford-Fulkerson and delete $k$ edges which originate in $A$ and terminate in $B$. This produces a max flow with value $k$ less than the previous max flow, or zero if the previous flow was less than $k$. This is the best we can do, since removing one edge will reduce the value of the max-flow by at most one. To see this, consider the two cases where the edge removed lies over a min-cut or not over a min-cut. If the former, the value of the min-cut is reduced by $1$ and consequently the max-flow is reduced by $1$. If the latter, the min-cut is not affected.
+\subsection*{7.14}
+a. Assign a capacity of $1$ to each directed edge in $G$, designate each populated node as a source of capacity $1$, and designate each safe node as a sink of infinite capacity. Then, any evaculation plan is a circulation on this network. Source capacity is given by condition (i), node conservation is given by the fact that the flows are paths, and edge capacity is given by the condition that no two paths share an edge. Conversely, every circulation is a evacuation plan. Given a circulation, pick any source, and we can find a path from that source to some sink. If we remove the edges along that path (including the source node) from the circulation, the remaining graph is still a circulation, as none of those edges could have been used by the other source nodes anyway because the flow through each edge is binary. Thus, each node is associated with a unique evacuation path.
+
+\noindent b. We did the max-flow problem with node capacities last week, and we can extend that to circulations the same way. Now all we have to do is assign each non-source and non-sink node a capacity of $1$ and try to find a circulation on that network. Here, we just need to check the node capacity, and that's satisfied because two paths share a node iff the node has a flow value greater than one flowing through it.
+
+\includegraphics[width=0.3\textwidth]{scripts_6/7_14.png}
+\subsection*{7.25}
+Build a circulation network as follows: Let each of the people be sources/sinks with capacity equal to their imbalance, where negative imbalance implies that the person is a sink and positive imbalance implies that the person is a source. Place a directed edge of infinite capacity between person $i$ and person $j$ if $a_{ij}>0$. A circulation on this network is a consistent reconciliation with check values being the value of the flow on the relevant edge. Initially, we have a circulation simply from each person writing a check to each person they owe money to for the amount they owe to the person. 
+
+We claim that we can reduce this circulation as follows: find a cycle in the residual graph visiting at least three nodes, each node at most once, and augment the flow by this cycle and its associated bottleneck in the same way as Ford-Fulkerson (that is, add flow to the edges going the opposite way as the bottleneck edge and subtract flow from the edges going the same way as the bottleneck edge) The result remains a circulation: edge capacities are not violated because there are none, and node capacities are preserved because we are adding the same thing to two edges going in to/coming out of the same node. 
+
+Performing this reduction reduces the number of edges with positive flow in them by at least one. Furthermore, we can always find such a cycle as long as the number of edges with positive flow is greater than $n$ -- it is equivalent to finding a cycle in a undirected graph with the same number of edges. Thus, if we iterate this reduction process, the algorithm will terminate in at most $\binom{n}{2}-n$ steps, which is $O(n^2)$. Since the cycle detection algorithm runs in $O(n)$ time, the total running time is $O(n^3)$.
+\subsection*{6}
+Let $x_v=1$ if $v$ is in the vertex cover and $0$ otherwise. We then want to minimize $\sum x_v$ subject to the constraints $x_v+x_w\geq 1$ for each pair $(v,w)$ which have an edge connecting them and $x_v=0$ or $1$ for each $v$. Suppose we had a solution to this linear program but the min vertex cover was bigger. Since the solution to this program gives a vertex cover, this is a contradiction.
+
+Enumerate the $m$ edges in some order. We can write constraints as a $m\times n$ matrix $A$ with row $i$ being all zero except for positions $j$ and $k$, where $v_j$ and $v_k$ are the endpoints of edge $i$. Then, the problem becomes to minimize $b^Tx$ subject to constraints $Ax\geq c$ and $x_i=0$ or $1$, where $b$ and $c$ are column vectors with all $1$s and appropriate dimensions. The dual is then to maximize $c^Ty$ subject to $A^Tx\leq b$. The $m$ components of $y$ each correspond to an edge, and each row of $A^T$ corresponds to a node of $G$, with $1$ in the $j$th position if edge $j$ is incident upon the node. Thus, the problem is to maximize the size of a subset of edges subject to the condition that each node has at most one edge incident upon it.
+\subsection*{7}
+In matrix form, the primal equation is to maximize $\openm10&6\closem\openm x_1\\x_2\closem$ subject to $\openm5&2\\0&1\closem\leq\openm8\\3\closem$ and positive $x$. The dual is then to minimize $\openm8&3\closem\openm y_1\\y_2\closem$ subject to $\openm5&0\\2&1\closem\openm y_1\\y_2\closem\geq\openm10\\6\closem$ and positive $y$.
+
+
+\noindent Primal:\\
+Input:
+\begin{verbatim}
+max: 10 x1+6 x2;
+5 x1 + 2 x2<=8;
+x2<=3;
+x1>=0;
+x2>=0;
+\end{verbatim}
+Output:
+\begin{verbatim}
+Value of objective function: 22.00000000
+
+Actual values of the variables:
+x1                            0.4
+x2                              3
+\end{verbatim}
+Dual:\\
+Input:
+\begin{verbatim}
+min: 8 y1 + 3 y2;
+5 y1>=10;
+2 y1 + y2>=6;
+y1>=0;
+y2>=0;
+\end{verbatim}
+Output:
+\begin{verbatim}
+Value of objective function: 22.00000000
+
+Actual values of the variables:
+y1                              2
+y2                              2
+\end{verbatim}
+\subsection*{8}
+Define Monday as day $1$ and number sequentially from there. We have $7$ variables $x_1,\ldots,x_7$, where $x_i$ is the number of employees who will be starting their workweek on day $i$. We want to minimize the sum of the $x_i$, as that is the total number of employees. There are $7$ constraints, one corresponding to each day of the week. On day $j$, the employees who start their weeks on day $i$ will be working, where $j-i\pmod{7}\leq5$, so the sum of these $x_i$ must be greater than or equal to the required number of employees on day $j$.
+
+\noindent Input:
+\begin{verbatim}
+min: x1+x2+x3+x4+x5+x6+x7;
+x4+x5+x6+x7+x1>=11;
+x5+x6+x7+x1+x2>=7;
+x6+x7+x1+x2+x3>=6;
+x7+x1+x2+x3+x4>=9;
+x1+x2+x3+x4+x5>=12;
+x2+x3+x4+x5+x6>=5;
+x3+x4+x5+x6+x7>=8;
+int x1,x2,x3,x4,x5,x6,x7;
+\end{verbatim}
+Output:
+\begin{verbatim}
+Value of objective function: 13.00000000
+
+Actual values of the variables:
+x1                              5
+x2                              0
+x3                              0
+x4                              6
+x5                              1
+x6                              1
+x7                              0
+\end{verbatim}
 \end{document}
