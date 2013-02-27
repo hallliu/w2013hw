@@ -17,12 +17,12 @@
 \nc{\topo}{\mathscr{T}}
 \nc{\basis}{\mathscr{B}}
 \nc{\nullset}{\varnothing}
+\let\bar\overline
 \setlength{\parindent}{0mm}
 \begin{document}
 Name: Hall Liu
 
 Date: \today 
-\vspace{1.5cm}
 \subsection*{1}
 a. Since $f$ is a homomorphism of additive groups, it suffices to show that $f(x)=0$ iff $x=0$. Suppose not -- let $x\neq0$ and $f(x)=0$. Multiplying both sides by $f(1/x)$ gives $f(x/x)=f(1)=0$, which is a contradiction.
 
@@ -60,4 +60,23 @@ a. For simplicity's sake, let $x=0$ (translation is a homeomorphism). Consider t
 b. Continue to let $x=0$. Consider the point above, and consider open balls about it of radius $\ep'$. For any $\ep'$, there exists a $n$ such that $\ep'>1/n$. Then, the $n$th component of the open ball will not be contained in the $n$th component of $U(0,\ep)$, as $(n-1)\ep/n+\ep'>\ep$. Since there is no neighborhood around it that is contained in $U(0,\ep)$, the set is not open.
 
 c. Continue to let $x=0$. Suppose a sequence lies in $U(0,\delta)$. Then, the sup of its components is at most $\delta<\ep$, so it is contained in $B_\ep(0)$. Conversely, suppose a sequence lies in $B_\ep(0)$. Then the sup of its components is some value $a<\ep$, so there exists a delta such that $a<\delta<\ep$. Thus, each of its components has magnitude less than $\delta$, so it lies in $U(0,\delta)$.
+
+\subsection*{6}
+Let $S^1$ have the subspace topology inherited from $\cn$, where basic open sets are of the form $\{e^{ix}|0\leq a<x<b<2\pi\}$ or $\{e^{ix}|x<a<2\pi\text{ or }x>b>a\geq0\}$ (the wraparound case). Equip some set $A$ with the discrete topology, and consider a quotient map $\pi:A\times S^1\to Sh$, where $\pi(a,s)=\bar{s}$ for $s\neq1$ and $\pi(a,1)=1_a$. Let $Sh$ have the quotient topology. 
+
+$Sh$ is locally Euclidean: for a point $\bar{e^{ix}},x\neq0$, find some $\ep<x$ and consider the neighborhood $\{\bar{e^{iy}}|y\in(x-\ep,x+\ep)\}$. This is open because its preimage is $A\times\{e^{iy}|y\in(x-\ep,x+\ep)\}$, which is open. In fact, all sets of the form 
+$$(\star):\quad\{\bar{e^{iy}}|y\in U,\text{ $U$ open in $\rn$, $0\not\in U$}\}$$ 
+are open. It is homeomorphic to $\{e^{iy}|y\in(x-\ep,x+\ep)\}$, which is itself homeomorphic to an interval because $S^1$ is locally Euclidean. For a point $1_a$, fix some reasonably sized $\ep$ and consider $\{\bar{e^{iy}}|y\in(-\ep,\ep),y\neq0\}\cup\{1_a\}$. The preimage of this is 
+$$a\times\{e^{iy}|y\in(x-\ep,x+\ep)\}\cup\bigcup_{a'\neq a}a'\times\{e^{iy}|y\in(-\ep,\ep),y\neq0\}$$
+each of which is open, so the preimage is open. This is homeomorphic to the interval $(-\ep,\ep)$ by taking $\bar{e^{iy}}$ to $y$ and $1_a$ to $0$. The preimage of any open subinterval not containing $0$ is of the form $\star$, so that's open. The preimage of any open subinterval containing $0$ looks like the 'hood of $1_a$ we defined, so we showed that was open too. For much the same reasons, this is an open map, so we have a homeomorphism.
+
+$Sh$ is $T_1$: For a point $\bar{s}$, its preimage is $A\times\{s\}$, which is closed because it's a product of closed sets. For points $1_a$, their preimage is $a\times 1$, which is closed because it's a single point in the product space. Thus all single-point sets are closed.
+
+Suppose $|A|>2$. Then, consider the sequence $s_n=\bar{e^{i/n}}$. Let $1_a\neq1_b$, and consider neighborhoods of these two points. For each $n$, we have that $\{\bar{e^{iy}}|y\in(-2/n,2/n),y\neq0\}\cup\{1_a\}$ is a 'hood of $1_a$ which contains $s_n$ and $\{\bar{e^{iy}}|y\in(-2/n,2/n),y\neq0\}\cup\{1_b\}$ is a 'hood of $1_b$ that contains $s_n$. Thus, $s_n$ converges to both $1_a$ and $1_b$, which is not possible in a Hausdorff space.
+
+Consider the subset formed by the elements of the sequence $s_n$ together with $1_a$. This is compact because any 'hood containing $1_a$ contains cofinitely many points of $s_n$, so that the rest of the sequence can be sub-covered by a finite collection of open sets. However, it is not closed because every 'hood about $1_b$ also contains elements of $s_n$, implying that the complement of this subset is not open.
+
+Suppose $|A|\geq\aleph_0$. Consider the same compact set above. Its closure contains all points $1_a,a\in A$. Here, that is an infinite number of points. If we consider the open cover 
+$$\{\bar{e^{iy}}|y\in(-1,1)-\{0\}\}\bigcup_{a\in A}(\{\bar{e^{iy}}|y\in(-\ep,\ep),y\neq0\}\cup\{1_a\})$$
+any finite subcollection of these would fail to include some point $1_{a_i}$, so this closure is not compact.
 \end{document}
