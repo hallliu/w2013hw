@@ -48,6 +48,11 @@ b. Consider $xy^{-1}$. This is not equal to the identity, and it's a closed sing
 c. Repeat the same thing above, except with the set $xA^{-1}$ instead of $\{xy^{-1}\}$. $xA^{-1}$ is closed because it is the image of the composition of the inversion homeomorphism and the left-multiplication homeomorphism. We then have some symmetric 'hood $V$ such that $VV$ is disjoint from $xA^{-1}$. Suppose that $Vx$ and $VA$ share a point $c$, and let $c=vx=wa$ implying that $xa^{-1}=v^{-1}w\in VV$, which is a contradiction. $Vx$ is a 'hood of $x$ as shown above, and $VA$ is open and contains $A$ because $e\in V$ and $VA$ is the union of all the right-translated copies of $V$.
 
 \subsection*{4}
+a. Take two points $x,y$, and suppose WLOG that $d(x,A)\leq d(y,A)$. Then, $d(y,A)=\inf_{a\in A}d(y,a)\leq\inf_{a\in A}(d(x,y)+d(x,a))=d(x,y)+d(x,A)$, so $d(y,A)-d(x,A)\leq d(x,y)$, so the distance-to-A function is Lipschitz.
 
+b. Suppose $x\in\bar{A}$. Then there is some sequence $a_n$ converging to $x$ in $A$. Since $d(a_n,x)$ can be made arbitrarily small, the distance is $0$. Suppose that $d(x,A)=0$. Then, for each $n$, let $a_n$ be such that $d(x,a_n)<1/n$. Then we have constructed a sequence in $A$ that converges to $x$, so $x\in\bar{A}$.
 
+c. For metric spaces, compact implies sequentially compact. Construct a sequence $a_n$ such that for each $n$, $d(a_n,x)-d(A,x)<1/n$. This is possible because of the inf property. We have that some subsequence of these converges. Call this subsequence $b_n$ and its limit $b$. Suppose that $d(b,x)>d(A,x)$. Then there exists some $\ep$ such that $d(b,x)=d(A,x)+\ep\leq d(b_n,b)+d(b_n,x)$ for all $n$, or $d(b_n,b)+(d(b_n,x)-d(A,x))\geq\ep$ for all $n$. However, this is impossible, as both terms converge to $0$ as $n\to\infty$. Thus $d(b,x)=d(A,x)$ since by definition $d(A,x)\leq d(b,x)$.
+
+\subsection*{5}
 \end{document}
