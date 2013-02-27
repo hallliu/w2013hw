@@ -55,4 +55,9 @@ b. Suppose $x\in\bar{A}$. Then there is some sequence $a_n$ converging to $x$ in
 c. For metric spaces, compact implies sequentially compact. Construct a sequence $a_n$ such that for each $n$, $d(a_n,x)-d(A,x)<1/n$. This is possible because of the inf property. We have that some subsequence of these converges. Call this subsequence $b_n$ and its limit $b$. Suppose that $d(b,x)>d(A,x)$. Then there exists some $\ep$ such that $d(b,x)=d(A,x)+\ep\leq d(b_n,b)+d(b_n,x)$ for all $n$, or $d(b_n,b)+(d(b_n,x)-d(A,x))\geq\ep$ for all $n$. However, this is impossible, as both terms converge to $0$ as $n\to\infty$. Thus $d(b,x)=d(A,x)$ since by definition $d(A,x)\leq d(b,x)$.
 
 \subsection*{5}
+a. For simplicity's sake, let $x=0$ (translation is a homeomorphism). Consider the point $(0,\ep/2,2\ep/3,3\ep/4,\ldots)$. This is in $U(0,\ep)$, since each of the terms is strictly less than $\ep$. However, it is not in $B(0,\ep)$, since the sup of the points is $\ep$, which is not strictly less than $\ep$.
+
+b. Continue to let $x=0$. Consider the point above, and consider open balls about it of radius $\ep'$. For any $\ep'$, there exists a $n$ such that $\ep'>1/n$. Then, the $n$th component of the open ball will not be contained in the $n$th component of $U(0,\ep)$, as $(n-1)\ep/n+\ep'>\ep$. Since there is no neighborhood around it that is contained in $U(0,\ep)$, the set is not open.
+
+c. Continue to let $x=0$. Suppose a sequence lies in $U(0,\delta)$. Then, the sup of its components is at most $\delta<\ep$, so it is contained in $B_\ep(0)$. Conversely, suppose a sequence lies in $B_\ep(0)$. Then the sup of its components is some value $a<\ep$, so there exists a delta such that $a<\delta<\ep$. Thus, each of its components has magnitude less than $\delta$, so it lies in $U(0,\delta)$.
 \end{document}
