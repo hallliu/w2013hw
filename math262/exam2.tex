@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\qn}{\mathbb{Q}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\topo}{\mathscr{T}}
+\nc{\basis}{\mathscr{B}}
+\nc{\nullset}{\varnothing}
+\setlength{\parindent}{0mm}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{1}
+a. Since $f$ is a homomorphism of additive groups, it suffices to show that $f(x)=0$ iff $x=0$. Suppose not -- let $x\neq0$ and $f(x)=0$. Multiplying both sides by $f(1/x)$ gives $f(x/x)=f(1)=0$, which is a contradiction.
+
+b. Suppose $s<t$. Then $t-s>0$, so we can let $u^2=t-s$. We then have $f(u^2)=f(u)^2=f(t)-f(s)$, which implies that $f(t)>f(s)$ since $f(u)^2$ is strictly positive.
+
+c. For $n\in\mathbb{Z}$, we have $f(n)=f(1)+\cdots+f(1)=n$. If we divide this by $f(m)$ for some $m\in\mathbb{Z}^\times$, we get $f(n/m)=n/m$, so the function acts as the identity on the rationals.
+
+d. Follows from e
+
+e. Let $x\in\rn$. If $x\in\qn$, then $f(x)=x$. Otherwise, we have some sequence of rationals $r_n$ converging from below to $x$ and some other sequence $s_n$ converging from above to $x$. Since $f$ preserves order, we have $f(x)<f(s_n)=s_n$ for all $n$ and $f(x)>f(r_n)=r_n$ for all $n$. If $f(x)>x$, then $f(x)-x=\ep$, which is a contradiction because $s_n<x+\ep/2$ for some $n$, thus rendering $f(x)$ larger than $s_n$. Same argument for $f(x)<x$. Thus we have $f(x)=x$ for all $x\in\rn$.
+\subsection*{2}
+a. Let $A\subset L$. WTS that $A^c$ is open. Consider some $(a,b)$ in $A^c$, and suppose that every 'hood of $(a,b)$ intersects $A$. Let $A,B$ be 'hoods of $a,b$, resp. in $\rn_l$, so we have that $A\times B$ contains some element of $A$, or that $x=-y$ for some $y\in B$ and $x\in A$, for all neighborhoods $A$ and $B$. However, since $b\neq -a$, let us assume WLOG that $|a|<|b|$. We can find neighborhoods $[a,(a-b)/2)$ and $[b,(b-a)/2)$ that are disjoint when we take the negative of one of them. This presents a contradiction, so we conclude that $A$ is closed.
+
+b. I couldn't find the symbol for this function, so I'm calling it $f$. We WTS that $f(A)=f(B)$ iff $A=B$, which shows injectivity. Suppose otherwise 
+\end{document}

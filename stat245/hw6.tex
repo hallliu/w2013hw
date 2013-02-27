@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\newcommand{\ep}{\epsilon}
+\newcommand{\openm}{\begin{pmatrix}}
+\newcommand{\closem}{\end{pmatrix}}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\var}{var}
+\newcommand{\nc}{\newcommand}
+\newcommand{\rn}{\mathbb{R}}
+\nc{\xbar}{\bar{X}}
+\nc{\ybar}{\bar{Y}}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+\subsection*{12.2}
+If $I=2$, call the samples $X_1,\ldots,X_n$ and $Y_1,\ldots,Y_m$. Then, from 12.2.1,
+$$s_p^2=ss_W/(n+m-2)=\frac{1}{n+m-2}\left(\sum_j(X_j-\bar{X})^2+\sum_j(Y_j-\bar{Y})^2\right)=\frac{(n-1)s_X^2+(m-1)s_Y^2}{n+m-2}=s_p^2$$
+from 11.2.1 with $n=m=J$.
+\subsection*{12.3}
+We showed above that the denominator of the $F$-statistic is equal to the $s_p^2$ from the $t$-test. The numerator of the $F$-statistic is $ss_B/(I-1)=ss_B$, which is 
+$$n\left(\bar{X}-\frac{n\bar{X}+m\bar{Y}}{n+m}\right)^2+m\left(\bar{Y}-\frac{n\bar{X}+m\bar{Y}}{n+m}\right)^2=\frac{2(n\xbar-m\ybar)^2}{(n+m)^2}+\frac{-(n^2\xbar^2+m^2\ybar^2)-4nm\xbar\ybar+nm\xbar^2+nm\ybar^2}{n+m}$$
+$$=\frac{nm\xbar^2-2nm\xbar\ybar+nm\ybar^2}{n+m}=\left(1/n+1/m\right)^{-1}(\xbar-\ybar)^2$$
+Dividing this by $s_p^2$ and moving the $\left(1/n+1/m\right)$ down to the bottom, taking the square root gives the $t$-statistic.
+\subsection*{12.5}
+\subsection*{12.9}
+\subsection*{12.20}
+a. $$E(MS_W)=\frac{1}{I(J-1)}E(SS_W)=\frac{1}{I(J-1)}\sum_i\sum_jE((Y_{ij}-\bar{Y}_{i.})^2)$$
+We can now use Lemma A. The expected value of each $Y_{ij}$ is $\mu+E(A_i)+E(\ep_{ij})=\mu$, and $\var(Y_{ij})=\var(A_i)+\var(\ep_{ij})=\sigma_\ep^2$ for a fixed $i$. The inner sum resolves to $(J-1)\sigma_\ep^2$, so summing over $i$ gives $I(J-1)\sigma_\ep^2$, which is just $\sigma_\ep^2$ when divided by $I(J-1)$.
+
+Similarly, $E(MS_B)=\frac{J}{I-1}\sum_iE((\bar{Y}_{i.}-\bar{Y}_{..})^2)$. We can apply Lemma A again, where we have $E(\bar{Y}_{i.})=\frac{1}{J}\sum_jE(Y_{ij})=E(A_i)+\mu=\mu$ and $\var(\bar{Y}_{i.})=\frac{1}{J^2}\sum_j\sum_k\cov(Y_{ij},Y_{ik})=\frac{1}{J^2}\sum_j\sum_k(\sigma_A^2+\delta_{jk}\sigma_\ep^2)=\sigma_\ep^2/J+\sigma_A^2$, where $\delta$ denotes the Kronecker delta. Then, the inner sum resolves to $(I-1)(\sigma_\ep^2/J+\sigma_A^2)$, and multiplying by the thing out front gives us $\sigma_\ep^2+J\sigma_A^2$.
+
+We can then estimate $\sigma_\ep^2$ as $MS_W$ and $\sigma_A^2$ as $(MS_B-MS_W)/J$. Calculating these for the data given, we have $MS_W=4.469$ and $MS_B=83.09$
+
+\noindent b. This would be the two-way ANOVA layout with no interaction term, since we do not expect any sort of interaction between randomized subsamples and batches. By Theorem A in 12.3.2, we have $E(MS_E)=\frac{1}{IJ(K-1)}E(SS_E)=\sigma_\ep^2$, where $K$ is the number of duplicate measurements on each subsample. We also have that $E(MS_A)=\frac{1}{(I-1)}E(SS_A)=\sigma_\ep^2+JK\sigma_A^2$, where $A$ refers to the effect of the batches, and $E(MS_B)=\frac{1}{(J-1)}E(SS_B)=\sigma_\ep^2+IK\sigma_B^2$, where $B$ refers to the effect of the subsample variation.
+\subsection*{12.21}
+An ANOVA table:
+
+\begin{tabular}{cccccc}
+\hline
+Source & SS & df & MS & F & p\\
+\hline
+Between & 27234 & 3 & 9078 & 2.2712 & 0.119\\
+Within & 63953 & 16 & 3997 \\
+Total & 91187 & 19 & 4799\\
+\end{tabular}
+
+The $p$-value suggests that there's not enough evidence to conclude that the means are different. A boxplot says the same thing, as they're all roughly around the same neighborhood.
+
+\includegraphics[width=0.5\textwidth]{scripts_6/12_21.png}
+\end{document}
