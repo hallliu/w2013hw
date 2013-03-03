@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\tr}{tr}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{4.3.3}
+Matrix is $\openm0&1\\-1&0\closem$. Eigenvalues are $\pm i$. Since these have real part zero and are simple, zero is stable.
+\subsection*{4.3.5}
+Matrix is $\openm0&1\\-1&-2\closem$. Single eigenvalue $-1$ with multiplicity $2$. It has negative real part so zero is asm. stable.
+\subsection*{4.3.9}
+This has a single positive eigenvalue at $1/2(\sqrt{17}-1)$, so zero is not stable. 
+\subsection*{4.3.13}
+a. $D_1=p$ and $D_2=pq$. We want these to be strictly positive, and that only happens if both $p$ and $q$ are strictly positive.
+
+b. $D_1=p$ and $D_2=pq-r$ and $D_3=\det\openm p&r&0\\1&q&0\\0&p&r\closem=pqr-r^2$. We need $p>0$ and $pq>r$ and $r(pq-r)>0$ which implies that we also need $r>0$.
+
+c. $D_1=p$ and $D_2=pq-r$ and $D_3=\det\openm p&r&0\\1&q&s\\0&p&r\closem=pqr-r^2-p^2s$ and 
+$$D_4=\det\openm p&r&0&0\\1&q&s&0\\0&p&r&0\\0&1&q&s\closem=pqrs-r^2s-p^2s=s(pqr-r^2-p^2s)$$
+Then we need $p>0$ and $pq>r$ and $r(pq-r)>p^2s$ and $s>0$. Under the rest of these, $pq>r$ is equivalent to $q>0$, since if $q\leq0$ we'd have $r\leq0$ which means $p^2s\leq0$ which means $s\leq0$ which is a contradiction, and if $pq\leq r$ we'd have $r>0$ which means $p^2s<0$ which is a contradiction.
+\subsection*{4.3.15}
+\end{document}
