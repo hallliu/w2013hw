@@ -32,7 +32,41 @@ $$n\left(\bar{X}-\frac{n\bar{X}+m\bar{Y}}{n+m}\right)^2+m\left(\bar{Y}-\frac{n\b
 $$=\frac{nm\xbar^2-2nm\xbar\ybar+nm\ybar^2}{n+m}=\left(1/n+1/m\right)^{-1}(\xbar-\ybar)^2$$
 Dividing this by $s_p^2$ and moving the $\left(1/n+1/m\right)$ down to the bottom, taking the square root gives the $t$-statistic.
 \subsection*{12.5}
+I think we did this in class... but okay.
+
+Under $H_0$, the observations $Y_{ij}$ are iid $N(\mu,\sigma^2)$. The log-likelihood function is 
+$$l_0=-\frac{J_.}{2}\log(2\pi)-\frac{J_.}{2}\log\sigma^2-\frac{1}{2\sigma^2}\sum_i\sum_j(Y_{ij}-\mu)^2$$
+Differentiating wrt $\mu$ gives $\frac{1}{2\sigma^2}\sum_i\sum_j2(Y_{ij}-\mu)=0$. Rearranging gives the MLE for $\mu$ as $\ybar$. Similarly, differentiating wrt $\sigma^2$ gives $-\frac{J_.}{2\sigma^2}+\frac{1}{2\sigma^4}\sum_i\sum_j(Y_{ij}-\hat{\mu})^2=0$, which gives $\hat{\sigma^2}=\frac{1}{J.}\sum_i\sum_j(Y_{ij}-\ybar)^2$.
+
+Plugging these in gives the log-likelihood of $H_0$, which after some cancellation is 
+$$l_0=-\frac{J.}{2}(\log(2\pi)+\log(\hat{\sigma^2})+1)$$
+
+Under the general hypothesis in which the means of the groups is allowed to vary, we have 
+$$l=-\frac{J_.}{2}\log(2\pi)-\frac{J_.}{2}\log\sigma^2-\frac{1}{2\sigma^2}\sum_i\sum_j(Y_{ij}-\mu_i)^2$$
+When we differentiate wrt $\mu_k$, everything but the $k$th term in the outer sum drops out and we end up with $\frac{1}{\sigma^2}\sum_j(Y_{kj}-\mu_k)$, which gives $\hat{\mu_k}=\ybar_{k.}$. $\hat{\sigma}$ remains the same, since we have changed nothing of importance, but the $\ybar$ changes to a $\ybar_{k.}$. Plugging these in, we get 
+$$l=-\frac{J.}{2}(\log(2\pi)+\log(\hat{\sigma^2})+1)$$
+
+Plugging these in gives the log-likelihood of $H_0$, which after some cancellation is 
+$$l_0=-\frac{J.}{2}(\log(2\pi)+\log(\hat{\sigma^2})+1)$$
+
+Under the general hypothesis in which the means of the groups is allowed to vary, we have 
+$$l=-\frac{J_.}{2}\log(2\pi)-\frac{J_.}{2}\log\sigma^2-\frac{1}{2\sigma^2}\sum_i\sum_j(Y_{ij}-\mu_i)^2$$
+When we differentiate wrt $\mu_k$, everything but the $k$th term in the outer sum drops out and we end up with $\frac{1}{\sigma^2}\sum_j(Y_{kj}-\mu_k)$, which gives $\hat{\mu_k}=\ybar_{k.}$. $\hat{\sigma}$ remains the same, since we have changed nothing of importance, but the $\ybar$ changes to a $\ybar_{k.}$. Plugging these in, we get 
+$$l=-\frac{J.}{2}(\log(2\pi)+\log(\hat{\sigma^2})+1)$$
+
+The LRT statistic is 
+$$-2\log\Lambda=-2(l_0-l)=J.(\log(\hat{\sigma^2_0}-\hat{\sigma^2}))=J.\log\left(\frac{\sum_i\sum_j(Y_{ij}-\ybar)^2}{\sum_i\sum_j(Y_{ij}-\mu_i)^2}\right)=J.\log\left(\frac{SS_w+SS_b}{SS_w}\right)=J.\log(SS_b/SS_w+1)$$
+which follows a $\chi^2_{I-1}$ distribution. 
+
+If we fix the significance level $\alpha$, we reject when $P(-2\log\lambda>c)<\alpha$ or when 
+$$P(J.\log(SS_b/SS_w+1)>c)=P(SS_b/SS_w>\exp(c/J.)-1)=P\left(\frac{SS_b/(I-1)}{SS_w/(J.-I)}>\frac{J.-I}{I-1}(\exp(c/J.)-1)\right)<\alpha$$
+This is just rejecting when the $F$-statistic is bigger than some critical value, and we can pick $c$ so that they reject at the same value.
 \subsection*{12.9}
+The book isn't very clear about this, but it seems like that the $t=2$ column corresponds to a range of two sample means, or essentially the absolute value of the difference of two sample means. The $q$-statistic is $\frac{|\xbar-\ybar|}{s_p/\sqrt{J}}$ whereas the $t$-statistic is $\frac{\xbar-\ybar}{s_p\sqrt{2/J}}$. Suppose we know that $P(q>q_0)=0.10$, where $q_0$ is the entry in the $q_{90}$ table. Then, 
+$$P\left(\frac{|\xbar-\ybar|}{s_p/\sqrt{J}}>q_0\right)=P\left(\frac{|\xbar-\ybar|}{s_p\sqrt{2/J}}>q_0/\sqrt{2}\right)=0.10$$
+so 
+$$P(\left(\frac{\xbar-\ybar}{s_p/\sqrt{2J}}>q_0/\sqrt{2}\right)=P(t>q_0/\sqrt{2})=0.05$$
+which means that at the same degree of freedom, the $90\%$level for $q$ of $2$ should correspond to the $95\%$ level for $t$.
 \subsection*{12.20}
 a. $$E(MS_W)=\frac{1}{I(J-1)}E(SS_W)=\frac{1}{I(J-1)}\sum_i\sum_jE((Y_{ij}-\bar{Y}_{i.})^2)$$
 We can now use Lemma A. The expected value of each $Y_{ij}$ is $\mu+E(A_i)+E(\ep_{ij})=\mu$, and $\var(Y_{ij})=\var(A_i)+\var(\ep_{ij})=\sigma_\ep^2$ for a fixed $i$. The inner sum resolves to $(J-1)\sigma_\ep^2$, so summing over $i$ gives $I(J-1)\sigma_\ep^2$, which is just $\sigma_\ep^2$ when divided by $I(J-1)$.
