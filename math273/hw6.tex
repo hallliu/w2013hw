@@ -17,6 +17,7 @@
 \nc{\ep}{\epsilon}
 \setlength{\parindent}{0mm}
 \DeclareMathOperator{\tr}{tr}
+\nc{\vy}{\mathbf{y}}
 \begin{document}
 Name: Hall Liu
 
@@ -38,4 +39,21 @@ c. $D_1=p$ and $D_2=pq-r$ and $D_3=\det\openm p&r&0\\1&q&s\\0&p&r\closem=pqr-r^2
 $$D_4=\det\openm p&r&0&0\\1&q&s&0\\0&p&r&0\\0&1&q&s\closem=pqrs-r^2s-p^2s=s(pqr-r^2-p^2s)$$
 Then we need $p>0$ and $pq>r$ and $r(pq-r)>p^2s$ and $s>0$. Under the rest of these, $pq>r$ is equivalent to $q>0$, since if $q\leq0$ we'd have $r\leq0$ which means $p^2s\leq0$ which means $s\leq0$ which is a contradiction, and if $pq\leq r$ we'd have $r>0$ which means $p^2s<0$ which is a contradiction.
 \subsection*{4.3.15}
+Taking norms on both sides of 4.6, we get
+$$|\psi(t,t_0,\vy_0)|\leq K\exp(-\sigma(t-t_0))|\vy_0|+K\exp(-\sigma(t-t_0))\int_{t_0}^t|B(s)\psi(s,t_0,\vy_0)|ds$$
+Using Grunwall's on this, we have that
+$$|\psi(t,t_0,\vy_0)|\leq K\exp(-\sigma(t-t_0))|\vy_0|\exp\left(K\exp(-\sigma(t-t_0))\int_{t_0}^tB(s)ds\right)\leq
+K\exp(-\sigma(t-t_0))|\vy_0|\exp\left(K\exp(-\sigma(t-t_0))K_1\right)$$
+As $t$ approaches infinity, the inside of the second exp approaches zero, so the second exp approaches $1$, while the first exp goes to $0$. Thus the whole expression goes to $0$, which shows asymptotic stability.
+\subsection*{4.4.2}
+The integral equation becomes 
+$$\psi(t,t_0,\vy_0)=\exp((t-t_0)A)\vy_0+\int_{t_0}^t\exp((t-s)A)f(s,\psi(s,t_0,\vy_0))ds+\int_{t_0}^t\exp((t-s)A)B(s)\psi(s,t_0,\vy_0)ds$$
+As in the proof of Thm 4.2, for any $\eta$ we can choose some $T$ such that $|B(t)|<\eta$ for $t>T$. Also, as in the proof of Thm 4.3, for that same $\eta$ we can take some $\alpha$ such that for $|\vy_0|<\alpha$ we have $f(t,\vy)<\eta|\vy|$. Then, for $t>T$, write 
+
+$$\psi(t,t_0,\vy_0)=\exp((t-T)A)\psi(T,t_0,\vy_0)+\int_{T}^t\exp((t-s)A)(f(s,\psi(s,t_0,\vy_0))+B(s)\psi(s,t_0,\vy_0))ds$$
+Taking norms gives
+$$|\psi(t,t_0,\vy_0)|\leq Ke^{-\sigma(t-T)}|\psi(T,t_0,\vy_0)|+2K\eta\int_T^te^{-\sigma(t-s)}|\psi(t,t_0,\vy_0)|$$
+Multiply on both sides by $e^{\sigma t}$ and use Grunwalls to get something very similar to (4.7) in the proof of Thm 4.2 (only a constant factor of 2 is added). Now, this inequality is valid for all $t>T$ -- the proof of Thm 4.3 shows that if we can bound the value of $\psi$ at $T$ sufficiently, then we can extend the solution for all $t$. However, following the proof of Thm 4.2 and letting $K_1=\max(|B(s)|,|f|)$ over $t_0<t<T$, we find that we can bound $\psi(T,t_0,y_0)$ arbitrarily small by choosing small enough $y_0$. Thus, wrapping up like in the proof of 4.2, we have stability.
+\subsection*{4.5.4}
+Writing as a system and applying the change of variable, we get $v_1'=v_2$ and $v_2'=-\frac{g}{L}\sin(v_1+\pi)=\frac{g}{L}\sin(v_1)$. This can be written as $v'=\openm0&1\\g/L&0\closem+\openm0\\g/L(\sin(v_1)-v_1)\closem$. Assuming gravity behaves nicely, the eigenvalues of the linear part are $\pm\sqrt{g/L}$, which makes the zero solution a saddle point. Let $g(y)=\openm0\\g/L(\sin(v_1)-v_1)\closem$. $g(0)=0$, and $\partial{g}{v_1}=\openm0\\g/L(\cos(v_1)-1)\closem$ and $\partial{g}{v_2}=0$, so both go to $0$ as $v_1,v_2\to0$. Thus, the hypotheses of Thm 4.6 are satisfied, so $0$ is a conditionally stable point for $v_1,v_2$, which makes $\theta=\pi$ a conditionally stable point.
 \end{document}
