@@ -77,4 +77,18 @@ $$\begin{array}{c|ccccc}
 \text{Total}&71&4.21\times10^9\\
 \end{array}$$
 
+From the ANOVA, it seems that the main effects for both sources and the interaction are significant at the $95\%$ level. In particular, we are now interested in whether the PEG serum is significantly better than the untreated serum. To do so, we conduct a paired $t$-test for $H_0:\mu_{PEG}=\mu_{untreated}$ versus $H_a:\mu_{PEG}>\mu_{untreated}$. We choose the pairs arbitrarily from each dose level -- for simplicity's sake, the pairs will just be the measurements that appear next to each other in the book. Then, we get a $t$-statistic of $\frac{2581.11-0}{4931.66/4.899}=2.56$. Under a $t$-distribution with $23$ degrees of freedom, this corresponds to a one-sided $p$-value of $0.0087$, which is significant at the $95\%$ level. 
+
+We could also run another ANOVA with the control group omitted. The results, shown below, also show a significant effect from the serum type, indicating that our $t$-test from above was accurate.
+
+$$\begin{array}{c|ccccc}
+&df&ss&ms&F&p\\
+\hline
+\text{Serum type}&1&7.99\times10^7&7.99\times10^7&11.0&0.00231\\
+\text{Dose}&7&1.42\times10^9&2.04\times10^8&27.9&6.64\times10^{-12}\\
+\text{Interaction}&7&1.52\times10^8&2.17\times10^7&2.97&0.0161\\
+\text{Error}&32&2.33\times10^8&7.29\times10^6\\
+\text{Total}&47&1.89\times10^9\\
+\end{array}$$
+
 \end{document}
