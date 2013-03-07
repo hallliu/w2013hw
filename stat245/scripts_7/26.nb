@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     14572,        468]
-NotebookOptionsPosition[     13412,        422]
-NotebookOutlinePosition[     13749,        437]
-CellTagsIndexPosition[     13706,        434]
+NotebookDataLength[     23569,        722]
+NotebookOptionsPosition[     22062,        664]
+NotebookOutlinePosition[     22399,        679]
+CellTagsIndexPosition[     22356,        676]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,7 +26,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.571439748830406*^9, 3.57143976544069*^9}}],
 
 Cell[BoxData["\<\"/home/hall/w2013/stat245/scripts_7\"\>"], "Output",
- CellChangeTimes->{3.57143976601943*^9}]
+ CellChangeTimes->{3.57143976601943*^9, 3.57162619809515*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -56,7 +56,9 @@ Cell[BoxData[
     "1.07`", ",", "1.35`", ",", "0.69`", ",", "0.28`", ",", "1.24`", ",", 
      "1.53`", ",", "0.49`", ",", "0.56`", ",", "1.02`", ",", "0.3`"}], 
     "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.571439780321158*^9, 3.5714428766425877`*^9}]
+ CellChangeTimes->{
+  3.571439780321158*^9, 3.5714428766425877`*^9, {3.571626196191963*^9, 
+   3.571626199838533*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -76,7 +78,8 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<ANOVA`\>\"", "]"}]], "Input",
- CellChangeTimes->{{3.571442864313388*^9, 3.57144286983282*^9}}],
+ CellChangeTimes->{{3.571442864313388*^9, 3.57144286983282*^9}, {
+  3.571626258944799*^9, 3.571626264149931*^9}}],
 
 Cell[CellGroupData[{
 
@@ -87,13 +90,11 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ANOVA", "::", "oneway"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The number of columns \[NoBreak]\\!\\(10\\)\[NoBreak] in \
-the argument is not valid. The number of columns must be 2 for a one-way \
-ANOVA. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ANOVA/ref/ANOVA\\\", ButtonNote -> \
+   RowBox[{"ANOVA", "::", "oneway"}], "MessageName"], ":", 
+  " ", "\<\"The number of columns \[NoBreak]\\!\\(10\\)\[NoBreak] in the \
+argument is not valid. The number of columns must be 2 for a one-way ANOVA. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ANOVA/ref/ANOVA\\\", ButtonNote -> \
 \\\"ANOVA`ANOVA::oneway\\\"]\\)\"\>"}]], "Message", "MSG",
  CellChangeTimes->{3.571442880896536*^9}],
 
@@ -418,10 +419,251 @@ Cell[BoxData[
      Function[BoxForm`e$, 
       TableForm[BoxForm`e$]]]}]}], "}"}]], "Output",
  CellChangeTimes->{3.571443733435405*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"binned", "=", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{"Function", "[", 
+     RowBox[{"Partition", "[", 
+      RowBox[{"#1", ",", "1"}], "]"}], "]"}], ",", "data"}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.5716261769052153`*^9, 3.571626190951486*^9}, {
+  3.571626224873333*^9, 3.571626225628542*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "0.28`", "}"}], ",", 
+     RowBox[{"{", "0.51`", "}"}], ",", 
+     RowBox[{"{", "1.`", "}"}], ",", 
+     RowBox[{"{", "0.39`", "}"}], ",", 
+     RowBox[{"{", "0.29`", "}"}], ",", 
+     RowBox[{"{", "0.36`", "}"}], ",", 
+     RowBox[{"{", "0.32`", "}"}], ",", 
+     RowBox[{"{", "0.69`", "}"}], ",", 
+     RowBox[{"{", "0.17`", "}"}], ",", 
+     RowBox[{"{", "0.33`", "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "0.3`", "}"}], ",", 
+     RowBox[{"{", "0.39`", "}"}], ",", 
+     RowBox[{"{", "0.63`", "}"}], ",", 
+     RowBox[{"{", "0.68`", "}"}], ",", 
+     RowBox[{"{", "0.38`", "}"}], ",", 
+     RowBox[{"{", "0.21`", "}"}], ",", 
+     RowBox[{"{", "0.88`", "}"}], ",", 
+     RowBox[{"{", "0.39`", "}"}], ",", 
+     RowBox[{"{", "0.51`", "}"}], ",", 
+     RowBox[{"{", "0.32`", "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "1.07`", "}"}], ",", 
+     RowBox[{"{", "1.35`", "}"}], ",", 
+     RowBox[{"{", "0.69`", "}"}], ",", 
+     RowBox[{"{", "0.28`", "}"}], ",", 
+     RowBox[{"{", "1.24`", "}"}], ",", 
+     RowBox[{"{", "1.53`", "}"}], ",", 
+     RowBox[{"{", "0.49`", "}"}], ",", 
+     RowBox[{"{", "0.56`", "}"}], ",", 
+     RowBox[{"{", "1.02`", "}"}], ",", 
+     RowBox[{"{", "0.3`", "}"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.5716262032145452`*^9, 3.571626226225656*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"adata", "=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{
+    RowBox[{"MapIndexed", "[", 
+     RowBox[{
+      RowBox[{"Function", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"t", ",", "i"}], "}"}], ",", 
+        RowBox[{"MapIndexed", "[", 
+         RowBox[{
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"p", ",", "j"}], "}"}], ",", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{"Function", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"First", "[", "i", "]"}], ",", 
+                 RowBox[{"First", "[", "j", "]"}], ",", "#1"}], "}"}], "]"}], 
+              ",", "p"}], "]"}]}], "]"}], ",", "t"}], "]"}]}], "]"}], ",", 
+      "binned"}], "]"}], ",", "2"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.571626237362599*^9, 3.571626248266865*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "0.28`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "0.51`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "1.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "4", ",", "0.39`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "5", ",", "0.29`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "6", ",", "0.36`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "7", ",", "0.32`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "8", ",", "0.69`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "9", ",", "0.17`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "10", ",", "0.33`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1", ",", "0.3`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "2", ",", "0.39`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "3", ",", "0.63`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "4", ",", "0.68`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "5", ",", "0.38`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "6", ",", "0.21`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "7", ",", "0.88`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "8", ",", "0.39`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "9", ",", "0.51`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "10", ",", "0.32`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "1", ",", "1.07`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "2", ",", "1.35`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "3", ",", "0.69`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "4", ",", "0.28`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "5", ",", "1.24`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "6", ",", "1.53`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "7", ",", "0.49`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "8", ",", "0.56`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "9", ",", "1.02`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "10", ",", "0.3`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.571626227738018*^9, 3.5716262492896147`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ANOVA", "[", 
+  RowBox[{"adata", ",", 
+   RowBox[{"{", 
+    RowBox[{"treatment", ",", "dog"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"treatment", ",", "dog"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5716262706130753`*^9, 3.571626292951066*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"ANOVA", "\[Rule]", 
+    InterpretationBox[GridBox[{
+       {"\<\"\"\>", "\<\"DF\"\>", "\<\"SumOfSq\"\>", "\<\"MeanSq\"\>", \
+"\<\"FRatio\"\>", "\<\"PValue\"\>"},
+       {"treatment", "2", "1.0808066666666658`", "0.5404033333333329`", 
+        "4.405874342103274`", "0.027702967108955444`"},
+       {"dog", "9", "0.5169466666666676`", "0.05743851851851861`", 
+        "0.4682926240076828`", "0.8771906245938823`"},
+       {"\<\"Error\"\>", "18", "2.207793333333333`", 
+        "0.12265518518518516`", "\<\"\"\>", "\<\"\"\>"},
+       {"\<\"Total\"\>", "29", 
+        "3.8055466666666664`", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[2.0999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     TableForm[{{
+       2, 1.0808066666666658`, 0.5404033333333329, 4.405874342103274, 
+        0.027702967108955444`}, {
+       9, 0.5169466666666676, 0.05743851851851861, 0.4682926240076828, 
+        0.8771906245938823}, {18, 2.207793333333333, 0.12265518518518516`}, {
+       29, 3.8055466666666664`}}, 
+      TableHeadings -> {{$CellContext`treatment, $CellContext`dog, "Error", 
+         "Total"}, {"DF", "SumOfSq", "MeanSq", "FRatio", "PValue"}}]]}], ",", 
+   
+   RowBox[{"CellMeans", "\[Rule]", 
+    TagBox[GridBox[{
+       {"\<\"All\"\>", "0.5853333333333333`"},
+       {
+        RowBox[{"treatment", "[", "1", "]"}], "0.434`"},
+       {
+        RowBox[{"treatment", "[", "2", "]"}], "0.46900000000000003`"},
+       {
+        RowBox[{"treatment", "[", "3", "]"}], "0.853`"},
+       {
+        RowBox[{"dog", "[", "1", "]"}], "0.55`"},
+       {
+        RowBox[{"dog", "[", "2", "]"}], "0.75`"},
+       {
+        RowBox[{"dog", "[", "3", "]"}], "0.7733333333333333`"},
+       {
+        RowBox[{"dog", "[", "4", "]"}], "0.45`"},
+       {
+        RowBox[{"dog", "[", "5", "]"}], "0.6366666666666666`"},
+       {
+        RowBox[{"dog", "[", "6", "]"}], "0.7000000000000001`"},
+       {
+        RowBox[{"dog", "[", "7", "]"}], "0.5633333333333334`"},
+       {
+        RowBox[{"dog", "[", "8", "]"}], "0.5466666666666667`"},
+       {
+        RowBox[{"dog", "[", "9", "]"}], "0.5666666666666668`"},
+       {
+        RowBox[{"dog", "[", "10", "]"}], "0.31666666666666665`"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[2.0999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$]]]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.571626293625763*^9}]
 }, Open  ]]
 },
 WindowSize->{740, 867},
-WindowMargins->{{Automatic, 104}, {Automatic, 2}},
+WindowMargins->{{Automatic, 94}, {Automatic, -8}},
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
@@ -438,41 +680,52 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 165, 3, 32, "Input"],
-Cell[747, 27, 110, 1, 32, "Output"]
+Cell[747, 27, 131, 1, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[894, 33, 245, 5, 32, "Input"],
-Cell[1142, 40, 698, 18, 77, "Output"]
+Cell[915, 33, 245, 5, 32, "Input"],
+Cell[1163, 40, 751, 20, 77, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1877, 63, 155, 3, 32, "Input"],
-Cell[2035, 68, 191, 5, 32, "Output"]
+Cell[1951, 65, 155, 3, 32, "Input"],
+Cell[2109, 70, 191, 5, 32, "Output"]
 }, Open  ]],
-Cell[2241, 76, 136, 2, 32, "Input"],
+Cell[2315, 78, 185, 3, 32, "Input"],
 Cell[CellGroupData[{
-Cell[2402, 82, 127, 2, 32, "Input"],
-Cell[2532, 86, 517, 11, 59, "Message"],
-Cell[3052, 99, 726, 19, 77, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3815, 123, 564, 16, 55, "Input"],
-Cell[4382, 141, 2218, 69, 143, "Output"]
+Cell[2525, 85, 127, 2, 32, "Input"],
+Cell[2655, 89, 502, 9, 41, "Message"],
+Cell[3160, 100, 726, 19, 77, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6637, 215, 153, 3, 32, "Input"],
-Cell[6793, 220, 1983, 63, 121, "Output"]
+Cell[3923, 124, 564, 16, 55, "Input"],
+Cell[4490, 142, 2218, 69, 143, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8813, 288, 182, 4, 32, "Input"],
-Cell[8998, 294, 2005, 63, 121, "Output"]
+Cell[6745, 216, 153, 3, 32, "Input"],
+Cell[6901, 221, 1983, 63, 121, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11040, 362, 126, 2, 32, "Input"],
-Cell[11169, 366, 2227, 53, 155, "Output"]
+Cell[8921, 289, 182, 4, 32, "Input"],
+Cell[9106, 295, 2005, 63, 121, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11148, 363, 126, 2, 32, "Input"],
+Cell[11277, 367, 2227, 53, 155, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13541, 425, 334, 9, 32, "Input"],
+Cell[13878, 436, 1434, 39, 121, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15349, 480, 909, 25, 121, "Input"],
+Cell[16261, 507, 2310, 63, 143, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18608, 575, 281, 7, 32, "Input"],
+Cell[18892, 584, 3154, 77, 388, "Output"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-

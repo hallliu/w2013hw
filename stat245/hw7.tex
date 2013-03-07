@@ -25,17 +25,18 @@ Let all means be zero. This is consistent with all the parameters being zero, so
 \subsection*{12.12}
 A three-factor two-level table of cell means can be visualized as a $2\times2\times2$ cube, where each face represents a level of a factor. The main effect of a level of a factor is then the average of the means over a face. If we let the means in level I of factor A be $\openm1&-1\\-1&1\closem$ and the means in level II of factor A be $\openm0&0\\0&0\closem$, we can see that the main effect of both factors of $A$ are $0$. Similarly, the faces corresponding to factors of B and C look like $\openm\pm1&\mp1\\0&0\closem$, so their main effects are zero as well. However, since not all the cells are zero, there must be some contribution from interactions.
 \subsection*{12.26}
-We use the one-way layout by averaging over each treatment -- the two-way is intractable because $ss_E$ has zero degrees of freedom here. However, the F-test may not be appropriate here -- the sample variance of the concentrations under cyclopropane is $0.2$, which is quite a bit higher than the sample variance of the other two. An ANOVA table follows
+This can be considered an example of a randomized block design. Running an ANOVA with the assumption of zero interaction, we have
 
 \begin{tabular}{cccccc}
 &df&ss&ms&F&p\\
 \hline
-Between&2&1.081&0.540&5.354&0.011\\
-Within&27&2.725&0.101\\
+Treatment&2&1.081&0.540&4.406&0.0277\\
+Dog&9&0.517&0.0574&0.468&0.877\\
+Error&18&2.21&0.122\\
 Total&29&3.806\\
 \end{tabular}
 
-Looking at the means of each of the treatments, cyclopropane had a mean of $0.863$, which is considerably higher than the means of isofluorane and halothane, which were $0.434$ and $0.469$, respectively.
+This indicates that there is a significant difference between the three treatments at the $5\%$ level. Looking at the means of each of the treatments, cyclopropane had a mean of $0.853$, which is considerably higher than the means of isofluorane and halothane, which were $0.434$ and $0.469$, respectively.
 \subsection*{12.34}
 a. ANOVA table:
 
@@ -91,4 +92,6 @@ $$\begin{array}{c|ccccc}
 \text{Total}&47&1.89\times10^9\\
 \end{array}$$
 
+\subsection*{12.19}
+Let $Y_{ijkl}=\mu+\alpha_i+\beta_j+\gamma_k+\delta^{\alpha\beta}_{ij}+\delta^{\alpha\gamma}_{ik}+\delta^{\beta\gamma}_{jk}+\delta^{\alpha\beta\gamma}_{ijk}+\ep_{ijkl}$. $\alpha,\beta$, and $\gamma$ represent the main effects of $A,B$, and $C$ resp. The deltas represent interactions between the factors in the superscript, and the $\ep$ represents the random fluctuations within each cell. The two-factor interactions can be interpreted as some special effect resulting when the two factors are present, but no influence beyond the main effect is derived from the third factor. We have the constraints $\sum_i\alpha_i=0,\sum_j\beta_j=0,\sum_k\gamma_k=0$ on the main factors, as any nonzero sum can be absorbed into $\mu$. On the two-factor interactions, we have $\sum_i\delta^{\alpha\beta}_{ij}=0$ for each $j$ and $\sum_j\delta^{\alpha\beta}_{ij}=0$ for each $i$. This is because any nonzero sum can be absorbed into $\alpha_i$ or $\beta_j$. This general constraint form also holds for the other two two-factor interactions. For the three-factor interactions, we have that the sum over any index should come out to zero because a nonzero sum can be absorbed into the proper main interaction, and the sum over any two indices should come out to zero because a nonzero sum can be absorbed into the proper two-factor constraint. Thus, if we have $I$ levels of $A$, $J$ levels of $B$ and $K$ levels of $C$, we get $3$ main constraints, $2(I+J+K)$ two-factor constraints, and $IJ+JK+IK+I+J+K$ three-factor constraints.
 \end{document}
