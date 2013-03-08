@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\nn}{\mathbb{N}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\nc{\nullset}{\varnothing}
+\DeclareMathOperator{\opt}{opt}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+
+\subsection*{7.6}
+We reduce this to the bipartite matching problem as follows: Let $A$ be the set of switches, and let $B$ be the set of fixtures. For each pair $a\in A$ and $b\in B$, connect them with an edge iff the line from switch $a$ to fixture $b$ does not intersect any walls. This takes $O(n^2m)$ time, as there are $n^2$ pairs to check and each pair takes $O(m)$ time to check. Then, we can solve the bipartite matching problem in $O(n^3)$ time, since there are at most $n^2$ edges in the bipartite graph.
+
+To establish correctness, suppose that we find a bipartite matching. Then, if we wire the matched switches and fixtures, we are guaranteed by our choice of edges that each fixture is visible from its switch. Conversely, if we have an ergonomic wiring, then the bijection given by the wiring will run along the edges on the bipartite graph we constructed, again by our choice of edges.
+\subsection*{7.17}
+First, we establish two results. Given any $s-t$ path, there must be some edge along the path which has been compromised, as otherwise $t$ would be reachable from $s$. In addition, along any $s-t$ path, if we have a reachable node followed by an unreachable node, the edge between them on the path must be compromised, since otherwise the unreachable node would be reachable via the former one. 
+
+Now, find any acyclic $s-t$ path in $G$. The path defines a total order on the vertices in the path, so we can do something similar to binary search. Start by pinging the middle node (or something close to the middle). If this middle node is reachable, then we know that somewhere further down the path there is a compromised edge, so we consider the path from the middle node to $t$ and look at the midpoint of that. Similarly, if the middle node is unreachable, then we know that there is a compromised edge upstream of the middle node, so we consider the path from $s$ to the middle node and look at the midpoint of that. Proceeding in a manner similar to binary search, we will eventually come upon two adjacent nodes, one reachable and the other unreachable, with an edge going from the reachable node to the unreachable node. We have thus found a compromised edge. Since the path we found has at most $n$ edges, this takes $O(\log n)$ pings. 
+
+Next, we remove the compromised edge from $G$ and find another path from $s$ to $t$ in the modified graph. Since the removal of one edge reduces the min-cut by at most $1$, we are guaranteed to have another path. We can then iterate the above procedure $k$ times, each time removing the compromised edge found, until we have found all $k$ compromised edges. This takes $O(k\log n)$ pings. Now, since the set of compromised edges is a cut, we just need to remove them all from $G$ and find the connected component containing $t$ to find all unreachable nodes.
+\subsection*{8.1}
+\end{document}
