@@ -14,6 +14,7 @@
 \nc{\nn}{\mathbb{N}}
 \nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
 \nc{\ep}{\epsilon}
+\nc{\co}{\mathscr{C}}
 \nc{\nullset}{\varnothing}
 \DeclareMathOperator{\opt}{opt}
 \begin{document}
@@ -32,4 +33,19 @@ Now, find any acyclic $s-t$ path in $G$. The path defines a total order on the v
 
 Next, we remove the compromised edge from $G$ and find another path from $s$ to $t$ in the modified graph. Since the removal of one edge reduces the min-cut by at most $1$, we are guaranteed to have another path. We can then iterate the above procedure $k$ times, each time removing the compromised edge found, until we have found all $k$ compromised edges. This takes $O(k\log n)$ pings. Now, since the set of compromised edges is a cut, we just need to remove them all from $G$ and find the connected component containing $t$ to find all unreachable nodes.
 \subsection*{8.1}
+a. Yes, since vertex cover is NP-complete and interval scheduling is P therefore NP.
+
+\noindent b. Unknown, since independent set is NP-complete and it being reducible to interval scheduling is equivalent to P=NP.
+\subsection*{8.2}
+This problem is NP because we can check all pairs of customers in S to see if they've bought the same thing, which takes polynomial time. We reduce independent set to this problem. Given a graph, let each of its vertices be customers, and let each of its edges be a product. Let customer $i$ buy one of product $j$ iff edge $j$ is incident on vertex $i$. Then, solving the diverse subset problem on this array is equivalent to solving the independent set problem on the original graph.
+
+Suppose the graph has an independent set of size $k$. Then, no edge connects two nodes in this set, which is equivalent to no product is purchased by two customers in the corresponding set of customers, which is equivalent to that it's a diverse subset. 
+\subsection*{8.6}
+This problem is NP because we can evaluate the clauses on the satisfying assignment to verify that it come out true. We reduce vertex cover to this problem. Given a graph, assign a boolean variable to each of its edges, and let each node represent a clause containing the boolean variables corresponding to the edges incident upon the node. Then, we get a monotone satisfiability problem. If there exists an assignment for which at most $k$ variables are true, we obtain a covering set of edges by including the edges whose corresponding variable is true in the satisfying assignment. The satisfying assignment is equivalent to each clause containing at least one true variable, which is equivalent to each node having at least one edge incident upon it, which constitutes a solution to the vertex cover problem.
+\subsection*{8.7}
+This problem is NP because we can take the collection of tuples and iterate through them in linear time to look for duplicates. We can reduce 3D matching to this. Given sets $X,Y,Z$ from 3D matching, let $W=X$. For each element $(x_i,y_j,z_k)$ in the collection $\co$, construct an element $(x_i,x_i,y_j,z_k)$ and add it to the collection $\co'$ of 4-tuples. Then, if we can find $n$ of these 4-tuples that don't share any element, chopping off the head will result in a set of $n$ 3-tuples which don't share any elements. Conversely, if we can find such a set of $n$ 3-tuples, the corresponding set of 4-tuples will also not share any elements because any conflicts will originate from the added component, which can't cause any conflict because it's a copy of the first component of the 3-tuple.
+\subsection*{8.17}
+This problem is NP because if we are given a cycle, we just add up the weights of its edges in linear time and check if it's zero. We reduce subset-sum to this problem. Begin with the complete directed graph on $n+1$ vertices labeled from $0$ to $n$, with each edge impinging upon vertex $i$ having weight $w_i$. Then, remove all edges from vertex $i$ to vertex $j$, where $i>j$. This makes the graph acyclic due to the edge structure enforcing an ordering on any directed path. Finally, add an edge of weight $-W$ from every vertex back to vertex $0$. 
+
+Suppose that we find a zero-weight cycle on this graph. By the previously mentioned acyclic property, this cycle must pass through an edge of weight $-W$. Further, it cannot pass through an edge of weight $w_i$ twice for any $i$, due to the enforced ordering on any path. Thus, all the non-$-W$ edges this cycle passes through form a subset of the $w_i$ summing to $W$. Conversely, suppose that we have a subset $\{w_{i_1},w_{i_2},\ldots,w_{i_k}\}$ summing to $W$, with $i_1<i_2<\cdots<i_k$. Then, consider the cycle given by following $\{0,i_1,i_2,\ldots,i_k\}$. The edge between $0$ and $i_1$ has weight $w_{i_1}$, the edge between $i_1$ and $i_2$ has weight $w_{i_2}$, and so on, and the edge between $i_k$ and $0$ has weight $-W$. Thus, summing these gives $0$, so we have a zero-weight cycle.
 \end{document}
