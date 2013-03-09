@@ -48,4 +48,23 @@ This problem is NP because we can take the collection of tuples and iterate thro
 This problem is NP because if we are given a cycle, we just add up the weights of its edges in linear time and check if it's zero. We reduce subset-sum to this problem. Begin with the complete directed graph on $n+1$ vertices labeled from $0$ to $n$, with each edge impinging upon vertex $i$ having weight $w_i$. Then, remove all edges from vertex $i$ to vertex $j$, where $i>j$. This makes the graph acyclic due to the edge structure enforcing an ordering on any directed path. Finally, add an edge of weight $-W$ from every vertex back to vertex $0$. 
 
 Suppose that we find a zero-weight cycle on this graph. By the previously mentioned acyclic property, this cycle must pass through an edge of weight $-W$. Further, it cannot pass through an edge of weight $w_i$ twice for any $i$, due to the enforced ordering on any path. Thus, all the non-$-W$ edges this cycle passes through form a subset of the $w_i$ summing to $W$. Conversely, suppose that we have a subset $\{w_{i_1},w_{i_2},\ldots,w_{i_k}\}$ summing to $W$, with $i_1<i_2<\cdots<i_k$. Then, consider the cycle given by following $\{0,i_1,i_2,\ldots,i_k\}$. The edge between $0$ and $i_1$ has weight $w_{i_1}$, the edge between $i_1$ and $i_2$ has weight $w_{i_2}$, and so on, and the edge between $i_k$ and $0$ has weight $-W$. Thus, summing these gives $0$, so we have a zero-weight cycle.
+\subsection*{13.1}
+Assign a color at random to each node. The probability that any edge is not satisfied is $3/9=1/3$, so each edge has probability $2/3$ of being satisfied. The number of satisfied edges therefore follows a binomial distribution with parameters $|E|$ and $2/3$, so its expected value is $(2/3)|E|>(2/3)c*$. 
+\subsection*{13.3}
+a. Suppose not. Then, two processes in $S$ are in conflict, which means they both got $1$, which is a contradiction because either process would not have entered $S$ because one of the processes it is in conflict with also got $1$. 
+
+If each process has $d$ conflicts, then it enters $S$ with probability $(1/2)^{d+1}$, since the process enters $S$ only in the case of one event out of an event space of size $2^{d+1}$. The expected value of the size of $S$ is thus binomial with parameters $(1/2)^{d+1}$ and $n$, so its expected value is $n(1/2)^{d+1}$.
+
+\noindent b. The probability that any particular process enters $S$ is now $p(1-p)^d$, since the process has probability $p$ of picking $1$ and each of the ones it's in conflict with has probability $1-p$ of picking $0$. Thus, the expected value is $np(1-p)^d$. Differentiating wrt $p$, we have $n(1-p)^d-dnp(1-p)^{d-1}=0\implies n(1-p)=dnp\implies p=\frac{1}{d+1}$, so the maximum expected value is $\frac{nd^d}{(d+1)^{d+1}}$.
+\subsection*{13.9}
+Reject the first $n/2$ bids, then accept the next bid that is larger than all previous bids seen. If we get to the last buyer, accept his bid. We want to find the probability that the accepted bid is the largest bid. By the law of total probability we have 
+\begin{align*}
+P(\text{highest bid is accepted})&=\sum_iP(\text{highest bid is accepted and highest bid is bid $i$})\\
+&=\sum_iP(\text{bid $i$ is accepted}|\text{bid $i$ is the highest bid})P(\text{bid $i$ is the highest bid})\\
+&=\frac{1}{n}\sum_iP(\text{bid $i$ is accepted}|\text{bid $i$ is the highest bid})\\
+\end{align*}
+For $i$ from $1$ to $n/2$, the summand is zero because we never accept anything from the first half. For $i$ from $n/2+1$ on, given that $b_i$ is the best bid, it is accepted iff no bid between $n/2+1$ and $i-1$, inclusive, exceeds the maximum value of the first $n/2$ bids. This is equivalent to the maximum of the first $i-1$ bids being in the first $n/2$ bids, which has probability $\frac{n/2}{i-1}$. Summing this over $i$ from $n/2+1$ to $n$, we have that the total probability is 
+$$\frac{1}{2}\sum_{i=n/2+1}^n\frac{1}{i-1}>\frac{1}{2}\frac{n/2}{n-1}>\frac{1}{4}$$
+\subsection*{6.23}
+
 \end{document}
