@@ -57,14 +57,24 @@ If each process has $d$ conflicts, then it enters $S$ with probability $(1/2)^{d
 
 \noindent b. The probability that any particular process enters $S$ is now $p(1-p)^d$, since the process has probability $p$ of picking $1$ and each of the ones it's in conflict with has probability $1-p$ of picking $0$. Thus, the expected value is $np(1-p)^d$. Differentiating wrt $p$, we have $n(1-p)^d-dnp(1-p)^{d-1}=0\implies n(1-p)=dnp\implies p=\frac{1}{d+1}$, so the maximum expected value is $\frac{nd^d}{(d+1)^{d+1}}$.
 \subsection*{13.9}
-Reject the first $n/2$ bids, then accept the next bid that is larger than all previous bids seen. If we get to the last buyer, accept his bid. We want to find the probability that the accepted bid is the largest bid. By the law of total probability we have 
-\begin{align*}
-P(\text{highest bid is accepted})&=\sum_iP(\text{highest bid is accepted and highest bid is bid $i$})\\
-&=\sum_iP(\text{bid $i$ is accepted}|\text{bid $i$ is the highest bid})P(\text{bid $i$ is the highest bid})\\
-&=\frac{1}{n}\sum_iP(\text{bid $i$ is accepted}|\text{bid $i$ is the highest bid})\\
-\end{align*}
-For $i$ from $1$ to $n/2$, the summand is zero because we never accept anything from the first half. For $i$ from $n/2+1$ on, given that $b_i$ is the best bid, it is accepted iff no bid between $n/2+1$ and $i-1$, inclusive, exceeds the maximum value of the first $n/2$ bids. This is equivalent to the maximum of the first $i-1$ bids being in the first $n/2$ bids, which has probability $\frac{n/2}{i-1}$. Summing this over $i$ from $n/2+1$ to $n$, we have that the total probability is 
-$$\frac{1}{2}\sum_{i=n/2+1}^n\frac{1}{i-1}>\frac{1}{2}\frac{n/2}{n-1}>\frac{1}{4}$$
-\subsection*{6.23}
+Reject the first $n/2$ bids, then accept the next bid that is larger than all previous bids seen. If we get to the last buyer, accept his bid. We want to find the probability that the accepted bid is the largest bid. We know that this happens whenever the second-highest bid is in the first half of bids and the highest bid is in the second half (the largest bid can be accepted without this happening, but it suffices as a lower bound). The probability of the highest bid landing in the second half is $1/2$, and given this, the probability of the second highest bid landing in the first half is $\frac{n/2}{n-1}$. Thus, we have that the total probability is $(1/4)\frac{n}{n-1}>1/4$.
 
+%By the law of total probability we have 
+%\begin{align*}
+%P(\text{highest bid is accepted})&=\sum_iP(\text{highest bid is accepted and highest bid is bid $i$})\\
+%&=\sum_iP(\text{bid $i$ is accepted}|\text{bid $i$ is the highest bid})P(\text{bid $i$ is the highest bid})\\
+%&=\frac{1}{n}\sum_iP(\text{bid $i$ is accepted}|\text{bid $i$ is the highest bid})\\
+%\end{align*}
+%For $i$ from $1$ to $n/2$, the summand is zero because we never accept anything from the first half. For $i$ from $n/2+1$ on, given that $b_i$ is the best bid, it is accepted iff no bid between $n/2+1$ and $i-1$, inclusive, exceeds the maximum value of the first $n/2$ bids. This is equivalent to the maximum of the first $i-1$ bids being in the first $n/2$ bids, which has probability $\frac{n/2}{i-1}$. Summing this over $i$ from $n/2+1$ to $n$, we have that the total probability is 
+%$$\frac{1}{2}\sum_{i=n/2+1}^n\frac{1}{i-1}>\frac{1}{2}\frac{n/2}{n-1}>\frac{1}{4}$$
+\subsection*{6.23}
+a. Let the graph be represented as a list of edges. Iterate through this list. For an edge from $v$ to $w$, compare $d(v)$ with $d(w)+c_e$. If $d(v)>d(w)+c_e$, we know immediately that $d(v)$ is incorrect, and we can return that result. If $d(v)<d(w)+c_e$, remove the edge from the list. Otherwise, keep going. 
+
+If we reach the end of this process, if $d(v)$ is incorrect for any $v$, then there must be some $u$ such that $d(u)$ is incorrect, but $d(w)$ for each node $w$ on the min cost path from $u$ to $t$ is correct. 
+
+$d(u)$ must be smaller than the actual min cost path to $t$, since if it were larger it would've been larger than $d(w)+c_e$ for some neighbor $w$ of $u$, which would've prompted an immediate rejection. Then, since the actual min cost is of the form $d(w)+c_e$, every edge heading out of $u$ would have been removed. Conversely, if all the $d(v)$ are correct, then there will be one edge left, the edge for which $d(v)=d(w)+c_e$. Thus, all we need to do is iterate through the list of edges again and see if any nodes have no edges coming out of them. 
+
+\noindent b. The new cost function on an edge $e=(v,w)$ represents the ``extra'' cost that is incurred by taking a path from $v$ through $w$ to $t$ instead of the actual min cost path. For all edges, $c_e'$ is nonnegative, as we have $d(v)\leq c_e+d(w)$ for all edges. We now want to show that the shortest path between any two points with the new cost function is the same as the shortest path with the original cost function, since this will allow us to use Dijkstra's algorithm to compute new min costs.
+
+The new cost function on an edge $e=(v,w)$ represents the ``extra'' cost that is incurred by taking a path from $v$ through $w$ to $t$ instead of the actual min cost path. Suppose that we have a path in the new cost function, expressed as $v_0,v_1,v_2,\ldots,v_k$. Let the original cost of the edge between $v_i$ and $v_{i+1}$ be $c_{e_i}$. Then, we can express the cost of this path as $\sum c_{e_i}'=\sum c_{e_i}-d(v_i)+d(v_{i+1})=d(v_k)-d(v_0)+\sum c_{e_i}$. Since $d(v_k)$ and $d(v_0)$ are fixed with respect to the path, any path minimizing $\sum c_{e_i}$ must also minimize $\sum c_{e_i}'$ and conversely.
 \end{document}
