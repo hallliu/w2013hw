@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\tr}{tr}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{4.6.4}
+First, we show that all solns are bounded. By variation of constants, we have
+$$\psi(t)=e^{(t-t_0)A}y_0+\int_{t_0}^te^{(t-s)A}g(s,\psi(s))ds\implies|\psi(t)|\leq|e^{(t-t_0)A}y_0|+M\int_{t_0}^t\lambda(s)|\psi(s)|ds$$
+due to the bound on $g$ then due to the bound on the norm of $e^{(t-s)A}$. Then by Grunwall's, we get 
+$$|\psi(t)|\leq|e^{(t-t_0)A}y_0|\exp\left(\int_{t_0}^t|\lambda(s)|\right)$$
+The term in front is bounded because it's a solution of the linear system. The term inside the exponent is bounded by assumption. Thus the solution is bounded. 
+
+Now define matrices $U_1$ and $U_2$ like in the proof of 4.6. Since this only concerns the linear part, equ 4.51 holds here too. We can then write the solutions like 4.52, except in the form 
+$$y(t)=e^{tA}c+\int_0^tU_1(t-s)g(s,y(s))-\int_t^\infty U_2(t-s)g(s,y(s))$$.
+Subtracting $e^{tA}c$ from both sides and taking norms, we get 
+$$|y(t)-e^{tA}c|\leq K\int_0^te^{-\sigma(t-s)}|\lambda(s)||y(s)|+K\int_t^\infty|\lambda(s)||y(s)|\leq KK_1\left(int_0^te^{-\sigma(t-s)}|\lambda(s)|+\int_t^\infty|\lambda(s)|\right)$$
+Taking $t\to\infty$, we see that both integrals go to $0$ due to the bound on the integral of $\lambda(s)$. I guess we have to do the successive approximation thing to construct a solution now, but apparently nobody figured it out, so I'm not going to bother trying it.
+
+\subsection*{4.7.1}
+Substitute $z=P(t)u$, and we have $P'(t)u+P(t)u'=A(t)P(t)u+g(t,P(t)u)$. Since $P'(t)=A(t)P(t)-P(t)R$, substituting this gives $A(t)P(t)u-P(t)Ru+P(t)u'=A(t)P(t)u+g(t,P(t)u)\implies u'=Ru+P^{-1}(t)g(t,P(t))u$
+\subsection*{4.7.2}
+Consider the above equation for $u$. If the zero solution is asm. stable for that equation, then it also has to be asm. stable for the $z$ equation because $P$ is bounded. We have $\frac{|P^{-1}(t)g(t,P(t)u)|}{|u|}=\frac{|P^{-1}(t)g(t,z)|}{|P^{-1}(t)z|}\leq\frac{|g(t,z)|}{|z|}$. As $|u|\to0$, $|z|\to0$ as well, since $|P|$ is bounded. Thus, the nonlinear term divided by $|u|$ goes to $0$ as $u\to0$. 
+
+The eigenvalues $\rho_i$ of $R$ satisfy the relation 2.67. In particular, they're all negative in the real part, so we can apply Thm 4.3 and get asymptotic stability of the zero solution.
+\subsection*{4.7.3}
+If $F$ is periodic and continuous in $t$ and $C^2$ in the components of $y$ and $F_y(t,y)$ has eigenvalues with magnitude all less than $1$, then any periodic solution $p(t)$ is asymptotically stable. For any solution $\psi(t)=p(t)+z(t)$, we can write $z'=F_y(t,p(t))z+g(t,z)$, where $|g|/|z|$ vanishes as $|z|\to0$. Then, the hypotheses of 4.9 are satisfied for $z$, so zero is an asm stable solution for $z$, so if $|z_0|=|\psi(t_0)-p(t_0)|$ is small enough, then the magnitude of that difference goes to $0$, which means $p$ is asm. stable.
+\subsection*{5.1.3}
+a. You know, I though I was done with physics forever. Then this problem shows up on my pset. $p$ is momentum, $q$ is position. We have $q_i'=p_i$ and $p_i'=f_i(q_1,q_2,q_3)=-\partial{W}{q_i}(q_1,q_2,q_3)$.
+
+b. Kinetic energy is supposed to be $p^2/2m$, so there needs to be a $1/2$ in front of the sum here. $\partial{H}{p_i}=1/2\cdot2p_i=q_i'$ and $-\partial{H}{q_i}=-\partial{W}{q_i}(q_1,q_2,q_3)=p_i'$
+\subsection*{5.1.4}
+WHAT THE FUCK WHY DOES Y MEAN ANGLE
+
+This system is Hamiltonian because it fits the form of 5.1, which the book shows is Hamiltonian. Set $m=1$. 5.2 tells us that we should have $U=-g/L\cos y_1$, so the total energy is $-g/L\cos y_1+(1/2)y_2^2$. At $y_1=0$, the total energy is small, so the point is stable. At $y_1=\pi$, the total energy is large, so the system is unstable.
+\subsection*{5.1.5}
+If $U(0)$ is a local maximum, then we want to show that if $f(y)=-\frac{dU}{dy}>0$ for $0<y<\ep$, then for $0<y_1(0)<\ep$, the solution will eventually be greater than $\ep$. Let $y_2(0)=0$. Then $y_2(t)=\int_0^tf(y_1(t))>0$ for all $t$ if $y_1$ stays small, which means that $y_1(t)>y_1(0)$ for all $t$. However, this means that $f(y_1(t))$ is bounded below by some $M$, so $y_2(t)\geq tM$, but this implies that $y_1$ can't stay small.
+\end{document}
