@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\newcommand{\ep}{\epsilon}
+\newcommand{\openm}{\begin{pmatrix}}
+\newcommand{\closem}{\end{pmatrix}}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\var}{var}
+\newcommand{\nc}{\newcommand}
+\newcommand{\rn}{\mathbb{R}}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{14.1}
+a. Let $u=1/y$. Then we have $1/u=a/(b+cx)\implies u=(c/a)x+(b/a)$.
+
+\noindent b. Let $u=\log y$. Then $u=\log(ae^{-bx})=\log a-bx$.
+
+\noindent c. Let $u\log y$. Then $u=\log(ae^{x\log b})=\log a+(\log b)x$.
+
+\noindent d. Let $u=x/y$ and $0$ when $x=y=0$. Then $x/u=x/(a+bx)\implies u=a+bx$.
+
+\noindent e. Let $u=\log(1/y-1)$. Then $1/(1+e^u)=1/(1+e^{bx})\implies u=bx$.
+\subsection*{14.2}
+a. Equation is $y=-0.0334+0.904x$. 
+
+\includegraphics[width=0.6\textwidth]{scripts_8/2a.png}
+
+\noindent b. Equation is $x=0.0331+1.055y$. 
+
+\includegraphics[width=0.6\textwidth]{scripts_8/2b.png}
+
+\noindent c. The lines are not the same. The functional inverse of the $x=c+dy$ equation is $y=x/d-c/d$, which would imply that $1.055=0.904^{-1}$, which is not true. In addition, going back to the formulas for regression, $b=1/d$ would imply that $ss_{XY}^2=ss_Xss_Y$, which is not always true.
+
+\subsection*{14.7}
+a. The new model satifies the assumptions of the two-variable linear regression model, with the two variables being $u_i$ and $v_i$, the parameters $\beta_0$ and $\beta_1$, and the variance of the random fluctuations are $\sigma^2$ because $\var(\delta_i)=\rho^{-2}\var(e_i)=\sigma^2$.
+
+\noindent b. We want to minimize the residuals $\sum(z_i-u_i\beta_0-v_i\beta_1)^2$. Writing the problem out in matrix form, we want to minimize $(z-X\beta)^T(z-X\beta)$ wrt $\beta$, where 
+$$z=\openm z_1\\z_2\\\vdots\\z_n\closem,\quad X=\openm u_1&v_1\\u_2&v_2\\\vdots&\vdots\\u_n&v_n\closem,\quad\text{and }\beta=\openm\beta_0\\\beta_1\closem$$
+
+Equations given in class show that this occurs at $\hat{\beta}=(X^TX)^{-1}X^Tz$, or
+$$\hat{\beta}=\openm\sum u_i^2&\sum u_iv_i\\\sum u_iv_i&\sum v_i^2\closem^{-1}\openm\sum u_iz_i\\\sum v_iz_i\closem$$
+The determinant of $X^TX$ is $\sum u_i^2\sum v_i^2-(\sum u_iv_i)^2$. Define this value as $d$, so we then have 
+$$\hat{\beta}=\frac{1}{d}\openm\sum v_i^2&-\sum u_iv_i\\-\sum u_iv_i&\sum u_i^2\closem\openm\sum u_iz_i\\\sum v_iz_i\closem=\frac{1}{d}\openm\sum v_i^2\sum u_iz_i-\sum u_iv_i\sum v_iz_i\\-\sum u_iv_i\sum u_iz_i+\sum u_i^2\sum v_iz_i\closem$$
+
+\noindent c. We can factor out a $\rho_i^{-1}$ from each term of $\sum(z_i-u_i\beta_0-v_i\beta_1)^2$ to get $\sum\rho_i^{-2}(y_i-\beta_0-\beta_1x_i)^2$, so minimizing one is equivalent to minimizing the other.
+
+\noindent d. From class, the covariance matrix of $\hat{\beta}$ is $(X^TX)^{-1}\sigma^2$, so the variance of $\beta_0$ is $\frac{\sigma^2}{d}\sum v_i^2$ and that of $\beta_1$ is $\frac{\sigma^2}{d}\sum u_i^2$.
+\subsection*{14.13}
+a. $\var(\hat{\mu_0})=\var(\hat{\beta_0})+\var(\hat{\beta_1})x_0^2+2x_0\cov(\hat{\beta_0},\hat{\beta_1})=\sigma^2\left(\frac{x_0^2}{ss_X}+\frac{1}{n}+\frac{\conj{X}^2}{ss_X}-\frac{2x_0\conj{X}}{ss_X}\right)=\sigma^2\left(\frac{1}{n}+\frac{(x_0-\conj{X})^2}{ss_X}\right)$
+
+\noindent b. The general form of it should look like $y=\sqrt{ax^2+b}$. A plot follows.
+
+\includegraphics[width=0.5\textwidth]{scripts_8/13b.png}
+
+\noindent c. The form of the $t$-statistic is $\frac{\hat{\mu_0}-\mu_0}{s_R\sqrt{\var(\hat{\mu_0})}}$, so we reject when $|\hat{\mu_0}-\mu_0|>t_{n-2,0.975}(s_R\sqrt{\var(\hat{\mu_0})})$, and the CI is $\mu_0\pm t_{n-2,0.975}(s_R\sqrt{\var(\hat{\mu_0})})$
+\subsection*{14.14}
+a. This variance is $\var(\hat{Y_0})+\var(Y_0)=\var(\hat{Y_0})+\sigma^2$ since we know that $e_0$ is independent. The first term has the same form as above, so the overall variance is $\sigma^2\left(\frac{1}{n}+\frac{(x_0-\conj{X})^2}{ss_X}+1\right)$
+
+\noindent b. Mean of $Y_0$ is $\beta_0+\beta_1x_0$ since $E(e_0)=0$. Mean of $\hat{Y_0}$ is the same, so the distribution of the difference is normal with mean $0$ and variance as found above. The interval $I$ is basically a confidence interval, which is $\mu_0\pm t_{n-2,(1-\alpha/2)}(s_R\sqrt{\var(\hat{Y_0})})$
+\subsection*{14.15}
+We want to minimize $\sum(y_i-\hat{\beta}x_i)^2$. Taking the derivative wrt $\hat{\beta}$ gives $-2\sum(y_i-\hat{\beta}x_i)x_i$. Setting equal to $0$ gives $\sum y_i-\hat{\beta}\sum x_i^2=0\implies \hat{\beta}=\frac{\sum y_i}{\sum x_i^2}$.
+\subsection*{14.16}
+We can take $w_i=x_i^2$ to be a second independent variable. Since the componentwise square of a vector has no linear dependence on the vector unless all the components are the same, we are guaranteed that the matrix $X$ we construct will have $X^TX$ invertible. Define matrices as follows:
+$$y=\openm y_1\\y_2\\\vdots\\y_n\closem,\quad X=\openm x_1&w_1\\x_2&w_2\\\vdots&\vdots\\x_n&w_n\closem,\quad\text{and }\beta=\openm\beta_0\\\beta_1\closem$$
+Then, the least-squares minimization problem is solved by $\hat{\beta}=(X^TX)^{-1}X^Ty$, or
+$$\hat{\beta}=\openm\sum x_i^2&\sum x_iw_i\\\sum x_iw_i&\sum w_i^2\closem^{-1}\openm\sum x_iy_i\\\sum w_iy_i\closem$$
+The determinant of that matrix in front is $\sum x_i^2\sum w_i^2-(\sum x_iw_i)^2=\sum x_i^2\sum x_i^4-(\sum x_i^3)^2$, and let this be $d$. We then have
+$$\hat{\beta}=\frac{1}{d}\openm\sum w_i^2&-\sum x_iw_i\\-\sum x_iw_i&\sum x_i^2\closem\openm\sum x_iy_i\\\sum w_iy_i\closem=\frac{1}{d}\openm\sum w_i^2\sum x_iy_i-\sum x_iw_i\sum w_iy_i\\-\sum x_iw_i\sum x_iy_i+\sum x_i^2\sum w_iy_i\closem=\frac{1}{d}\openm\sum x_i^4\sum x_iy_i-\sum x_i^3\sum x_i^2y_i\\-\sum x_i^3\sum x_iy_i+\sum x_i^2\sum x_i^2y_i\closem$$
+
+\noindent b. The covariance matrix is $\sigma^2(X^TX)^{-1}$, or 
+$$\frac{\sigma^2}{d}\openm\sum w_i^2&-\sum x_iw_i\\-\sum x_iw_i&\sum x_i^2\closem=\frac{\sigma^2}{d}\openm\sum x_i^4&-\sum x_i^3\\-\sum x_i^3&\sum x_i^2\closem$$
+
+\end{document}
