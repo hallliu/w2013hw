@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[namelimits,sumlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[cm]{fullpage}
+\newcommand{\nc}{\newcommand}
+\newcommand{\tab}{\hspace*{5em}}
+\newcommand{\conj}{\overline}
+\newcommand{\dd}{\partial}
+\nc{\cn}{\mathbb{C}}
+\nc{\rn}{\mathbb{R}}
+\nc{\vphi}{\varphi}
+\nc{\openm}{\begin{pmatrix}}
+\nc{\closem}{\end{pmatrix}}
+\nc{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\nc{\ep}{\epsilon}
+\setlength{\parindent}{0mm}
+\DeclareMathOperator{\tr}{tr}
+\begin{document}
+Name: Hall Liu
+
+Date: \today 
+\vspace{1.5cm}
+
+\subsection*{5.2.3}
+We have $V(0,0)=0$ just by plugging in values. Suppose $(y_1,y_2)!=0$. Then, if $y_1>0$, $\int_0^{y_1}g(\sigma)>0$ because $g(\sigma)>0$ for $\sigma$ between $0$ and $y_0$. If $y_1<0$, then $g(\sigma)<0$ on the interval $[y_1,0]$, so by reversing the integral, we get that the integral is greater than $0$. Thus, since $y_2^2>0$ always, the whole thing $>0$. If that product thingy is only $\geq 0$, then it's positive on the plane minus the $y_2=0$ line, since we could have $g=0$ identically.
+\subsection*{5.2.5}
+This equation fits the mold of Example 3, so we can take $V(y_1,y_2)=y_2^2/2+\int_0^{y_1}\sin(\sigma)$. On $\Sigma=(-\pi,\pi)$, $\sin$ satisfies the hypotheses of the previous problem, so $V$ is positive definite, and as the book shows, $dV/dt=0$. Thus we have stability. The orbit of a solution starting at $(y_{10},y_{20})$ is given by $y_2^2/2-\cos(y_1)+1=y_{20}^2/2-\cos(y_{10})+1$, so for $|y|<\pi\implies|y_1|<\pi$, all the orbits are closed. The phase portrait looks like this:
+
+\includegraphics[width=0.4\textwidth]{scripts_8/5_2_5a.png}
+
+On $(-2\pi,2\pi)$, it looks like this (more included for clarity):
+
+\includegraphics[width=0.4\textwidth]{scripts_8/5_2_5b.png}
+
+If we identify $y_1=\pi$ and $y_1=-\pi$ together and consider the solution in a physically sensible manner, all starting points are stable. 
+
+\end{document}
