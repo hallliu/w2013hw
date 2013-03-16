@@ -37,4 +37,29 @@ On $(-2\pi,2\pi)$, it looks like this (more included for clarity):
 
 If we identify $y_1=\pi$ and $y_1=-\pi$ together and consider the solution in a physically sensible manner, all starting points are stable. 
 
+\subsection*{5.2.9}
+There are no other real critical points. Setting the derivative to $0$ and solving gives $-y_2=y_2^3$, which is only solved by zero. Since both $V$ and $dV/dt$ are pos/neg definite on the whole plane and the system is autonomous, the solution passing through any point must move in a direction of decreasing $V$. Since there are no other critical points, as $t\to\infty$ the solution must approach $0$, so the region of asymptotic stability is the whole plane.
+\subsection*{5.2.10}
+Consider the case in which $g$ is almost linear, so let $g=bx+f(x)$ for $f(x)$ small. Due to the constraint $ug(u)>0$, we must have $b>0$. Thus, we can write the system (5.14) as $y'=\openm0&1\\-b&-1\closem+\openm0\\-f(x)\closem$. The matrix has characteristic equation $\lambda^2+\lambda+b$, so for $b>1/4$ all roots have real part $-1/2$ and for $0<b\leq1/4$ all roots have real part $<0$ by application of the quadratic formula. Thus, hypotheses of Theorem 4.4 are satisfied, and we get asymptotic stability for the system.
+\subsection*{5.2.12}
+Way too tedious. Is this how you're supposed to do it?
+http://www.math.siu.edu/burton/papers/Bu-nwe.pdf
+
+\subsection*{5.4.2}
+Using the same $V$, the set $E$ is the line $y_2=0$. If we start at some point $(y_1,0)$, then the derivative of the solution at that point is given by $(0,-g(y_1))$, so the solution must move away from the line $y_2=0$ unless $y_1=0$ also. Then, $0$ is the largest invariant subset of $E$, so by Cor. 1 $0$ is asm. stable.
+
+\subsection*{5.5.1}
+Let $V=3y_1^2+2y_1^3+3y_2^2$. This follows the form of (5.15), so $V'$ is $-6y_2^2$. The book shows that $V$ is positive definite on $\Sigma$ defined by the interior of some curve, and $V'=0$ only on the line $y_2=0$. Looking at the derivative at some point $(y_1,0)$, we see that the derivative is $(0,-y_1-y_1^2)$, which is zero only if $y_1=0$. Thus $0$ is the biggest invariant subset, so $0$ is stable.
+\subsection*{5.5.5}
+On $(-\sqrt{3},\sqrt{3})$, we have $uF(u)=u\ep(u-u^3/3)\sim u^2-u^4/3>0$. Thus, the equation fits the form of the Lienard equation, and we can take $\hat{\lambda}=\min(G(\sqrt{3}),G(-\sqrt{3}))=\min(3/2,3/2)=3/2$, and then $C_{\hat{\lambda}}=\{(y_1,y_2)|y_2^2/2+y_1^2/2<3/2\}=\{(y_1,y_2)|y_1^2+y_2^2<3\}$.
+\subsection*{5.5.6}
+Let $\tau=-t$. Then $d^2u/d\tau^2=d/d\tau(du/dt*dt/d\tau)=d^2u/dt^2$, $du/d\tau=-du/dt$. Then, given the $t$ equation $=0$, we get that the $\tau$ equation also $=0$. Then, if we examine solutions of the equation in 5.5.5 and run them back in time, we get solutions of this equation. However, since solutions of that other equation are asm stable at $0$, for any small radius about $0$, there's a solution from $|y|$ near $\sqrt{3}$ that goes in there, so running a solution back from that small radius will go out to the big point, so $0$ can't be stable.
+\subsection*{5.5.7}
+If $f(u)>0$ for $u\neq0$, then $F(a)=\int_0^af(u)du>0$ for $a>0$ and $\int_0^af(u)du=-\int_a^0f(u)du<0$ for $a<0$, so this is an equation of the typwe considered in Example 2. Choose $V$ as in Example 2. Then, since $G\to\infty$ and $y_2\to\infty$ as $(y_1,y_2)\to\infty$, and the other properties are shown in Example 2, we get that the zero solution is actually globally asm stable.
+\subsection*{5.5.10}
+At the left boundary, there's a typo in the book, and $W'(t)=-2(-a)g(\phi_1(t,y_0))<0$ since $a>0$ and $\phi_1<0\implies g(\phi_1)<0$.
+\subsection*{5.5.11}
+a. Use the $V$ function the book gives. Since $G$ is positive definite (same argument as what I did w/ something else), so is $V$. Furthermore, taking $|x,y|\to\infty$ takes $V$ to infinity also, since $G$ goes to infinity by assumption and the sum is just $|y|^2$. Computing $V'$, we get $\partial{V}{x}=(1/c)g(x)$ and $\partial{V}{y_i}=y_i$. Thus, $V'=-(1/c)g(x)\sum a_iy_i-h(x,y)\sum y_i^2+g(x)\sum b_iy_i=-h(x,y)\sum y_i^2$ by the $a_i=cb_i$ identity. This is nonpositive, and zero only when $y=0$, so along the $x$-axis. If $x\neq0$, then $y_i'=b_ig(x)\neq0$ for any $i$ such that $b_i\neq0$, since $g(x)$ is nonzero when $x$ is nonzero. Thus, $0$ is the only invariant set, so by Theorem 5.6 we have asymptotic stability of $0$.
+
+b. Let $V=G(x)+(1/2)\sum\frac{a_i}{b_i}y_i^2$. Then $\partial{V}{x}=g(x)$ and $\partial{V}{y_i}=\frac{a_i}{b_i}y_i$, so $V'=-g(x)\sum a_iy_i-h(x,y)\sum\frac{a_i}{b_i}y_i^2+g(x)\sum a_iy_i=-h(x,y)\sum\frac{a_i}{b_i}y_i^2<0$ since $a_i/b_i>0$. Everything else I said above still holds, and we get asm stability again
 \end{document}
