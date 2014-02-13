@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element xmlns="http://relaxng.org/ns/structure/1.0" name="transactions">
+  <attribute name="date"/>
+  <zeroOrMore>
+    <choice>
+      <element name="sale">
+        <attribute name="itemID"/>
+        <attribute name="timestamp"/>
+        <optional>
+          <attribute name="card"/>
+        </optional>
+        <empty/>
+      </element>
+      <element name="restock">
+        <attribute name="itemID"/>
+        <attribute name="timestamp"/>
+        <attribute name="num"/>
+        <empty/>
+      </element>
+      <element name="remove">
+        <attribute name="itemID"/>
+        <attribute name="timestamp"/>
+        <empty/>
+      </element>
+    </choice>
+  </zeroOrMore>
+</element>

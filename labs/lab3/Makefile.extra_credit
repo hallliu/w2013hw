@@ -1,0 +1,11 @@
+CFLAGS = --std=c99
+
+SRC = prefixeval.c
+OBJ = prefixeval.o
+
+prefixeval: prefixeval.o
+
+#lesson learned: never put anything with a .c extension under clean
+clean:
+	rm -f prefixeval prefixeval.o
+

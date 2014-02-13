@@ -1,0 +1,9 @@
+host "ftp-1.foobar.com" {
+	ftproot = /var/ftp/server1
+	max_out_bandwidth = 20.7
+};
+
+host "ftp-2.foobar.com" {
+	ftproot = /var/ftp/server2
+	exclude = /var/ftp/server2/private
+};

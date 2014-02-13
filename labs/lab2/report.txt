@@ -1,0 +1,28 @@
+10 top senders
+------------
+xs.random.hacker@foobar.com: 175 emails
+es.random.hacker@foobar.com: 115 emails
+ae.random.hacker@foobar.com: 50 emails
+[email hidden]: 40 emails
+cn.random.hacker@foobar.com: 30 emails
+og.random.hacker@foobar.com: 28 emails
+io.random.hacker@foobar.com: 23 emails
+ot.random.hacker@foobar.com: 21 emails
+sn.random.hacker@foobar.com: 16 emails
+tn.random.hacker@foobar.com: 14 emails
+
+
+10 top receivers
+------------
+ba.random.hacker@foobar.com: 1911 emails
+aa.random.hacker@foobar.com: 74 emails
+pr.random.hacker@foobar.com: 2 emails
+
+
+Stats
+---------------
+Ham: 563
+Spam: 1412
+Average Spam score: 14.5758
+Spam to ham ratio: 2.5080
+Infected: 12

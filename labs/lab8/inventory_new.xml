@@ -1,0 +1,74 @@
+<shop name="Uncle SNAFU&apos;s Computer Store">
+	<item card="y" id="1" stock="8">
+		<name>FOOBAR keyboard</name>
+		<price>39.99</price>
+	</item>
+	<item card="y" id="2" stock="14">
+		<name>Grouchobyte hard drive</name>
+		<price>149.99</price>
+	</item>
+	<item id="3" stock="4">
+		<name>FOOBAR drive</name>
+		<price>229.99</price>
+	</item>
+	<item card="y" id="4" stock="0">
+		<name>Blinkenlights</name>
+		<price>59.99</price>
+	</item>
+	<item id="5" stock="11">
+		<name>FOOBAR sound card</name>
+		<price>69.99</price>
+	</item>
+	<item id="6" stock="1">
+		<name>Plan 9 accounting software</name>
+		<price>29.95</price>
+	</item>
+	<item id="7" stock="42">
+		<name>FOOBAR USB drive</name>
+		<price>19.95</price>
+	</item>
+	<item card="y" id="9" stock="33">
+		<name>FOOBAR scanner</name>
+		<price>99.95</price>
+	</item>
+	<item card="y" id="10" stock="78">
+		<name>QWERTY microphone</name>
+		<price>5.99</price>
+	</item>
+	<item id="11" stock="21">
+		<name>FOOBAR joystick</name>
+		<price>39.99</price>
+	</item>
+	<item id="12" stock="42">
+		<name>Kludge DVD burner</name>
+		<price>149.99</price>
+	</item>
+	<item card="y" id="13" stock="54">
+		<name>FOOBAR graphics card</name>
+		<price>79.99</price>
+	</item>
+	<item id="14" stock="89">
+		<name>Wumpus repellant</name>
+		<price>49.99</price>
+	</item>
+	<item card="y" id="15" stock="22">
+		<name>FOOBAR CD burner</name>
+		<price>29.99</price>
+	</item>
+	<item card="y" id="16" stock="80">
+		<name>RTFM printer</name>
+		<price>64.99</price>
+	</item>
+	<item id="18" stock="26">
+		<name>FUD screen</name>
+		<price>249.99</price>
+	</item>
+	<item card="y" id="19" stock="0">
+		<name>Grok mouse</name>
+		<price>149.99</price>
+	</item>
+	<item card="y" id="20" stock="35">
+		<name>FOOBAR network card</name>
+		<price>19.95</price>
+	</item>
+</shop>

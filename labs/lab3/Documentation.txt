@@ -1,0 +1,11 @@
+1. Peers used algorithms fairly similar to mine. They were along the
+theme of using doublings effectively to get from a^1 to a^p. Mine differed
+from theirs mostly on the basis of how we decided which numbers to multiply.
+I used a bitwise and operation to see if a particular power of 2 was in the
+exponent, and they used something more akin to a right shift of bits.
+
+2. Changes I made were in response to criticisms regarding redundant use of
+arrays and useless commenting. Arrays were removed and comments were cleaned
+up. Suggestion about modifying line 15 so that particular values of p don't 
+result in an infinite loop was ignored - any p large enough to cause that
+error would have also caused an overflow problem in result.

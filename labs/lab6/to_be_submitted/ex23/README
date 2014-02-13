@@ -1,0 +1,3 @@
+Ex2 fully implemented, Ex3 and extra credit were implemented separately
+(i.e. only pure string values are substituted in the extra_credit directory,
+and there is no distinction between string and decimal values in the ex23 directory.

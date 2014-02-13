@@ -1,0 +1,20 @@
+Problem: the use of fscanf discards the spaces in the input, as the format
+string contains no spaces. 
+Problem: the use of fscanf results in overflow errors for contiguous text of
+over 100 characters, as fscanf will attempt to write in all characters
+regardless of size of buffer.
+Problem: File handles are not closed after each file is read. This problem
+will cause symptoms when the number of specified input files exceeds the
+number of file handles permitted to any one process by the OS, resulting in
+null file pointers.
+
+Solution: The use of fscanf was replaced by the low-level operation fread,
+which takes 100 bytes at a time so as to not overflow the buffer. This also
+constitutes the optimization requested in the lab, and an individual solution
+was not provided due to this being the obvious way to fix the problems with
+fscanf.
+Solution: A fclose call was added at the bottom of the top-level for loop,
+ensuring that only one file handle is open at a time.
+
+Incidentally, badcat looks really familiar. Was it in K&R or some other fairly
+famous programming text?

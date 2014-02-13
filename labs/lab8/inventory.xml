@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE shop SYSTEM "inventory.dtd">
+<shop name="Uncle SNAFU's Computer Store">
+	<item id="1" stock="7" card="y">
+		<name>FOOBAR keyboard</name>
+		<price>39.99</price>
+	</item>
+	<item id="2" stock="15" card="y">
+		<name>Grouchobyte hard drive</name>
+		<price>149.99</price>
+	</item>
+	<item id="3" stock="1">
+		<name>FOOBAR drive</name>
+		<price>229.99</price>
+	</item>
+	<item id="4" stock="0" card="y">
+		<name>Blinkenlights</name>
+		<price>59.99</price>
+	</item>
+	<item id="5" stock="3">
+		<name>FOOBAR sound card</name>
+		<price>69.99</price>
+	</item>
+	<item id="6" stock="2">
+		<name>Plan 9 accounting software</name>
+		<price>29.95</price>
+	</item>
+	<item id="7" stock="45">
+		<name>FOOBAR USB drive</name>
+		<price>19.95</price>
+	</item>
+	<item id="8" stock="8" card="y">
+		<name>ELIZA speakers</name>
+		<price>19.95</price>
+	</item>
+	<item id="9" stock="34" card="y">
+		<name>FOOBAR scanner</name>
+		<price>99.95</price>
+	</item>
+	<item id="10" stock="79" card="y">
+		<name>QWERTY microphone</name>
+		<price>5.99</price>
+	</item>
+	<item id="11" stock="23">
+		<name>FOOBAR joystick</name>
+		<price>39.99</price>
+	</item>
+	<item id="12" stock="42">
+		<name>Kludge DVD burner</name>
+		<price>149.99</price>
+	</item>
+	<item id="13" stock="5" card="y">
+		<name>FOOBAR graphics card</name>
+		<price>79.99</price>
+	</item>
+	<item id="14" stock="81">
+		<name>Wumpus repellant</name>
+		<price>49.99</price>
+	</item>
+	<item id="15" stock="25" card="y">
+		<name>FOOBAR CD burner</name>
+		<price>29.99</price>
+	</item>
+	<item id="16" stock="80" card="y">
+		<name>RTFM printer</name>
+		<price>64.99</price>
+	</item>
+	<item id="17" stock="34">
+		<name>FOOBAR tape drive</name>
+		<price>89.95</price>
+	</item>
+	<item id="18" stock="27">
+		<name>FUD screen</name>
+		<price>249.99</price>
+	</item>
+	<item id="19" stock="1" card="y">
+		<name>Grok mouse</name>
+		<price>149.99</price>
+	</item>
+	<item id="20" stock="37" card="y">
+		<name>FOOBAR network card</name>
+		<price>19.95</price>
+	</item>
+</shop>

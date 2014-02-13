@@ -1,0 +1,5 @@
+*.lm : L-system grammar files
+
+plant-1*: Turtle graphics file(s) and resulting .ps, created using a
+working implementation of lm2tg (and applying the provided
+'visulinden' script).

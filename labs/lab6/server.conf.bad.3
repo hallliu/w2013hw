@@ -1,0 +1,17 @@
+global {
+	num_daemons = 4
+	max_out_bandwidth = 10.0
+	max_in_bandwidth = 5.5
+	etc = "/etc/ftpd"
+	hostcert = "/etc/ftpd/hostkey.pem"
+};
+
+host "ftp-1.foobar.com" {
+	ftproot = "/var/ftp/server1"
+	max_out_bandwidth = 20.7
+};
+
+host "ftp-2.foobar.com" {
+	ftproot = "/var/ftp/server2"
+	exclude = "/var/ftp/server2/private"
+};

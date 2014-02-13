@@ -1,0 +1,9 @@
+CFLAGS = --std=gnu99 
+LDFLAGS = -lm
+SRC = guess.c
+OBJ = guess.o
+
+guess: ${OBJ}
+
+clean:
+	rm -f ${OBJ} guess

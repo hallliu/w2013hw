@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE transactions SYSTEM "transactions.dtd">
+<transactions date="02/27/2006">
+	<sale itemID="2" timestamp="468822992" card="y"/>
+	<sale itemID="11" timestamp="468823002"/>
+	<sale itemID="7" timestamp="468823039"/>
+	<sale itemID="18" timestamp="468823067"/>
+	<sale itemID="13" timestamp="468823101" card="y"/>
+	<restock itemID="5" timestamp="468823134" num="10"/>
+	<sale itemID="7" timestamp="468823155" card="y"/>
+	<sale itemID="5" timestamp="468823167"/>
+	<sale itemID="10" timestamp="468823199" card="y"/>
+	<sale itemID="14" timestamp="468823203"/>
+	<remove itemID="8" timestamp="468823209"/>
+	<sale itemID="6" timestamp="468823212"/>
+	<sale itemID="3" timestamp="468823267"/>
+	<restock itemID="13" timestamp="468823276" num="50"/>
+	<sale itemID="9" timestamp="468823310"/>
+	<sale itemID="1" timestamp="468823345"/>
+	<sale itemID="15" timestamp="468823398" card="y"/>
+	<sale itemID="7" timestamp="468823456" card="y"/>
+	<sale itemID="15" timestamp="468823458"/>
+	<restock itemID="1" timestamp="468823466" num="3"/>
+	<sale itemID="1" timestamp="468823472"/>
+	<sale itemID="4" timestamp="468823501"/>
+	<restock itemID="3" timestamp="468823543" num="5"/>
+	<sale itemID="11" timestamp="468823543" card="y"/>
+	<sale itemID="19" timestamp="468823607"/>
+	<remove itemID="17" timestamp="468823634"/>
+	<sale itemID="3" timestamp="468823667"/>
+	<sale itemID="15" timestamp="468823695" card="y"/>
+	<sale itemID="5" timestamp="468823701"/>
+	<restock itemID="14" timestamp="468823746" num="9"/>
+	<sale itemID="20" timestamp="468823775"/>
+	<sale itemID="20" timestamp="468823781" card="y"/>
+</transactions>

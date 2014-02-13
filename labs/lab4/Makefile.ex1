@@ -1,0 +1,8 @@
+CFLAGS = --std=gnu99 
+SRC = array.c
+OBJ = array.o
+
+array: ${OBJ}
+
+clean:
+	rm -f ${OBJ} array

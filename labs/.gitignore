@@ -1,0 +1,13 @@
+*.o
+*.gz
+guess
+pow
+prefixeval
+array
+goodcat
+fsm
+configparse
+lm2tg
+tnormal
+turtle
+visulinden

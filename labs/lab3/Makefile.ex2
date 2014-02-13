@@ -1,0 +1,10 @@
+CFLAGS = --std=c99
+
+SRC = pow.c
+OBJ = pow.o
+
+pow: pow.o
+
+clean:
+	rm -f pow pow.o
+

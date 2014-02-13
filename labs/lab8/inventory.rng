@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <element name="shop" xmlns="http://relaxng.org/ns/structure/1.0">
+      <attribute name="name"/>
+      <zeroOrMore>
+    <element name="item">
+      <attribute name="id"/>
+      <attribute name="stock"/>
+      <optional>
+        <attribute name="card"/>
+      </optional>
+<element name="name">
+      <text/>
+    </element>
+    <element name="price">
+      <text/>
+    </element>
+</element>
+</zeroOrMore>
+    </element>
